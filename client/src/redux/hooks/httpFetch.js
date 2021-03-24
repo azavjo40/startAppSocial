@@ -1,0 +1,34 @@
+//@ts-check
+import { hideLoader, showAlert, showLoader } from "../generals/generalAcsions";
+export function httpFetch(options) {
+  return async (dispach) => {
+    try {
+      dispach(showLoader());
+      const requestOptions = {
+        method: options.method,
+        headers: { Authorization: options.token },
+      };
+      if (options.method === "POST" && options.body) {
+        requestOptions.body = JSON.stringify(options.body);
+        requestOptions.headers = {
+          "Content-Type": "application/json",
+          Authorization: options.token,
+        };
+      }
+
+      if (options.file) {
+        requestOptions.body = options.file;
+      }
+
+      const response = await fetch(options.url, requestOptions);
+      const data = await response.json();
+      if (options.type && data) {
+        dispach({ type: options.type, payload: data });
+      }
+      dispach(showAlert(data.message));
+      dispach(hideLoader());
+    } catch (e) {
+      dispach(showAlert("Something went wrong try again"));
+    }
+  };
+}
