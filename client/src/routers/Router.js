@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { Auth } from "../pages";
+import { Auth, Home } from "../pages";
 function useRouters(isAuthUser) {
   return (
     <Switch>
@@ -10,6 +10,9 @@ function useRouters(isAuthUser) {
         </>
       ) : (
         <>
+          <Route path="/" exact>
+            <Home />
+          </Route>
           <Route path="/auth" exact>
             <Auth />
           </Route>

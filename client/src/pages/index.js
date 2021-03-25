@@ -1,2 +1,3 @@
 import Auth from "./auth";
-export { Auth };
+import Home from "./home";
+export { Auth, Home };

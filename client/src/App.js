@@ -21,7 +21,7 @@ function App() {
         {isAuthUser ? (
           <Navbar logout="Logout" lo="/" />
         ) : (
-          <Navbar login="Login" l="/auth" />
+          <Navbar login="Login" l="/auth" home="Home" h="/" />
         )}
         {routers}
       </Router>

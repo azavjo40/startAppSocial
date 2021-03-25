@@ -1,9 +1,9 @@
 //@ts-check
-import { hideLoader, showAlert, showLoader } from "../generals/generalAcsions";
+import { showAlert, showLoader } from "../generals/generalAcsions";
 export function httpFetch(options) {
   return async (dispach) => {
     try {
-      dispach(showLoader());
+      dispach(showLoader(true));
       const requestOptions = {
         method: options.method,
         headers: { Authorization: options.token },
@@ -22,11 +22,12 @@ export function httpFetch(options) {
 
       const response = await fetch(options.url, requestOptions);
       const data = await response.json();
+
       if (options.type && data) {
         dispach({ type: options.type, payload: data });
       }
       dispach(showAlert(data.message));
-      dispach(hideLoader());
+      dispach(showLoader(false));
     } catch (e) {
       dispach(showAlert("Something went wrong try again"));
     }

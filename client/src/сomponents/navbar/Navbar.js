@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import icon from "../images/openMenu.png";
+import icon from "../../images/openMenu.png";
 import { useDispatch } from "react-redux";
-import { logout } from "../redux/auths/authAcsions";
-import "../styles/navbar/navbar.css";
+import { logout } from "../../redux/auths/authAcsions";
+import "../../styles/navbar/navbar.css";
 const Navbar = (props) => {
   const [isLoadin, setIsLoading] = useState(false);
   const dispatch = useDispatch();
@@ -28,6 +28,13 @@ const Navbar = (props) => {
         className={isLoadin ? "openNav" : "nav_links"}
         onClick={() => setIsLoading(false)}
       >
+        {props.home ? (
+          <li>
+            <NavLink to={props.h ? props.h : ""}>{props.home}</NavLink>
+          </li>
+        ) : (
+          ""
+        )}
         {props.login ? (
           <li>
             <NavLink to={props.l ? props.l : ""}>{props.login}</NavLink>

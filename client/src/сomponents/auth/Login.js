@@ -1,15 +1,17 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { authLogin } from "../redux/auths/authAcsions";
+import { authLogin } from "../../redux/auths/authAcsions";
 import { useHistory } from "react-router-dom";
-import "../styles/auth/register.css";
-import { Alert } from "./index";
+import "../../styles/auth/register.css";
+import { Alert } from "../index";
+
 function Login() {
   const history = useHistory();
   const [form, setForm] = useState({ email: "", password: "" });
   const changehandler = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
   };
+
   const isloading = useSelector((state) => state.general.isloading);
   const alert = useSelector((state) => state.general.alert);
   const dispach = useDispatch();

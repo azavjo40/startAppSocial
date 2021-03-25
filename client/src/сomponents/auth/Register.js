@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { authRegister } from "../redux/auths/authAcsions";
+import { authRegister } from "../../redux/auths/authAcsions";
 import { useHistory } from "react-router-dom";
-import { Alert } from "./index";
-import "../styles/auth/register.css";
+import { Alert } from "../index";
+import "../../styles/auth/register.css";
 function Register() {
   const history = useHistory();
   const [form, setForm] = useState({
