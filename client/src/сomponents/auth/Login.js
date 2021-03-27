@@ -20,7 +20,7 @@ function Login() {
     e.preventDefault();
     dispach(authLogin(form));
     setForm({ email: "", password: "" });
-    setTimeout(() => history.push("/"), 1500);
+    setTimeout(() => history.push("/myPage"), 1500);
   };
 
   return (

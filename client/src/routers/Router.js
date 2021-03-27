@@ -1,12 +1,15 @@
 import React from "react";
 import { Redirect, Route, Switch } from "react-router-dom";
-import { Auth, Home } from "../pages";
+import { Auth, Home, MyPage } from "../pages";
 function useRouters(isAuthUser) {
   return (
     <Switch>
       {isAuthUser ? (
         <>
-          <Redirect to="/" />
+          <Route path="/myPage" exact>
+            <MyPage />
+          </Route>
+          <Redirect to="/myPage" />
         </>
       ) : (
         <>

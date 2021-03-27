@@ -19,7 +19,7 @@ function App() {
     <div className="cont">
       <Router>
         {isAuthUser ? (
-          <Navbar logout="Logout" lo="/" />
+          <Navbar logout="Logout" lo="/" myPage="MyPage" p="/myPage" />
         ) : (
           <Navbar login="Login" l="/auth" home="Home" h="/" />
         )}

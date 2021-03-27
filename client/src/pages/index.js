@@ -1,3 +1,4 @@
 import Auth from "./auth";
 import Home from "./home";
-export { Auth, Home };
+import MyPage from "./myPage";
+export { Auth, Home, MyPage };

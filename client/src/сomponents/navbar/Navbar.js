@@ -42,7 +42,13 @@ const Navbar = (props) => {
         ) : (
           ""
         )}
-
+        {props.myPage ? (
+          <li>
+            <NavLink to={props.p ? props.p : ""}>{props.myPage}</NavLink>
+          </li>
+        ) : (
+          ""
+        )}
         {props.logout ? (
           <li>
             <NavLink

@@ -1,0 +1,67 @@
+$myColor-1: #ecf3ff;
+$myColor-2: #ecf3ff99;
+$black-80: #181818;
+$black-50: #787878;
+.containerMyData {
+  width: 600px;
+  height: 150px;
+  display: flex;
+  position: relative;
+  z-index: 1;
+  background-color: $myColor-2;
+  .name {
+    font-size: 15px;
+    font-weight: 600;
+    position: absolute;
+    top: 50px;
+    left: 20px;
+  }
+  .avatar {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    z-index: 2;
+    top: -25%;
+    left: 15%;
+    img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+  }
+  .btnData {
+    width: 100px;
+    height: 25px;
+    position: absolute;
+    right: 10%;
+    top: 10%;
+    font-size: 10px;
+  }
+  .itemData {
+    width: 100%;
+    display: flex;
+    position: absolute;
+    align-items: flex-end;
+    bottom: 0px;
+    left: 0px;
+    justify-content: space-around;
+    align-items: flex-end;
+    p {
+      width: 150px;
+      height: 20px;
+      padding: 0px;
+      margin: 0px;
+      overflow: hidden;
+    }
+  }
+}
+@media (max-width: 600px) {
+  .containerMyData {
+    width: 100%;
+    height: 20%;
+    .avatar {
+      width: 70px;
+      height: 70px;
+    }
+  }
+}
