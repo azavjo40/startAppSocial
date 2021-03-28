@@ -1,7 +1,7 @@
 import React from "react";
 import avatar from "../../images/avatar.jpg";
 import Button from "@material-ui/core/Button";
-import "../../styles/myPage/myData.css";
+import "../../styles/userPage/userData.css";
 
 function UserData() {
   return (

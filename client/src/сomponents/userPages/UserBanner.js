@@ -1,6 +1,6 @@
 import React from "react";
 import bannerImg from "../../images/banner.png";
-import "../../styles/myPage/myBanner.css";
+import "../../styles/userPage/userBanner.css";
 
 function UserBanner() {
   return (
