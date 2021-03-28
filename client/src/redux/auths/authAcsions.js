@@ -34,16 +34,21 @@ export function autoLogin(data) {
 }
 
 export function authRegister(form) {
-  const options = {
-    url: "/api/auth/register",
-    method: "POST",
-    body: form,
-    file: null,
-    token: null,
-    type: AUTH_STORAGE,
-  };
   return async (dispach) => {
+    const formdata = new FormData();
+    formdata.append("name", form.name);
+    formdata.append("email", form.email);
+    formdata.append("password", form.password);
+    formdata.append("file", form.file);
     try {
+      const options = {
+        url: "/api/auth/register",
+        method: "POST",
+        body: null,
+        file: formdata,
+        token: null,
+        type: AUTH_STORAGE,
+      };
       await dispach(httpFetch(options));
       const storage = await JSON.parse(
         localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME)
@@ -77,7 +82,9 @@ export function authLogin(form) {
       } else {
         await dispach(authUser(false));
       }
-    } catch (e) {}
+    } catch (e) {
+      console.log(e);
+    }
   };
 }
 

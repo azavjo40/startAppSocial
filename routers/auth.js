@@ -3,14 +3,14 @@ const { check } = require("express-validator");
 const router = Router();
 const passport = require("passport");
 const controller = require("../controlles/auth");
-
+const upload = require("../midlleware/upload");
 router.post(
   "/register",
+  upload.single("file"),
   [
     check("email", "Please enter email").isEmail(),
     check("password", "Please enter password min 6 dgits").isLength({ min: 6 }),
     check("name", "Please enter name").exists(),
-    check("phone", "Please enter phone").isNumeric(),
   ],
   controller.register
 );

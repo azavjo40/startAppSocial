@@ -12,13 +12,20 @@ module.exports.register = async (req, res) => {
         message: "Incorrect register  data",
       });
     }
+    const file = req.file;
     const { name, phone, email, password } = req.body;
     const candidate = await User.findOne({ email });
     if (candidate) {
       return res.status(400).json({ message: "This user already exists" });
     }
     const hashedPassword = await bcrypt.hash(password, 12);
-    const user = new User({ name, phone, email, password: hashedPassword });
+    const user = new User({
+      name,
+      phone,
+      email,
+      password: hashedPassword,
+      imageSrc: file ? file.path : "",
+    });
     await user.save();
     const tokenUser = token(user.id);
     res.status(201).json({

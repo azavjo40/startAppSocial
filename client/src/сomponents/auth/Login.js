@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authLogin } from "../../redux/auths/authAcsions";
 import { useHistory } from "react-router-dom";
+import Button from "@material-ui/core/Button";
+import Icon from "@material-ui/core/Icon";
 import "../../styles/auth/register.css";
 import { Alert } from "../index";
 
@@ -20,7 +22,7 @@ function Login() {
     e.preventDefault();
     dispach(authLogin(form));
     setForm({ email: "", password: "" });
-    setTimeout(() => history.push("/myPage"), 1500);
+    setTimeout(() => history.push("/userPage"), 1500);
   };
 
   return (
@@ -28,6 +30,7 @@ function Login() {
       {alert && <Alert text={alert} />}
       <h1>Login</h1>
       <input
+        className="input"
         type="email"
         name="email"
         placeholder="Enter Email"
@@ -36,6 +39,7 @@ function Login() {
         onChange={(event) => changehandler(event)}
       />
       <input
+        className="input"
         type="passeord"
         name="password"
         placeholder="Enter Password"
@@ -43,7 +47,15 @@ function Login() {
         value={form.password}
         onChange={(event) => changehandler(event)}
       />
-      <button disabled={isloading}>Login</button>
+      <Button
+        type="submit"
+        variant="contained"
+        disabled={isloading}
+        color="primary"
+        endIcon={<Icon>send</Icon>}
+      >
+        Login
+      </Button>
     </form>
   );
 }

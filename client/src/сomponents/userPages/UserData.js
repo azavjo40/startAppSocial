@@ -3,7 +3,7 @@ import avatar from "../../images/avatar.jpg";
 import Button from "@material-ui/core/Button";
 import "../../styles/myPage/myData.css";
 
-function MyData() {
+function UserData() {
   return (
     <div className="containerMyData">
       <div className="avatar">
@@ -21,4 +21,4 @@ function MyData() {
   );
 }
 
-export default MyData;
+export default UserData;
