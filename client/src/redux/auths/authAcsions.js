@@ -2,7 +2,8 @@
 import { LOCAL_STORAGE } from "../../constant/localstorage";
 import { showAlert } from "../generals/generalAcsions";
 import { httpFetch } from "../hooks/httpFetch";
-import { IS_AUTH_USER, AUTH_TOKEN, AUTH_STORAGE } from "./types";
+import { USER_PAGES_PAGE } from "../userPages/types";
+import { IS_AUTH_USER, AUTH_TOKEN, AUTH_STORAGE, AUTH_USERID } from "./types";
 
 const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME));
 
@@ -14,21 +15,34 @@ export const authToken = (token) => {
   return { type: AUTH_TOKEN, payload: token };
 };
 
-export function autoLogin(data) {
+export const authUserId = (userId) => {
+  return { type: AUTH_USERID, payload: userId };
+};
+
+export const autoSaveStorage = (data) => {
+  return async (dispach) => {
+    if (data.token) {
+      await localStorage.setItem(
+        LOCAL_STORAGE.STORAGE_NAME,
+        JSON.stringify({
+          token: data.token,
+          userId: data.userId,
+        })
+      );
+      await dispach(authToken(data.token));
+      await dispach(authUserId(data.userId));
+      dispach(authUser(true));
+    }
+  };
+};
+
+export function autoLogin() {
   return async (dispach) => {
     try {
-      if (data.token) {
-        localStorage.setItem(
-          LOCAL_STORAGE.STORAGE_NAME,
-          JSON.stringify({
-            token: data.token,
-            userId: data.userId,
-          })
-        );
-      }
       if (storage.token) {
+        await dispach(authToken(storage.token));
+        await dispach(authUserId(storage.userId));
         dispach(authUser(true));
-        dispach(authToken(storage.token));
       }
     } catch (e) {
       dispach(showAlert("Error something went wrong to Login"));
@@ -45,7 +59,7 @@ export function authRegister(form) {
     formdata.append("password", form.password);
     formdata.append("file", form.file);
     try {
-      const options = {
+      const options = await {
         url: "/api/auth/register",
         method: "POST",
         body: null,
@@ -53,15 +67,8 @@ export function authRegister(form) {
         token: null,
         type: AUTH_STORAGE,
       };
-      await dispach(httpFetch(options));
-      const storage = await JSON.parse(
-        localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME)
-      );
-      if (storage.token) {
-        await dispach(authUser(true));
-      } else {
-        await dispach(authUser(false));
-      }
+      const { data } = await dispach(httpFetch(options));
+      await dispach(autoSaveStorage(data));
     } catch (e) {}
   };
 }
@@ -77,15 +84,8 @@ export function authLogin(form) {
   };
   return async (dispach) => {
     try {
-      await dispach(httpFetch(options));
-      const storage = await JSON.parse(
-        localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME)
-      );
-      if (storage.token) {
-        dispach(authUser(true));
-      } else {
-        dispach(authUser(false));
-      }
+      const { data } = await dispach(httpFetch(options));
+      await dispach(autoSaveStorage(data));
     } catch (e) {
       console.log(e);
     }
@@ -95,28 +95,29 @@ export function authLogin(form) {
 let setTime;
 export const refreshToken = () => {
   return (dispach) => {
-    const storage = JSON.parse(
-      localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME)
-    );
-    const options = {
-      url: "/api/auth/refresh/token",
-      method: "POST",
-      body: { userId: storage.userId },
-      file: null,
-      token: storage.token,
-      type: AUTH_STORAGE,
-    };
     try {
-      setTime = setTimeout(() => {
-        storage.userId && dispach(httpFetch(options));
-      }, 100000);
+      if (storage.token) {
+        const options = {
+          url: "/api/auth/refresh/token",
+          method: "POST",
+          body: { userId: storage.userId },
+          file: null,
+          token: storage.token,
+          type: AUTH_STORAGE,
+        };
+        setTime = setTimeout(() => {
+          dispach(httpFetch(options));
+        }, 500000);
+      }
     } catch (e) {}
   };
 };
 
 export const logout = () => {
-  return (dispach) => {
-    localStorage.removeItem(LOCAL_STORAGE.STORAGE_NAME);
+  return async (dispach) => {
+    await localStorage.removeItem(LOCAL_STORAGE.STORAGE_NAME);
+    dispach({ type: AUTH_STORAGE, payload: null });
+    dispach({ type: USER_PAGES_PAGE, payload: null });
     dispach(authUser(false));
     clearTimeout(setTime);
   };

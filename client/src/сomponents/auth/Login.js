@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authLogin } from "../../redux/auths/authAcsions";
-import { useHistory } from "react-router-dom";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
 import "../../styles/auth/register.css";
 import { Alert } from "../index";
 
 function Login() {
-  const history = useHistory();
   const [form, setForm] = useState({ email: "", password: "" });
   const changehandler = (event) => {
     setForm({ ...form, [event.target.name]: event.target.value });
@@ -22,7 +20,6 @@ function Login() {
     e.preventDefault();
     dispach(authLogin(form));
     setForm({ email: "", password: "" });
-    setTimeout(() => history.push("/userPage"), 1500);
   };
 
   return (

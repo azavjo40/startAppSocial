@@ -66,7 +66,6 @@ module.exports.login = async (req, res) => {
 module.exports.getUserPage = async (req, res) => {
   try {
     const _id = req.params.userId;
-    console.log(_id);
     if (!_id) {
       res
         .status(400)

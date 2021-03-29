@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authRegister } from "../../redux/auths/authAcsions";
-import { useHistory } from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import Button from "@material-ui/core/Button";
@@ -9,7 +8,6 @@ import Icon from "@material-ui/core/Icon";
 import { Alert } from "../index";
 import "../../styles/auth/register.css";
 function Register() {
-  const history = useHistory();
   const [form, setForm] = useState({
     name: "",
     email: "",
@@ -35,7 +33,6 @@ function Register() {
     e.preventDefault();
     dispach(authRegister(form));
     setForm({ name: "", email: "", password: "", country: "" });
-    setTimeout(() => history.push("/userPage"), 1500);
   };
   return (
     <form className="authForm" onSubmit={(e) => registerHandler(e)}>

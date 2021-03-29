@@ -28,6 +28,7 @@ export function httpFetch(options) {
       }
       dispach(showAlert(data.message));
       dispach(showLoader(false));
+      return { data };
     } catch (e) {
       dispach(showAlert("Something went wrong try again"));
     }

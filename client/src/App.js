@@ -4,18 +4,15 @@ import { useRouters } from "./routers";
 import { BrowserRouter as Router } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { autoLogin, refreshToken } from "./redux/auths/authAcsions";
-import { getUserPage } from "./redux/userPages/userAcsions";
 import "./App.css";
 
 function App() {
   const isAuthUser = useSelector((state) => state.auth.isAuthUser);
-  const authStorage = useSelector((state) => state.auth.storage);
   const routers = useRouters(isAuthUser);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(autoLogin(authStorage));
-  }, [dispatch, authStorage]);
-  isAuthUser && dispatch(getUserPage());
+    dispatch(autoLogin());
+  }, [dispatch]);
   isAuthUser && dispatch(refreshToken());
   return (
     <div className="cont">

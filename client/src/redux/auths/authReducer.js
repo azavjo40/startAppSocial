@@ -1,11 +1,11 @@
 //@ts-check
-import { IS_AUTH_USER, AUTH_TOKEN, AUTH_STORAGE } from "./types";
+import { IS_AUTH_USER, AUTH_TOKEN, AUTH_STORAGE, AUTH_USERID } from "./types";
 
 const initialState = {
   isAuthUser: false,
   token: null,
   storage: "",
-  authAdmin: null,
+  userId: null,
 };
 
 export const authReducer = (state = initialState, actoin) => {
@@ -14,6 +14,8 @@ export const authReducer = (state = initialState, actoin) => {
       return { ...state, isAuthUser: actoin.payload };
     case AUTH_TOKEN:
       return { ...state, token: actoin.payload };
+    case AUTH_USERID:
+      return { ...state, userId: actoin.payload };
     case AUTH_STORAGE:
       return { ...state, storage: actoin.payload };
     default:
