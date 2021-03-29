@@ -20,7 +20,10 @@ export function autoLogin(data) {
       if (data.token) {
         localStorage.setItem(
           LOCAL_STORAGE.STORAGE_NAME,
-          JSON.stringify({ token: data.token, userId: data.userId })
+          JSON.stringify({
+            token: data.token,
+            userId: data.userId,
+          })
         );
       }
       if (storage.token) {
@@ -36,6 +39,7 @@ export function autoLogin(data) {
 export function authRegister(form) {
   return async (dispach) => {
     const formdata = new FormData();
+    formdata.append("country", form.country);
     formdata.append("name", form.name);
     formdata.append("email", form.email);
     formdata.append("password", form.password);
@@ -78,9 +82,9 @@ export function authLogin(form) {
         localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME)
       );
       if (storage.token) {
-        await dispach(authUser(true));
+        dispach(authUser(true));
       } else {
-        await dispach(authUser(false));
+        dispach(authUser(false));
       }
     } catch (e) {
       console.log(e);
@@ -90,18 +94,21 @@ export function authLogin(form) {
 
 let setTime;
 export const refreshToken = () => {
-  const options = {
-    url: "/api/auth/refresh/token",
-    method: "POST",
-    body: storage,
-    file: null,
-    token: storage.token,
-    type: AUTH_STORAGE,
-  };
   return (dispach) => {
+    const storage = JSON.parse(
+      localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME)
+    );
+    const options = {
+      url: "/api/auth/refresh/token",
+      method: "POST",
+      body: { userId: storage.userId },
+      file: null,
+      token: storage.token,
+      type: AUTH_STORAGE,
+    };
     try {
       setTime = setTimeout(() => {
-        dispach(httpFetch(options));
+        storage.userId && dispach(httpFetch(options));
       }, 100000);
     } catch (e) {}
   };

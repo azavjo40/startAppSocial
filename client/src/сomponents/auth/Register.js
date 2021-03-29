@@ -14,6 +14,7 @@ function Register() {
     name: "",
     email: "",
     password: "",
+    country: "",
   });
 
   const changehandler = (e) => {
@@ -33,7 +34,7 @@ function Register() {
   const registerHandler = (e) => {
     e.preventDefault();
     dispach(authRegister(form));
-    setForm({ name: "", email: "", password: "" });
+    setForm({ name: "", email: "", password: "", country: "" });
     setTimeout(() => history.push("/userPage"), 1500);
   };
   return (
@@ -69,6 +70,17 @@ function Register() {
         value={form.password}
         onChange={changehandler}
       />
+
+      <input
+        className="input"
+        type="country"
+        name="country"
+        placeholder="Enter Country"
+        required
+        value={form.country}
+        onChange={changehandler}
+      />
+
       <input
         accept="image/*"
         id="icon-button-file"

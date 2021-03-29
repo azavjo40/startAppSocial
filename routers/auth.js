@@ -24,6 +24,12 @@ router.post(
   controller.login
 );
 
+router.get(
+  "/get/user/page/:userId",
+  passport.authenticate("jwt", { session: false }),
+  controller.getUserPage
+);
+
 router.post(
   "/refresh/token",
   passport.authenticate("jwt", { session: false }),

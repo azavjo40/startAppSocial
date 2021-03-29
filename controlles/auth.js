@@ -13,7 +13,7 @@ module.exports.register = async (req, res) => {
       });
     }
     const file = req.file;
-    const { name, phone, email, password } = req.body;
+    const { name, phone, email, password, country } = req.body;
     const candidate = await User.findOne({ email });
     if (candidate) {
       return res.status(400).json({ message: "This user already exists" });
@@ -24,6 +24,7 @@ module.exports.register = async (req, res) => {
       phone,
       email,
       password: hashedPassword,
+      country,
       imageSrc: file ? file.path : "",
     });
     await user.save();
@@ -57,6 +58,22 @@ module.exports.login = async (req, res) => {
     }
     const tokenUser = token(user.id);
     res.status(200).json({ token: `Bearer ${tokenUser()}`, userId: user.id });
+  } catch (e) {
+    res.status(500).json({ message: "Something went wrong, please try again" });
+  }
+};
+
+module.exports.getUserPage = async (req, res) => {
+  try {
+    const _id = req.params.userId;
+    console.log(_id);
+    if (!_id) {
+      res
+        .status(400)
+        .json({ message: "Something went wrong, please try again" });
+    }
+    const user = await User.findById({ _id });
+    res.status(200).json(user);
   } catch (e) {
     res.status(500).json({ message: "Something went wrong, please try again" });
   }

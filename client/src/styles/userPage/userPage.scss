@@ -5,4 +5,18 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  .itemsPage {
+    width: 80%;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 425px) {
+  .containerMyPage {
+    .itemsPage {
+      width: 100%;
+    }
+  }
 }

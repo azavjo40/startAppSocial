@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["myBanner.scss"],"names":[],"mappings":"AAAA;EACE;EACA;EACA;;AACA;EACE;EACA;;;AAGJ;EACE;IACE;IACA;;EACA;IACE;IACA","file":"myBanner.css"}
+{"version":3,"sourceRoot":"","sources":["userBanner.scss"],"names":[],"mappings":"AAAA;EACE;EACA;EACA;;AACA;EACE;EACA","file":"userBanner.css"}

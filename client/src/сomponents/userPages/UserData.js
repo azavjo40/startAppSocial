@@ -1,21 +1,20 @@
 import React from "react";
-import avatar from "../../images/avatar.jpg";
 import Button from "@material-ui/core/Button";
 import "../../styles/userPage/userData.css";
 
-function UserData() {
+function UserData({ titleBtn, name, country, imageSrc }) {
   return (
     <div className="containerMyData">
       <div className="avatar">
-        <img src={avatar} alt="Your img" />
+        <img src={imageSrc} alt="Your img" />
       </div>
-      <p className="name">Adam Sufiev</p>
+
       <Button variant="outlined" color="primary" className="btnData">
-        Edit Profile
+        {titleBtn}
       </Button>
       <div className="itemData">
-        <p>I'm student </p>
-        <p>Warszawa</p>
+        <p>{name}</p>
+        <p>{country}</p>
       </div>
     </div>
   );

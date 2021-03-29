@@ -1,25 +1,18 @@
 .containerMyData {
-  width: 600px;
+  width: 100%;
   height: 150px;
   display: flex;
   position: relative;
   z-index: 1;
   background-color: #ecf3ff99;
 }
-.containerMyData .name {
-  font-size: 15px;
-  font-weight: 600;
-  position: absolute;
-  top: 50px;
-  left: 20px;
-}
 .containerMyData .avatar {
-  width: 100px;
-  height: 100px;
+  width: 60px;
+  height: 60px;
   position: absolute;
   z-index: 2;
   top: -25%;
-  left: 15%;
+  left: 12%;
 }
 .containerMyData .avatar img {
   width: 100%;
@@ -52,15 +45,11 @@
   overflow: hidden;
 }
 
-@media (max-width: 600px) {
-  .containerMyData {
-    width: 100%;
-    height: 20%;
-  }
+@media (max-width: 425px) {
   .containerMyData .avatar {
-    width: 70px;
-    height: 70px;
+    width: 50px;
+    height: 50px;
   }
 }
 
-/*# sourceMappingURL=myData.css.map */
+/*# sourceMappingURL=userData.css.map */
