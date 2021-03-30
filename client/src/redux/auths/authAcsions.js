@@ -3,20 +3,13 @@ import { LOCAL_STORAGE } from "../../constant/localstorage";
 import { showAlert } from "../generals/generalAcsions";
 import { httpFetch } from "../hooks/httpFetch";
 import { USER_PAGES_PAGE } from "../userPages/types";
-import { IS_AUTH_USER, AUTH_TOKEN, AUTH_STORAGE, AUTH_USERID } from "./types";
+import { getUserPage } from "../userPages/userAcsions";
+import { IS_AUTH_USER } from "./types";
 
 const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME));
 
 export const authUser = (isAuthUser) => {
   return { type: IS_AUTH_USER, payload: isAuthUser };
-};
-
-export const authToken = (token) => {
-  return { type: AUTH_TOKEN, payload: token };
-};
-
-export const authUserId = (userId) => {
-  return { type: AUTH_USERID, payload: userId };
 };
 
 export const autoSaveStorage = (data) => {
@@ -26,11 +19,9 @@ export const autoSaveStorage = (data) => {
         LOCAL_STORAGE.STORAGE_NAME,
         JSON.stringify({
           token: data.token,
-          userId: data.userId,
+          userId: data._doc._id,
         })
       );
-      await dispach(authToken(data.token));
-      await dispach(authUserId(data.userId));
       dispach(authUser(true));
     }
   };
@@ -40,9 +31,10 @@ export function autoLogin() {
   return async (dispach) => {
     try {
       if (storage.token) {
-        await dispach(authToken(storage.token));
-        await dispach(authUserId(storage.userId));
-        dispach(authUser(true));
+        await dispach(authUser(true));
+        await dispach(getUserPage());
+      } else {
+        await dispach(authUser(false));
       }
     } catch (e) {
       dispach(showAlert("Error something went wrong to Login"));
@@ -65,7 +57,7 @@ export function authRegister(form) {
         body: null,
         file: formdata,
         token: null,
-        type: AUTH_STORAGE,
+        type: USER_PAGES_PAGE,
       };
       const { data } = await dispach(httpFetch(options));
       await dispach(autoSaveStorage(data));
@@ -80,7 +72,7 @@ export function authLogin(form) {
     body: form,
     file: null,
     token: null,
-    type: AUTH_STORAGE,
+    type: USER_PAGES_PAGE,
   };
   return async (dispach) => {
     try {
@@ -103,11 +95,12 @@ export const refreshToken = () => {
           body: { userId: storage.userId },
           file: null,
           token: storage.token,
-          type: AUTH_STORAGE,
+          type: null,
         };
-        setTime = setTimeout(() => {
-          dispach(httpFetch(options));
-        }, 500000);
+        setTime = setInterval(async () => {
+          const { data } = await dispach(httpFetch(options));
+          dispach(autoSaveStorage(data));
+        }, 100000);
       }
     } catch (e) {}
   };
@@ -116,9 +109,8 @@ export const refreshToken = () => {
 export const logout = () => {
   return async (dispach) => {
     await localStorage.removeItem(LOCAL_STORAGE.STORAGE_NAME);
-    dispach({ type: AUTH_STORAGE, payload: null });
+    await dispach(authUser(false));
     dispach({ type: USER_PAGES_PAGE, payload: null });
-    dispach(authUser(false));
-    clearTimeout(setTime);
+    clearInterval(setTime);
   };
 };

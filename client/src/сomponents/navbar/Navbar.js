@@ -8,7 +8,7 @@ const Navbar = (props) => {
   const [isLoadin, setIsLoading] = useState(false);
   const dispatch = useDispatch();
   function handleResize() {
-    if (window.innerWidth > 600) {
+    if (window.innerWidth > 425) {
       setIsLoading(false);
     }
   }

@@ -18,6 +18,7 @@ module.exports.register = async (req, res) => {
     if (candidate) {
       return res.status(400).json({ message: "This user already exists" });
     }
+
     const hashedPassword = await bcrypt.hash(password, 12);
     const user = new User({
       name,
@@ -25,14 +26,15 @@ module.exports.register = async (req, res) => {
       email,
       password: hashedPassword,
       country,
-      imageSrc: file ? file.path : "",
+      imageSrc: file ? file.path : "uploads//spare//1617104631234-user.png",
+      banner: "uploads//spare//1617104683862-aavva.png",
     });
     await user.save();
     const tokenUser = token(user.id);
     res.status(201).json({
-      message: "User created",
+      ...user,
       token: `Bearer ${tokenUser()}`,
-      userId: user.id,
+      message: "User created",
     });
   } catch (e) {
     res.status(500).json({ message: "Something went wrong, please try again" });
@@ -57,7 +59,7 @@ module.exports.login = async (req, res) => {
         .json({ message: "Invalid password, please try again" });
     }
     const tokenUser = token(user.id);
-    res.status(200).json({ token: `Bearer ${tokenUser()}`, userId: user.id });
+    res.status(200).json({ ...user, token: `Bearer ${tokenUser()}` });
   } catch (e) {
     res.status(500).json({ message: "Something went wrong, please try again" });
   }
@@ -66,13 +68,14 @@ module.exports.login = async (req, res) => {
 module.exports.getUserPage = async (req, res) => {
   try {
     const _id = req.params.userId;
+    console.log(_id);
     if (!_id) {
       res
         .status(400)
         .json({ message: "Something went wrong, please try again" });
     }
     const user = await User.findById({ _id });
-    res.status(200).json(user);
+    res.status(200).json({ ...user });
   } catch (e) {
     res.status(500).json({ message: "Something went wrong, please try again" });
   }

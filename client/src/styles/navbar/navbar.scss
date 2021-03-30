@@ -40,6 +40,7 @@ $myRed: rgb(255 64 129);
     border-radius: 5px;
     text-decoration: none;
     color: $black-80;
+    font-size: 13px;
     cursor: pointer;
     user-select: none;
     &:hover {
@@ -49,11 +50,7 @@ $myRed: rgb(255 64 129);
   }
 }
 
-@media (max-width: 600px) {
-  .nav_links {
-    display: none;
-    transition: 2s;
-  }
+@media (max-width: 425px) {
   .imgIcon {
     display: block;
   }
@@ -63,7 +60,7 @@ $myRed: rgb(255 64 129);
 }
 
 .openNav {
-  width: 200px;
+  width: 100%;
   height: 300px;
   display: block;
   display: flex;
@@ -82,6 +79,7 @@ $myRed: rgb(255 64 129);
     text-decoration: none;
     color: $black-80;
     user-select: none;
+    font-size: 13px;
     cursor: pointer;
     &:hover {
       color: $black-80;

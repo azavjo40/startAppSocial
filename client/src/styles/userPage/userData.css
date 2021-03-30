@@ -36,6 +36,7 @@
   left: 0px;
   justify-content: space-around;
   align-items: flex-end;
+  padding-bottom: 10px;
 }
 .containerMyData .itemData p {
   width: 150px;

@@ -6,6 +6,7 @@ const userSchema = new Schema({
   password: { type: String, required: true },
   imageSrc: { type: String, required: true },
   country: { type: String },
+  banner: { type: String },
   date: { type: Date, default: Date.now },
 });
 module.exports = model("User", userSchema);

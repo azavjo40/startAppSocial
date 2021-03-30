@@ -2,13 +2,14 @@
 import { LOCAL_STORAGE } from "../../constant/localstorage";
 import { httpFetch } from "../hooks/httpFetch";
 import { USER_PAGES_PAGE } from "./types";
-
 const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME));
 
-export const getUserPage = (userId) => {
+export const getUserPage = () => {
   return async (dispatch) => {
     try {
-      if (userId) {
+      if (storage.userId) {
+        const userId = storage.userId;
+        console.log(storage.userId);
         const options = {
           url: `/api/auth/get/user/page/${userId}`,
           method: "GET",

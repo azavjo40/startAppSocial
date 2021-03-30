@@ -10,10 +10,12 @@ function App() {
   const isAuthUser = useSelector((state) => state.auth.isAuthUser);
   const routers = useRouters(isAuthUser);
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(autoLogin());
-  }, [dispatch]);
-  isAuthUser && dispatch(refreshToken());
+    isAuthUser && dispatch(refreshToken());
+  }, [dispatch, isAuthUser]);
+
   return (
     <div className="cont">
       <Router>
