@@ -16,8 +16,8 @@ function Register() {
   });
 
   const changehandler = (e) => {
-    const filed = e.target.files;
-    const file = filed && filed[0];
+    const files = e.target.files;
+    const file = files && files[0];
     setForm({
       ...form,
       [e.target.name]: e.target.value,

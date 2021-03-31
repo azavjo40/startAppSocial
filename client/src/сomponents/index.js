@@ -4,4 +4,5 @@ import Alert from "./general/Alert";
 import Navbar from "./navbar/Navbar";
 import UserBanner from "./userPages/UserBanner";
 import UserData from "./userPages/UserData";
-export { Login, Register, Alert, Navbar, UserBanner, UserData };
+import UserChangeData from "./userPages/UserChangeData";
+export { Login, Register, Alert, Navbar, UserBanner, UserData, UserChangeData };

@@ -3,14 +3,14 @@ import { LOCAL_STORAGE } from "../../constant/localstorage";
 import { showAlert } from "../generals/generalAcsions";
 import { httpFetch } from "../hooks/httpFetch";
 import { USER_PAGES_PAGE } from "../userPages/types";
-import { getUserPage } from "../userPages/userAcsions";
 import { IS_AUTH_USER } from "./types";
 
 const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME));
 
-export const authUser = (isAuthUser) => {
-  return { type: IS_AUTH_USER, payload: isAuthUser };
-};
+export const authUser = (isAuthUser) => ({
+  type: IS_AUTH_USER,
+  payload: isAuthUser,
+});
 
 export const autoSaveStorage = (data) => {
   return async (dispach) => {
@@ -19,7 +19,7 @@ export const autoSaveStorage = (data) => {
         LOCAL_STORAGE.STORAGE_NAME,
         JSON.stringify({
           token: data.token,
-          userId: data._doc._id,
+          userId: data.userId,
         })
       );
       dispach(authUser(true));
@@ -32,7 +32,6 @@ export function autoLogin() {
     try {
       if (storage.token) {
         await dispach(authUser(true));
-        await dispach(getUserPage());
       } else {
         await dispach(authUser(false));
       }
@@ -88,7 +87,7 @@ let setTime;
 export const refreshToken = () => {
   return (dispach) => {
     try {
-      if (storage.token) {
+      if (storage.userId) {
         const options = {
           url: "/api/auth/refresh/token",
           method: "POST",
@@ -99,8 +98,8 @@ export const refreshToken = () => {
         };
         setTime = setInterval(async () => {
           const { data } = await dispach(httpFetch(options));
-          dispach(autoSaveStorage(data));
-        }, 100000);
+          await dispach(autoSaveStorage(data));
+        }, 1000000);
       }
     } catch (e) {}
   };
@@ -108,9 +107,9 @@ export const refreshToken = () => {
 
 export const logout = () => {
   return async (dispach) => {
-    await localStorage.removeItem(LOCAL_STORAGE.STORAGE_NAME);
     await dispach(authUser(false));
-    dispach({ type: USER_PAGES_PAGE, payload: null });
+    await localStorage.removeItem(LOCAL_STORAGE.STORAGE_NAME);
+    await dispach({ type: USER_PAGES_PAGE, payload: null });
     clearInterval(setTime);
   };
 };

@@ -18,7 +18,6 @@ module.exports.register = async (req, res) => {
     if (candidate) {
       return res.status(400).json({ message: "This user already exists" });
     }
-
     const hashedPassword = await bcrypt.hash(password, 12);
     const user = new User({
       name,
@@ -30,10 +29,11 @@ module.exports.register = async (req, res) => {
       banner: "uploads//spare//1617104683862-aavva.png",
     });
     await user.save();
-    const tokenUser = token(user.id);
+    const tokenUser = token(user._id);
     res.status(201).json({
       ...user,
       token: `Bearer ${tokenUser()}`,
+      userId: user._id,
       message: "User created",
     });
   } catch (e) {
@@ -58,8 +58,10 @@ module.exports.login = async (req, res) => {
         .status(400)
         .json({ message: "Invalid password, please try again" });
     }
-    const tokenUser = token(user.id);
-    res.status(200).json({ ...user, token: `Bearer ${tokenUser()}` });
+    const tokenUser = token(user._id);
+    res
+      .status(200)
+      .json({ ...user, token: `Bearer ${tokenUser()}`, userId: user._id });
   } catch (e) {
     res.status(500).json({ message: "Something went wrong, please try again" });
   }

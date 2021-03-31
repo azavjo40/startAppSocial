@@ -9,7 +9,6 @@ export const getUserPage = () => {
     try {
       if (storage.userId) {
         const userId = storage.userId;
-        console.log(storage.userId);
         const options = {
           url: `/api/auth/get/user/page/${userId}`,
           method: "GET",

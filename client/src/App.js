@@ -4,6 +4,7 @@ import { useRouters } from "./routers";
 import { BrowserRouter as Router } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { autoLogin, refreshToken } from "./redux/auths/authAcsions";
+import {getUserPage} from "./redux/userPages/userAcsions"
 import "./App.css";
 
 function App() {
@@ -11,11 +12,9 @@ function App() {
   const routers = useRouters(isAuthUser);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(autoLogin());
-    isAuthUser && dispatch(refreshToken());
-  }, [dispatch, isAuthUser]);
-
+useEffect(() => dispatch(autoLogin()), [dispatch])
+useEffect(() => isAuthUser && dispatch(refreshToken()), [dispatch, isAuthUser])
+useEffect(() => isAuthUser && dispatch(getUserPage()), [dispatch, isAuthUser])
   return (
     <div className="cont">
       <Router>
