@@ -1,17 +1,14 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { authRegister } from "../../redux/auths/authAcsions";
-import IconButton from "@material-ui/core/IconButton";
-import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
+import close from "../../images/close-window.png";
 import "../../styles/userPage/userChangeData.css";
-function UserChangeData() {
+function UserChangeData({ name, country, imageSrc, email, setShow, show }) {
   const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
-    country: "",
+    name: name,
+    email: email,
+    country: country,
   });
 
   const changehandler = (e) => {
@@ -21,6 +18,7 @@ function UserChangeData() {
       ...form,
       [e.target.name]: e.target.value,
       file,
+      imageSrc,
     });
   };
 
@@ -28,13 +26,38 @@ function UserChangeData() {
 
   const registerHandler = (e) => {
     e.preventDefault();
-    dispach(authRegister(form));
-    setForm({ name: "", email: "", password: "", country: "" });
+    console.log(form);
+    // dispach(authRegister(form));
+    setTimeout(() => {
+      setShow(!show);
+      setForm({ name: "", email: "", password: "", country: "" });
+    }, 1000);
   };
   return (
     <div className="modalWind">
-      <form className="authForm" onSubmit={(e) => registerHandler(e)}>
-        <h1>Create An Account</h1>
+      <form className="changeForm" onSubmit={(e) => registerHandler(e)}>
+        <div className="btnParagraph">
+          <img src={close} alt="close" onClick={() => setShow(!show)} />
+          <p>Edit profile</p>
+          <Button
+            type="submit"
+            variant="contained"
+            color="primary"
+            endIcon={<Icon>send</Icon>}
+          >
+            Save
+          </Button>
+        </div>
+        <input
+          accept="image/*"
+          id="icon-button-file"
+          type="file"
+          style={{ display: "none" }}
+          onChange={changehandler}
+        />
+        <label htmlFor="icon-button-file" className="imageUser">
+          <img src={imageSrc} alt="change " />
+        </label>
         <input
           className="input"
           type="text"
@@ -57,16 +80,6 @@ function UserChangeData() {
 
         <input
           className="input"
-          type="passeord"
-          name="password"
-          placeholder="Enter Password"
-          required
-          value={form.password}
-          onChange={changehandler}
-        />
-
-        <input
-          className="input"
           type="country"
           name="country"
           placeholder="Enter Country"
@@ -74,31 +87,6 @@ function UserChangeData() {
           value={form.country}
           onChange={changehandler}
         />
-
-        <input
-          accept="image/*"
-          id="icon-button-file"
-          type="file"
-          style={{ display: "none" }}
-          onChange={changehandler}
-        />
-        <label htmlFor="icon-button-file">
-          <IconButton
-            color="primary"
-            aria-label="upload picture"
-            component="span"
-          >
-            <PhotoCamera />
-          </IconButton>
-        </label>
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          endIcon={<Icon>send</Icon>}
-        >
-          Register
-        </Button>
       </form>
     </div>
   );

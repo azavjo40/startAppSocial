@@ -41,7 +41,7 @@ h1 {
   .authForm button {
     width: 95%;
   }
-  .authForm input {
+  .authForm .input {
     width: 95%;
   }
 }

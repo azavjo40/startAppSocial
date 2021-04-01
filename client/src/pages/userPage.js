@@ -14,6 +14,7 @@ function UserPage() {
             name={items._doc.name}
             imageSrc={items._doc.imageSrc}
             country={items._doc.country}
+            email={items._doc.email}
           />
         </div>
       )}
