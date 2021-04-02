@@ -1,14 +1,17 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+// import { useDispatch } from "react-redux";
+import { UserBanner } from "../index";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
 import close from "../../images/close-window.png";
 import "../../styles/userPage/userChangeData.css";
-function UserChangeData({ name, country, imageSrc, email, setShow, show }) {
+function UserChangeData({ setShow, show, items }) {
   const [form, setForm] = useState({
-    name: name,
-    email: email,
-    country: country,
+    name: items._doc.name,
+    email: items._doc.email,
+    country: items._doc.country,
+    _id: items._doc._id,
+    imageSrc: items._doc.imageSrc,
   });
 
   const changehandler = (e) => {
@@ -18,19 +21,22 @@ function UserChangeData({ name, country, imageSrc, email, setShow, show }) {
       ...form,
       [e.target.name]: e.target.value,
       file,
-      imageSrc,
     });
   };
-
-  const dispach = useDispatch();
 
   const registerHandler = (e) => {
     e.preventDefault();
     console.log(form);
-    // dispach(authRegister(form));
     setTimeout(() => {
       setShow(!show);
-      setForm({ name: "", email: "", password: "", country: "" });
+      setForm({
+        name: "",
+        email: "",
+        password: "",
+        country: "",
+        _id: "",
+        imageSrc: "",
+      });
     }, 1000);
   };
   return (
@@ -48,16 +54,29 @@ function UserChangeData({ name, country, imageSrc, email, setShow, show }) {
             Save
           </Button>
         </div>
-        <input
-          accept="image/*"
-          id="icon-button-file"
-          type="file"
-          style={{ display: "none" }}
-          onChange={changehandler}
-        />
-        <label htmlFor="icon-button-file" className="imageUser">
-          <img src={imageSrc} alt="change " />
-        </label>
+        <div className="userPhotoChange">
+          <input
+            accept="image/*"
+            id="icon-button-banner"
+            type="file"
+            style={{ display: "none" }}
+            onChange={changehandler}
+          />
+          <label htmlFor="icon-button-banner">
+            <UserBanner banner={items._doc.banner} />
+          </label>
+
+          <input
+            accept="image/*"
+            id="icon-button-avatar"
+            type="file"
+            style={{ display: "none" }}
+            onChange={changehandler}
+          />
+          <label htmlFor="icon-button-avatar" className="imageUser">
+            <img src={items._doc.imageSrc} alt="change " />
+          </label>
+        </div>
         <input
           className="input"
           type="text"

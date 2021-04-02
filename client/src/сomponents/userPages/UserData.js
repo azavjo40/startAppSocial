@@ -3,13 +3,13 @@ import Button from "@material-ui/core/Button";
 import { UserChangeData } from "../index";
 import "../../styles/userPage/userData.css";
 
-function UserData({ titleBtn, name, country, imageSrc, email }) {
+function UserData({ titleBtn, items }) {
   const [show, setShow] = useState(false);
   return (
     <>
       <div className="containerMyData">
         <div className="avatar">
-          <img src={imageSrc} alt="Your img" />
+          <img src={items._doc.imageSrc} alt="Your img" />
         </div>
 
         <Button
@@ -21,20 +21,11 @@ function UserData({ titleBtn, name, country, imageSrc, email }) {
           {titleBtn}
         </Button>
         <div className="itemData">
-          <p>{name}</p>
-          <p>{country}</p>
+          <p>{items._doc.name}</p>
+          <p>{items._doc.country}</p>
         </div>
       </div>
-      {show && (
-        <UserChangeData
-          email={email}
-          name={name}
-          country={country}
-          imageSrc={imageSrc}
-          setShow={setShow}
-          show={show}
-        />
-      )}
+      {show && <UserChangeData items={items} setShow={setShow} show={show} />}
     </>
   );
 }

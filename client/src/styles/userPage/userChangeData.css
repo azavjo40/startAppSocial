@@ -11,24 +11,33 @@
   overflow: auto;
 }
 .modalWind .changeForm {
+  position: relative;
   background-color: #e6e6e6;
   display: flex;
   flex-direction: column;
   width: 400px;
   border-radius: 20px;
 }
-.modalWind .changeForm .imageUser {
-  width: 100px;
-  height: 100px;
-  margin: 20px;
+.modalWind .changeForm .userPhotoChange {
+  width: 100%;
+  height: 120px;
 }
-.modalWind .changeForm .imageUser img {
+.modalWind .changeForm .userPhotoChange .imageUser {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  top: 70px;
+  left: 10px;
+  z-index: 5;
+}
+.modalWind .changeForm .userPhotoChange .imageUser img {
+  margin-left: 30px;
   width: 100%;
   height: 100%;
   border-radius: 50%;
   transition: 1s;
 }
-.modalWind .changeForm .imageUser img:hover {
+.modalWind .changeForm .userPhotoChange .imageUser img:hover {
   opacity: 0.5;
 }
 .modalWind .changeForm .input {
@@ -55,6 +64,11 @@
 .modalWind .btnParagraph img {
   width: 25px;
   height: 25px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.modalWind .btnParagraph img:hover {
+  background-color: #3f51b5;
 }
 .modalWind .btnParagraph button {
   padding: 0px;
