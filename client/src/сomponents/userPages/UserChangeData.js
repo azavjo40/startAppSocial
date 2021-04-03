@@ -1,19 +1,20 @@
 import { useState } from "react";
-// import { useDispatch } from "react-redux";
+import close from "src/images/close-window.png";
+import { useDispatch } from "react-redux";
 import { UserBanner } from "../index";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
-import close from "../../images/close-window.png";
 import "../../styles/userPage/userChangeData.css";
+import { userChangeAvatar } from "../../redux/auths/authAcsions";
 function UserChangeData({ setShow, show, items }) {
   const [form, setForm] = useState({
     name: items._doc.name,
     email: items._doc.email,
     country: items._doc.country,
     _id: items._doc._id,
-    imageSrc: items._doc.imageSrc,
+    imageSrcAvatar: items._doc.imageSrc,
   });
-
+  const dispatch = useDispatch();
   const changehandler = (e) => {
     const files = e.target.files;
     const file = files && files[0];
@@ -24,9 +25,9 @@ function UserChangeData({ setShow, show, items }) {
     });
   };
 
-  const registerHandler = (e) => {
+  const userChangeHandler = (e) => {
     e.preventDefault();
-    console.log(form);
+    dispatch(userChangeAvatar(form));
     setTimeout(() => {
       setShow(!show);
       setForm({
@@ -35,13 +36,13 @@ function UserChangeData({ setShow, show, items }) {
         password: "",
         country: "",
         _id: "",
-        imageSrc: "",
+        imageSrcAvatar: "",
       });
     }, 1000);
   };
   return (
     <div className="modalWind">
-      <form className="changeForm" onSubmit={(e) => registerHandler(e)}>
+      <form className="changeForm" onSubmit={(e) => userChangeHandler(e)}>
         <div className="btnParagraph">
           <img src={close} alt="close" onClick={() => setShow(!show)} />
           <p>Edit profile</p>
@@ -55,16 +56,16 @@ function UserChangeData({ setShow, show, items }) {
           </Button>
         </div>
         <div className="userPhotoChange">
-          <input
+          {/* <input
             accept="image/*"
             id="icon-button-banner"
             type="file"
             style={{ display: "none" }}
             onChange={changehandler}
-          />
-          <label htmlFor="icon-button-banner">
+          /> */}
+          {/* <label htmlFor="icon-button-banner">
             <UserBanner banner={items._doc.banner} />
-          </label>
+          </label> */}
 
           <input
             accept="image/*"

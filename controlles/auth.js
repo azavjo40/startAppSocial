@@ -13,7 +13,7 @@ module.exports.register = async (req, res) => {
       });
     }
     const file = req.file;
-    const { name, phone, email, password, country } = req.body;
+    const { name, email, password, country } = req.body;
     const candidate = await User.findOne({ email });
     if (candidate) {
       return res.status(400).json({ message: "This user already exists" });
@@ -21,7 +21,6 @@ module.exports.register = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 12);
     const user = new User({
       name,
-      phone,
       email,
       password: hashedPassword,
       country,
@@ -70,7 +69,6 @@ module.exports.login = async (req, res) => {
 module.exports.getUserPage = async (req, res) => {
   try {
     const _id = req.params.userId;
-    console.log(_id);
     if (!_id) {
       res
         .status(400)
@@ -90,5 +88,66 @@ module.exports.refreshToken = async (req, res) => {
     res.status(200).json({ token: `Bearer ${tokenUser()}`, userId: id });
   } catch (e) {
     res.status(500).json({ message: "Something went wrong, please try again" });
+  }
+};
+
+module.exports.userChangeAvatar = async (req, res) => {
+  try {
+    const { imageSrcAvatar, name, country, _id } = req.body;
+    const file = req.file.path;
+    const ubdate = {
+      name,
+      country,
+      imageSrc: file ? file : imageSrcAvatar,
+    };
+    if (imageSrcAvatar === "uploads//spare//1617104631234-user.png") {
+      const user = await new User.findByIdAndUpdate(
+        { _id },
+        { $set: ubdate },
+        { new: true }
+      );
+      res.status(200).json(user);
+    } else {
+      const user = await new User.findByIdAndUpdate(
+        { _id },
+        { $set: ubdate },
+        { new: true }
+      );
+      res.status(200).json(user);
+      const path = imageSrcAvatar.split("\\").join("/");
+      fs.unlinkSync(path);
+    }
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+module.exports.userChangeBanner = async (req, res) => {
+  try {
+    const { imageSrcBanner, _id } = req.body;
+    const ubdate = {
+      imageSrc: req.file.path,
+    };
+    if (imageSrcBanner === "uploads//spare//1617104683862-aavva.png") {
+      const user = await new User.findByIdAndUpdate(
+        { _id },
+        { ubdate },
+        { new: true }
+      );
+      console.log(user);
+      res.status(200).json(user);
+    } else {
+      const user = await new User.findByIdAndUpdate(
+        { _id },
+        { ubdate },
+        { new: true }
+      );
+      console.log(user);
+      res.status(200).json(user);
+      const path = imageSrcAvatar.split("\\").join("/");
+      fs.unlinkSync(path);
+    }
+  } catch (e) {
+    console.log(e);
   }
 };

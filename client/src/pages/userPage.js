@@ -4,6 +4,7 @@ import "../styles/userPage/userPage.css";
 import { useSelector } from "react-redux";
 function UserPage() {
   const items = useSelector((state) => state.userPages.user);
+  console.log(items);
   return (
     <div className="containerMyPage">
       {items && (

@@ -36,4 +36,18 @@ router.post(
   controller.refreshToken
 );
 
+router.patch(
+  "/user/change/avatar",
+  upload.single("file"),
+  // passport.authenticate("jwt", { session: false }),
+  controller.userChangeAvatar
+);
+
+router.post(
+  "/user/change/banner",
+  upload.single("file"),
+  // passport.authenticate("jwt", { session: false }),
+  controller.userChangeBanner
+);
+
 module.exports = router;

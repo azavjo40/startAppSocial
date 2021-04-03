@@ -49,6 +49,7 @@ export function authRegister(form) {
     formdata.append("email", form.email);
     formdata.append("password", form.password);
     formdata.append("file", form.file);
+    console.log(formdata);
     try {
       const options = await {
         url: "/api/auth/register",
@@ -102,6 +103,38 @@ export const refreshToken = () => {
         }, 1000000);
       }
     } catch (e) {}
+  };
+};
+
+export const userChangeAvatar = (form) => {
+  return async (dispach) => {
+    const formdata = new FormData();
+    formdata.append("country", form.country);
+    formdata.append("name", form.name);
+    formdata.append("email", form.email);
+    formdata.append("imageSrcAvatar", form.imageSrcAvatar);
+    formdata.append("file", form.file);
+    try {
+      const options = await {
+        url: "/api/auth/user/change/avatar",
+        method: "PATCH",
+        body: null,
+        file: formdata,
+        token: storage.token,
+        type: USER_PAGES_PAGE,
+      };
+      const { data } = await dispach(httpFetch(options));
+      await dispach(autoSaveStorage(data));
+    } catch (e) {}
+  };
+};
+
+export const userChangeBanner = async (banner) => {
+  return async (dispach) => {
+    try {
+    } catch (e) {
+      console.log(e);
+    }
   };
 };
 
