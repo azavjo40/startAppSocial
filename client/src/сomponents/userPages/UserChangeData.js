@@ -5,7 +5,10 @@ import { UserBanner } from "../index";
 import Button from "@material-ui/core/Button";
 import Icon from "@material-ui/core/Icon";
 import "../../styles/userPage/userChangeData.css";
-import { userChangeAvatar } from "../../redux/auths/authAcsions";
+import {
+  userChangeAvatar,
+  userChangeBanner,
+} from "../../redux/auths/authAcsions";
 function UserChangeData({ setShow, show, items }) {
   const [form, setForm] = useState({
     name: items._doc.name,
@@ -13,9 +16,24 @@ function UserChangeData({ setShow, show, items }) {
     country: items._doc.country,
     _id: items._doc._id,
     imageSrcAvatar: items._doc.imageSrc,
+    banner: items._doc.banner,
   });
+
+  const [banner, setBanner] = useState();
+
   const dispatch = useDispatch();
-  const changehandler = (e) => {
+
+  const changehandlerBanner = (e) => {
+    const files = e.target.files;
+    const file = files && files[0];
+    setBanner({
+      ...form,
+      [e.target.name]: e.target.value,
+      file,
+    });
+  };
+
+  const changehandlerAvatar = (e) => {
     const files = e.target.files;
     const file = files && files[0];
     setForm({
@@ -28,6 +46,7 @@ function UserChangeData({ setShow, show, items }) {
   const userChangeHandler = (e) => {
     e.preventDefault();
     dispatch(userChangeAvatar(form));
+    dispatch(userChangeBanner(banner));
     setTimeout(() => {
       setShow(!show);
       setForm({
@@ -56,23 +75,23 @@ function UserChangeData({ setShow, show, items }) {
           </Button>
         </div>
         <div className="userPhotoChange">
-          {/* <input
+          <input
             accept="image/*"
             id="icon-button-banner"
             type="file"
             style={{ display: "none" }}
-            onChange={changehandler}
-          /> */}
-          {/* <label htmlFor="icon-button-banner">
+            onChange={changehandlerBanner}
+          />
+          <label htmlFor="icon-button-banner">
             <UserBanner banner={items._doc.banner} />
-          </label> */}
+          </label>
 
           <input
             accept="image/*"
             id="icon-button-avatar"
             type="file"
             style={{ display: "none" }}
-            onChange={changehandler}
+            onChange={changehandlerAvatar}
           />
           <label htmlFor="icon-button-avatar" className="imageUser">
             <img src={items._doc.imageSrc} alt="change " />
@@ -85,17 +104,7 @@ function UserChangeData({ setShow, show, items }) {
           placeholder="Enter Name"
           required
           value={form.name}
-          onChange={changehandler}
-        />
-
-        <input
-          className="input"
-          type="email"
-          name="email"
-          placeholder="Enter Email "
-          required
-          value={form.email}
-          onChange={changehandler}
+          onChange={changehandlerAvatar}
         />
 
         <input
@@ -105,7 +114,7 @@ function UserChangeData({ setShow, show, items }) {
           placeholder="Enter Country"
           required
           value={form.country}
-          onChange={changehandler}
+          onChange={changehandlerAvatar}
         />
       </form>
     </div>

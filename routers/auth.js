@@ -39,14 +39,14 @@ router.post(
 router.patch(
   "/user/change/avatar",
   upload.single("file"),
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   controller.userChangeAvatar
 );
 
-router.post(
+router.patch(
   "/user/change/banner",
   upload.single("file"),
-  // passport.authenticate("jwt", { session: false }),
+  passport.authenticate("jwt", { session: false }),
   controller.userChangeBanner
 );
 

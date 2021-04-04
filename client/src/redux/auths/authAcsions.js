@@ -108,33 +108,51 @@ export const refreshToken = () => {
 
 export const userChangeAvatar = (form) => {
   return async (dispach) => {
-    const formdata = new FormData();
-    formdata.append("country", form.country);
-    formdata.append("name", form.name);
-    formdata.append("email", form.email);
-    formdata.append("imageSrcAvatar", form.imageSrcAvatar);
-    formdata.append("file", form.file);
     try {
-      const options = await {
+      let formdata;
+      if (form.file) {
+        formdata = new FormData();
+        formdata.append("country", form.country);
+        formdata.append("_id", form._id);
+        formdata.append("name", form.name);
+        formdata.append("email", form.email);
+        formdata.append("imageSrcAvatar", form.imageSrcAvatar);
+        formdata.append("file", form.file);
+      }
+      const options = {
         url: "/api/auth/user/change/avatar",
+        method: "PATCH",
+        token: storage.token,
+        type: USER_PAGES_PAGE,
+      };
+      formdata ? (options.file = formdata) : (options.body = form);
+      if (form) {
+        await dispach(httpFetch(options));
+      }
+    } catch (e) {}
+  };
+};
+
+export const userChangeBanner = (banner) => {
+  return async (dispach) => {
+    try {
+      const formdata = new FormData();
+      formdata.append("_id", banner._id);
+      formdata.append("email", banner.email);
+      formdata.append("banner", banner.banner);
+      formdata.append("file", banner.file);
+      const options = {
+        url: "/api/auth/user/change/banner",
         method: "PATCH",
         body: null,
         file: formdata,
         token: storage.token,
         type: USER_PAGES_PAGE,
       };
-      const { data } = await dispach(httpFetch(options));
-      await dispach(autoSaveStorage(data));
+      if (banner.file) {
+        await dispach(httpFetch(options));
+      }
     } catch (e) {}
-  };
-};
-
-export const userChangeBanner = async (banner) => {
-  return async (dispach) => {
-    try {
-    } catch (e) {
-      console.log(e);
-    }
   };
 };
 

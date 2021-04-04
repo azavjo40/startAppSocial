@@ -1,6 +1,7 @@
 const User = require("../models/auth");
 const bcrypt = require("bcryptjs");
 const { validationResult } = require("express-validator");
+const fs = require("fs");
 const token = require("../midlleware/token");
 
 module.exports.register = async (req, res) => {
@@ -93,29 +94,23 @@ module.exports.refreshToken = async (req, res) => {
 
 module.exports.userChangeAvatar = async (req, res) => {
   try {
-    const { imageSrcAvatar, name, country, _id } = req.body;
-    const file = req.file.path;
+    const { imageSrcAvatar, name, country, _id, email } = req.body;
     const ubdate = {
       name,
       country,
-      imageSrc: file ? file : imageSrcAvatar,
+      imageSrc: req.file ? req.file.path : imageSrcAvatar,
     };
-    if (imageSrcAvatar === "uploads//spare//1617104631234-user.png") {
-      const user = await new User.findByIdAndUpdate(
-        { _id },
-        { $set: ubdate },
-        { new: true }
-      );
-      res.status(200).json(user);
+    const user = await User.findOne({ email });
+    if (req.file) {
+      await User.findByIdAndUpdate({ _id }, { $set: ubdate }, { new: true });
+      res.status(200).json({ ...user });
+      if (imageSrcAvatar !== "uploads//spare//1617104631234-user.png") {
+        const path = imageSrcAvatar.replace("uploadsad", "uploads/ad");
+        path && fs.unlinkSync(path);
+      }
     } else {
-      const user = await new User.findByIdAndUpdate(
-        { _id },
-        { $set: ubdate },
-        { new: true }
-      );
-      res.status(200).json(user);
-      const path = imageSrcAvatar.split("\\").join("/");
-      fs.unlinkSync(path);
+      await User.findByIdAndUpdate({ _id }, { $set: ubdate }, { new: true });
+      res.status(200).json({ ...user });
     }
   } catch (e) {
     console.log(e);
@@ -124,28 +119,21 @@ module.exports.userChangeAvatar = async (req, res) => {
 
 module.exports.userChangeBanner = async (req, res) => {
   try {
-    const { imageSrcBanner, _id } = req.body;
+    const { banner, _id, email } = req.body;
     const ubdate = {
-      imageSrc: req.file.path,
+      banner: req.file ? req.file.path : banner,
     };
-    if (imageSrcBanner === "uploads//spare//1617104683862-aavva.png") {
-      const user = await new User.findByIdAndUpdate(
-        { _id },
-        { ubdate },
-        { new: true }
-      );
-      console.log(user);
-      res.status(200).json(user);
+    const user = await User.findOne({ email });
+    if (req.file) {
+      await User.findByIdAndUpdate({ _id }, { $set: ubdate }, { new: true });
+      res.status(200).json({ ...user });
+      if (banner !== "uploads//spare//1617104683862-aavva.png") {
+        const path = banner.replace("uploadsad", "uploads/ad");
+        path && fs.unlinkSync(path);
+      }
     } else {
-      const user = await new User.findByIdAndUpdate(
-        { _id },
-        { ubdate },
-        { new: true }
-      );
-      console.log(user);
-      res.status(200).json(user);
-      const path = imageSrcAvatar.split("\\").join("/");
-      fs.unlinkSync(path);
+      await User.findByIdAndUpdate({ _id }, { $set: ubdate }, { new: true });
+      res.status(200).json({ ...user });
     }
   } catch (e) {
     console.log(e);

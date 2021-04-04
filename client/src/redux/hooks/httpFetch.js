@@ -8,7 +8,10 @@ export function httpFetch(options) {
         method: options.method,
         headers: { Authorization: options.token },
       };
-      if (options.method === "POST" && options.body) {
+      if (
+        (options.method === "POST" && options.body) ||
+        (options.method === "PATCH" && options.body)
+      ) {
         requestOptions.body = JSON.stringify(options.body);
         requestOptions.headers = {
           "Content-Type": "application/json",
@@ -16,7 +19,10 @@ export function httpFetch(options) {
         };
       }
 
-      if (options.file) {
+      if (
+        (options.file && options.method === "POST") ||
+        (options.file && options.method === "PATCH")
+      ) {
         requestOptions.body = options.file;
       }
 
