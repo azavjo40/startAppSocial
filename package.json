@@ -37,6 +37,7 @@
     "nodemailer": "^6.4.18",
     "nodemon": "^2.0.7",
     "passport": "^0.4.1",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "redux-devtools-extension": "^2.13.9"
   }
 }
