@@ -1,25 +1,25 @@
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
-import icon from "../../images/openMenu.png";
-import { useDispatch } from "react-redux";
-import { logout } from "../../redux/auths/authAcsions";
-import "../../styles/navbar/navbar.css";
-const Navbar = (props) => {
-  const [isLoadin, setIsLoading] = useState(false);
-  const dispatch = useDispatch();
+import { useState } from "react"
+import { NavLink } from "react-router-dom"
+import icon from "../../images/openMenu.png"
+import { useDispatch } from "react-redux"
+import { logout } from "../../redux/auths/authAcsions"
+import "../../styles/navbar/navbar.css"
+const Navbar = props => {
+  const [isLoadin, setIsLoading] = useState(false)
+  const dispatch = useDispatch()
   function handleResize() {
     if (window.innerWidth > 425) {
-      setIsLoading(false);
+      setIsLoading(false)
     }
   }
-  window.addEventListener("resize", handleResize);
+  window.addEventListener("resize", handleResize)
 
   return (
-    <header className="header">
+    <header className='header'>
       <img
         src={icon}
         alt={icon}
-        className="imgIcon"
+        className='imgIcon'
         onClick={() => setIsLoading(!isLoadin)}
       />
       <ul
@@ -47,6 +47,13 @@ const Navbar = (props) => {
         ) : (
           ""
         )}
+        {props.searchPeople ? (
+          <li>
+            <NavLink to={props.s ? props.s : ""}>{props.searchPeople}</NavLink>
+          </li>
+        ) : (
+          ""
+        )}
         {props.logout ? (
           <li>
             <NavLink
@@ -61,6 +68,6 @@ const Navbar = (props) => {
         )}
       </ul>
     </header>
-  );
-};
-export default Navbar;
+  )
+}
+export default Navbar

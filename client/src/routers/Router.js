@@ -1,28 +1,31 @@
-import React from "react";
-import { Redirect, Route, Switch } from "react-router-dom";
-import { Auth, Home, UserPage } from "../pages";
+import React from "react"
+import { Redirect, Route, Switch } from "react-router-dom"
+import { Auth, Home, UserPage, SearchPeople } from "../pages"
 function useRouters(isAuthUser) {
   return (
     <Switch>
       {isAuthUser ? (
         <>
-          <Route path="/userPage" exact>
+          <Route path='/userPage' exact>
             <UserPage />
           </Route>
-          <Redirect to="/userPage" />
+          <Route path='/searchPeople' exact>
+            <SearchPeople />
+          </Route>
+          <Redirect to='/userPage' />
         </>
       ) : (
         <>
-          <Route path="/" exact>
+          <Route path='/' exact>
             <Home />
           </Route>
-          <Route path="/auth" exact>
+          <Route path='/auth' exact>
             <Auth />
           </Route>
-          <Redirect to="/" />
+          <Redirect to='/' />
         </>
       )}
     </Switch>
-  );
+  )
 }
-export default useRouters;
+export default useRouters
