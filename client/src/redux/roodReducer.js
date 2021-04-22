@@ -11,5 +11,5 @@ export const roodReducer = combineReducers({
   auth: authReducer,
   general: generalReducer,
   userPages: userReducer,
-  people: peopleReducer,
+  peoples: peopleReducer,
 })

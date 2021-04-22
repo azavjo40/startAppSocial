@@ -1,0 +1,33 @@
+$myColor-1: #ecf3ff;
+$myColor-2: #ecf3ff99;
+$black-80: #181818;
+$black-50: #787878;
+$myRed: rgb(255 64 129);
+.containerPeoples {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding-top: 60px;
+  height: 700px;
+  overflow: auto;
+}
+.item {
+  width: 300px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px;
+  background-color: $myColor-2;
+  border-radius: 5px;
+  user-select: none;
+  padding: 5px;
+  position: relative;
+  z-index: 1;
+  img {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+  }
+}

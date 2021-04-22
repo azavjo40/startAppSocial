@@ -1,6 +1,6 @@
 //@ts-check
 import { httpFetch } from "../hooks/httpFetch"
-
+import { GET_SEARCH_PEOPLE } from "./type"
 export const getSearchPeople = () => {
   return async dispach => {
     const options = {
@@ -9,9 +9,8 @@ export const getSearchPeople = () => {
       body: null,
       file: null,
       token: null,
-      type: null,
+      type: GET_SEARCH_PEOPLE,
     }
-    const { data } = await dispach(httpFetch(options))
-    console.log(data)
+    await dispach(httpFetch(options))
   }
 }
