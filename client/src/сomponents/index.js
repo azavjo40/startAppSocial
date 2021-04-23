@@ -5,7 +5,8 @@ import Navbar from "./navbar/Navbar"
 import UserBanner from "./userPages/UserBanner"
 import UserData from "./userPages/UserData"
 import UserChangeData from "./userPages/UserChangeData"
-import SearchCart from "./peoples/SearchCart"
+import PeopleCart from "./peoples/PeopleCart"
+import Search from "./peoples/Search"
 export {
   Login,
   Register,
@@ -14,5 +15,6 @@ export {
   UserBanner,
   UserData,
   UserChangeData,
-  SearchCart,
+  PeopleCart,
+  Search,
 }
