@@ -14,7 +14,7 @@ function SearchCart({ item, iconeMessage }) {
           onClick={() => setShowChat(!showChat)}
         />
       </div>
-      {showChat && <Chat />}
+      {showChat && <Chat setShowChat={setShowChat} showChat={showChat} />}
     </>
   )
 }
