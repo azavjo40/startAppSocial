@@ -8,20 +8,20 @@ function Search({ items }) {
   const changeHandler = e => {
     const peoples = []
     const datalist = []
-
-    const peo = e.target.value.trim().toLowerCase()
+    const inputResult = e.target.value.trim().toLowerCase()
     items &&
       items.filter(item => {
-        if (item.name.toLowerCase() === peo) {
+        if (item.name.toLowerCase() === inputResult) {
           peoples.push(item)
         }
-        if (item.name.toLowerCase() >= peo) {
+        if (item.name.toLowerCase() >= inputResult) {
           datalist.push(item)
         }
         return false
       })
     setFiltrDatalist(datalist)
-    dispatch(searchPeople(peoples))
+    if (!inputResult) dispatch(searchPeople(items))
+    else dispatch(searchPeople(peoples))
   }
 
   return (

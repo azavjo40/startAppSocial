@@ -9,29 +9,22 @@ function SearchPeople() {
   useEffect(() => dispatch(getSearchPeople()), [dispatch])
   const items = useSelector(state => state.peoples.items)
   const searchItems = useSelector(state => state.peoples.search)
+  let resultItems
+  if (!searchItems) resultItems = items
+  else resultItems = searchItems
   return (
     <div className='containerPeoples'>
       <Search items={items} />
-      {searchItems
-        ? searchItems.map(item => {
-            return (
-              <PeopleCart
-                item={item}
-                key={item._id}
-                iconeMessage={iconeMessage}
-              />
-            )
-          })
-        : items &&
-          items.map(item => {
-            return (
-              <PeopleCart
-                item={item}
-                key={item._id}
-                iconeMessage={iconeMessage}
-              />
-            )
-          })}
+      {resultItems &&
+        resultItems.map(item => {
+          return (
+            <PeopleCart
+              item={item}
+              key={item._id}
+              iconeMessage={iconeMessage}
+            />
+          )
+        })}
     </div>
   )
 }

@@ -12,7 +12,7 @@ function Chat({ setShowChat, showChat }) {
       </div>
       <div className='chatPeople'></div>
       <form>
-        <textarea rows='10' cols='45' name='text'></textarea>
+        <textarea name='text'></textarea>
         <Button variant='contained' color='primary' endIcon={<Icon>send</Icon>}>
           Send
         </Button>
