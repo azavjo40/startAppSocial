@@ -6,7 +6,7 @@ const morgan = require("morgan")
 const mongoose = require("mongoose")
 const passport = require("passport")
 const cors = require("cors")
-
+const socketIo = require("./routers/socketIo")
 app.use("/uploads", express.static("uploads"))
 app.use(cors())
 app.use(morgan("dev"))
@@ -22,6 +22,7 @@ require("./midlleware/passport")(passport)
 //     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
 //   })
 // }
+socketIo(http)()
 
 const PORT = process.env.PORT || config.get("port") || 5000
 async function start() {
@@ -40,5 +41,4 @@ async function start() {
     process.exit(1)
   }
 }
-
 start()

@@ -10,18 +10,19 @@ function SearchPeople() {
   const items = useSelector(state => state.peoples.items)
   const searchItems = useSelector(state => state.peoples.search)
   let resultItems
-  if (!searchItems) resultItems = items
-  else resultItems = searchItems
+  !searchItems ? (resultItems = items) : (resultItems = searchItems)
   return (
     <div className='containerPeoples'>
       <Search items={items} />
       {resultItems &&
-        resultItems.map(item => {
+        resultItems.map((item, index) => {
+          let count = `76r3gdgxrt87e7r${index}`
           return (
             <PeopleCart
               item={item}
               key={item._id}
               iconeMessage={iconeMessage}
+              count={count}
             />
           )
         })}
