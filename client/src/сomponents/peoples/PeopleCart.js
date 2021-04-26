@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import "../../styles/peoples/searchPeople.css"
 import Chat from "./chat"
-function SearchCart({ item, iconeMessage, count }) {
+function SearchCart({ item, iconeMessage }) {
   const [showChat, setShowChat] = useState(false)
   return (
     <>
@@ -15,7 +15,11 @@ function SearchCart({ item, iconeMessage, count }) {
         />
       </div>
       {showChat && (
-        <Chat setShowChat={setShowChat} showChat={showChat} count={count} />
+        <Chat
+          setShowChat={setShowChat}
+          showChat={showChat}
+          interlocutor={item}
+        />
       )}
     </>
   )

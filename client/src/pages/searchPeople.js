@@ -15,14 +15,12 @@ function SearchPeople() {
     <div className='containerPeoples'>
       <Search items={items} />
       {resultItems &&
-        resultItems.map((item, index) => {
-          let count = `76r3gdgxrt87e7r${index}`
+        resultItems.map(item => {
           return (
             <PeopleCart
               item={item}
               key={item._id}
               iconeMessage={iconeMessage}
-              count={count}
             />
           )
         })}

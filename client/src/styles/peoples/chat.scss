@@ -4,7 +4,7 @@ $black-80: #181818;
 $black-50: #787878;
 .containerChat {
   width: 80%;
-  height: 500px;
+  height: 400px;
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -29,6 +29,20 @@ $black-50: #787878;
     width: 100%;
     background-color: white;
     flex: 1 1 auto;
+    padding: 20px;
+    overflow: auto;
+    .itemChat {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      span {
+        font-size: 10px;
+      }
+      p {
+        font-size: 15px;
+        margin: 1px;
+      }
+    }
   }
   form {
     display: flex;
@@ -40,7 +54,7 @@ $black-50: #787878;
     flex: 0 1 auto;
     textarea {
       width: 60%;
-      height: 80%;
+      height: 60%;
       outline: none;
       border-radius: 20px;
       padding-left: 15px;
@@ -55,6 +69,6 @@ $black-50: #787878;
 
 @media (max-width: 425px) {
   .containerChat {
-    height: 400px;
+    height: 250px;
   }
 }

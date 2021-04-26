@@ -1,8 +1,9 @@
-const chatIo = require("../controlles/sockets/chat")
+const chatSocket = require("../controlles/sockets/chatSocket")
 const socketIo = http => {
-  return async () => {
+  return () => {
     try {
-      await chatIo(http)()
+      console.log("Socket is connection")
+      chatSocket(http)()
     } catch (e) {
       console.log(e)
     }

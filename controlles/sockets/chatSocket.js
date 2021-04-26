@@ -7,18 +7,15 @@ const chatIo = http => {
   })
   return async () => {
     try {
-      console.log("Socket is connection")
       io.on("connection", async socket => {
-        await socket.on("message", async ({ mes }) => {
-          console.log(mes)
+        await socket.on("message", async ({ form }) => {
           const chat = new Chat({
-            message: mes.message,
-            name: mes.name,
-            chatId: mes.chatId,
+            message: form.message,
+            name: form.name,
+            chatId: form.chatId,
           })
           await chat.save()
-          const chatResult = await Chat.find({ chatId: mes.chatId })
-          io.emit("message", { chatResult })
+          await io.emit("message", { chatResult: chat })
         })
       })
     } catch (e) {
