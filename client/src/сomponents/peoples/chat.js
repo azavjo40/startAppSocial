@@ -13,6 +13,7 @@ import {
 } from "src/redux/peoples/peopleAcsions"
 
 function Chat({ setShowChat, showChat, interlocutor }) {
+  const [mount, setMount] = useState(false)
   const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
   const [form, setForm] = useState({ name: "", message: "", chatId: "" })
   const socket = io.connect("http://localhost:5000/")
@@ -23,9 +24,13 @@ function Chat({ setShowChat, showChat, interlocutor }) {
     `${interlocutor._id}-${storage.userId}`,
     `${storage.userId}-${interlocutor._id}`,
   ]
+
   useEffect(() => {
-    dispatch(getSoketMessage(socket))
-  }, [])
+    if (!mount) {
+      setMount(true)
+      dispatch(getSoketMessage(socket))
+    }
+  }, [dispatch, socket, mount])
 
   if (!message) {
     dispatch(getMessages(`${interlocutor._id}-${storage.userId}`))
