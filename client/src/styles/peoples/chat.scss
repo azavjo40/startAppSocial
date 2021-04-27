@@ -31,6 +31,7 @@ $black-50: #787878;
     flex: 1 1 auto;
     padding: 20px;
     overflow: auto;
+
     .itemChat {
       display: flex;
       width: 100%;
@@ -52,23 +53,29 @@ $black-50: #787878;
     align-items: center;
     background-color: $myColor-1;
     flex: 0 1 auto;
-    textarea {
-      width: 60%;
-      height: 60%;
+    input {
+      width: 50%;
+      height: 100%;
       outline: none;
       border-radius: 20px;
       padding-left: 15px;
       padding-right: 15px;
       overflow: hidden;
+      border: 0.5px solid yellowgreen;
+      &:hover {
+        border: 0.5px solid yellow;
+      }
     }
     button {
+      width: 45px;
       height: 30px;
+      font-size: 10px;
     }
   }
 }
 
 @media (max-width: 425px) {
   .containerChat {
-    height: 250px;
+    height: 300px;
   }
 }

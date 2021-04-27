@@ -74,16 +74,17 @@ function Chat({ setShowChat, showChat, interlocutor }) {
             </div>
           ))}
       </div>
-      <form>
-        <textarea
+      <form onSubmit={sendMessage}>
+        <input
+          type='message'
           name='message'
           onChange={changeHandler}
           value={form.message}
           placeholder='Enter message'
           required
-        ></textarea>
+        />
         <Button
-          onClick={sendMessage}
+          type='submit'
           variant='contained'
           color='primary'
           endIcon={<Icon>send</Icon>}
