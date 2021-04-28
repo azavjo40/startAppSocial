@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import Icon from "@material-ui/core/Icon"
 import Button from "@material-ui/core/Button"
 import close from "../../images/close-window.png"
@@ -12,12 +12,13 @@ import {
   sendSoketMessage,
 } from "src/redux/peoples/peopleAcsions"
 
-function Chat({ setShowChat, showChat, interlocutor, eventCart }) {
+function Chat({ setShowChat, showChat, interlocutor }) {
   const [mount, setMount] = useState(false)
   const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
   const [form, setForm] = useState({ name: "", message: "", chatId: "" })
   const socket = io.connect("http://localhost:5000/")
   const message = useSelector(state => state.peoples.message)
+  const menuRef = useRef()
   const dispatch = useDispatch()
   const containerHeight = window.innerHeight - 70
   const chatId = [
@@ -25,16 +26,34 @@ function Chat({ setShowChat, showChat, interlocutor, eventCart }) {
     `${storage.userId}-${interlocutor._id}`,
   ]
 
+  const closeModale = useCallback(() => {
+    setShowChat(!showChat)
+    dispatch(getMessages())
+  }, [dispatch, setShowChat, showChat])
+
   useEffect(() => {
     if (!mount) {
       setMount(true)
       dispatch(getSoketMessage(socket))
     }
-  }, [dispatch, socket, mount])
+  }, [dispatch, mount, socket])
+
+  useEffect(() => {
+    const handler = event => {
+      if (!menuRef.current.contains(event.target)) {
+        closeModale()
+      }
+    }
+    document.addEventListener("mousedown", handler)
+    return () => {
+      document.removeEventListener("mousedown", handler)
+    }
+  }, [dispatch, closeModale])
 
   if (!message) {
     dispatch(getMessages(`${interlocutor._id}-${storage.userId}`))
   }
+
   const changeHandler = e => {
     e.preventDefault()
     setForm({
@@ -44,24 +63,23 @@ function Chat({ setShowChat, showChat, interlocutor, eventCart }) {
       chatId,
     })
   }
-  const sendMessage = e => {
+
+  const sen
+  dMessage = e => {
     e.preventDefault()
     dispatch(sendSoketMessage(form, socket))
     setForm({ name: "", message: "", chatId: "" })
   }
 
   return (
-    <div className='containerChat' style={{ height: `${containerHeight}px` }}>
+    <div
+      ref={menuRef}
+      className='containerChat'
+      style={{ height: `${containerHeight}px` }}
+    >
       <div className='infoPeople'>
         <span>{interlocutor.name}</span>
-        <img
-          src={close}
-          alt='close'
-          onClick={() => {
-            setShowChat(!showChat)
-            dispatch(getMessages())
-          }}
-        />
+        <img src={close} alt='close' onClick={closeModale} />
       </div>
       <div className='chatPeople'>
         {message &&
