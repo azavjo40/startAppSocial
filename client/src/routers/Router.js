@@ -1,6 +1,6 @@
 import React from "react"
 import { Redirect, Route, Switch } from "react-router-dom"
-import { Auth, Home, UserPage, Peoples } from "../pages"
+import { Auth, UserPage, Peoples } from "../pages"
 function useRouters(isAuthUser) {
   return (
     <Switch>
@@ -12,17 +12,14 @@ function useRouters(isAuthUser) {
           <Route path='/searchPeople' exact>
             <Peoples />
           </Route>
-          <Redirect to='/userPage' />
+          <Redirect to='/searchPeople' />
         </>
       ) : (
         <>
-          <Route path='/' exact>
-            <Home />
-          </Route>
           <Route path='/auth' exact>
             <Auth />
           </Route>
-          <Redirect to='/' />
+          <Redirect to='/auth' />
         </>
       )}
     </Switch>

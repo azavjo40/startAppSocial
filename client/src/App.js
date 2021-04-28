@@ -31,7 +31,7 @@ function App() {
             searchPeople='Search'
           />
         ) : (
-          <Navbar login='Login' l='/auth' home='Home' h='/' />
+          <Navbar login='Login' l='/auth' />
         )}
         {routers}
       </Router>

@@ -63,9 +63,7 @@ function Chat({ setShowChat, showChat, interlocutor }) {
       chatId,
     })
   }
-
-  const sen
-  dMessage = e => {
+  const sendMessage = e => {
     e.preventDefault()
     dispatch(sendSoketMessage(form, socket))
     setForm({ name: "", message: "", chatId: "" })

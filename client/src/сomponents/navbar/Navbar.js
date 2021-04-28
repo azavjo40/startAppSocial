@@ -26,13 +26,6 @@ const Navbar = props => {
         className={isLoadin ? "openNav" : "nav_links"}
         onClick={() => setIsLoading(false)}
       >
-        {props.home ? (
-          <li>
-            <NavLink to={props.h ? props.h : ""}>{props.home}</NavLink>
-          </li>
-        ) : (
-          ""
-        )}
         {props.login ? (
           <li>
             <NavLink to={props.l ? props.l : ""}>{props.login}</NavLink>

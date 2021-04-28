@@ -6,12 +6,14 @@ import iconeMessage from "../images/open-message.png"
 import "../styles/peoples/peoples.css"
 function Peoples() {
   const dispatch = useDispatch()
-  useEffect(() => dispatch(getSearchPeople()), [dispatch])
   const items = useSelector(state => state.peoples.items)
   const searchItems = useSelector(state => state.peoples.search)
   let resultItems
   !searchItems ? (resultItems = items) : (resultItems = searchItems)
-  const containerHeight = window.innerHeight
+  let containerHeight = window.innerHeight
+  useEffect(() => {
+    dispatch(getSearchPeople())
+  }, [dispatch])
   return (
     <div
       className='containerPeoples'
