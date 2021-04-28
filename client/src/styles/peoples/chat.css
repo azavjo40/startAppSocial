@@ -1,21 +1,24 @@
 .containerChat {
-  width: 80%;
-  height: 400px;
+  width: 77%;
   display: flex;
   flex-direction: column;
   position: absolute;
   z-index: 10;
   border: 2px solid #ecf3ff;
+  position: absolute;
+  right: 0px;
+  height: 80%;
+  background-color: white;
 }
 .containerChat .infoPeople {
   width: 100%;
   height: 30px;
-  background-color: #ecf3ff;
   flex: 0 1 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px;
+  border-bottom: 2px solid #ecf3ff;
 }
 .containerChat .infoPeople img {
   width: 25px;
@@ -44,14 +47,15 @@
 .containerChat form {
   display: flex;
   width: 100%;
-  height: 50px;
+  height: 70px;
   justify-content: space-around;
   align-items: center;
   background-color: #ecf3ff;
   flex: 0 1 auto;
+  padding: 7px;
 }
 .containerChat form input {
-  width: 50%;
+  width: 70%;
   height: 100%;
   outline: none;
   border-radius: 20px;
@@ -69,9 +73,9 @@
   font-size: 10px;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 768px) {
   .containerChat {
-    height: 300px;
+    width: 100%;
   }
 }
 

@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import "../../styles/peoples/searchPeople.css"
+import "../../styles/peoples/peoples.css"
 import Chat from "./chat"
 function SearchCart({ item, iconeMessage }) {
   const [showChat, setShowChat] = useState(false)

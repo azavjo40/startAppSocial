@@ -12,14 +12,14 @@ import {
   sendSoketMessage,
 } from "src/redux/peoples/peopleAcsions"
 
-function Chat({ setShowChat, showChat, interlocutor }) {
+function Chat({ setShowChat, showChat, interlocutor, eventCart }) {
   const [mount, setMount] = useState(false)
   const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
   const [form, setForm] = useState({ name: "", message: "", chatId: "" })
   const socket = io.connect("http://localhost:5000/")
   const message = useSelector(state => state.peoples.message)
   const dispatch = useDispatch()
-
+  const containerHeight = window.innerHeight - 70
   const chatId = [
     `${interlocutor._id}-${storage.userId}`,
     `${storage.userId}-${interlocutor._id}`,
@@ -51,7 +51,7 @@ function Chat({ setShowChat, showChat, interlocutor }) {
   }
 
   return (
-    <div className='containerChat'>
+    <div className='containerChat' style={{ height: `${containerHeight}px` }}>
       <div className='infoPeople'>
         <span>{interlocutor.name}</span>
         <img
@@ -80,7 +80,7 @@ function Chat({ setShowChat, showChat, interlocutor }) {
           name='message'
           onChange={changeHandler}
           value={form.message}
-          placeholder='Enter message'
+          placeholder='Enter Message'
           required
         />
         <Button

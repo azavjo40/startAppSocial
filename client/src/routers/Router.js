@@ -1,6 +1,6 @@
 import React from "react"
 import { Redirect, Route, Switch } from "react-router-dom"
-import { Auth, Home, UserPage, SearchPeople } from "../pages"
+import { Auth, Home, UserPage, Peoples } from "../pages"
 function useRouters(isAuthUser) {
   return (
     <Switch>
@@ -10,7 +10,7 @@ function useRouters(isAuthUser) {
             <UserPage />
           </Route>
           <Route path='/searchPeople' exact>
-            <SearchPeople />
+            <Peoples />
           </Route>
           <Redirect to='/userPage' />
         </>

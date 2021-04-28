@@ -3,22 +3,25 @@ $myColor-2: #ecf3ff99;
 $black-80: #181818;
 $black-50: #787878;
 .containerChat {
-  width: 80%;
-  height: 400px;
+  width: 77%;
   display: flex;
   flex-direction: column;
   position: absolute;
   z-index: 10;
   border: 2px solid $myColor-1;
+  position: absolute;
+  right: 0px;
+  height: 80%;
+  background-color: white;
   .infoPeople {
     width: 100%;
     height: 30px;
-    background-color: $myColor-1;
     flex: 0 1 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px;
+    border-bottom: 2px solid $myColor-1;
     img {
       width: 25px;
       height: 25px;
@@ -31,7 +34,6 @@ $black-50: #787878;
     flex: 1 1 auto;
     padding: 20px;
     overflow: auto;
-
     .itemChat {
       display: flex;
       width: 100%;
@@ -48,13 +50,14 @@ $black-50: #787878;
   form {
     display: flex;
     width: 100%;
-    height: 50px;
+    height: 70px;
     justify-content: space-around;
     align-items: center;
     background-color: $myColor-1;
     flex: 0 1 auto;
+    padding: 7px;
     input {
-      width: 50%;
+      width: 70%;
       height: 100%;
       outline: none;
       border-radius: 20px;
@@ -74,8 +77,8 @@ $black-50: #787878;
   }
 }
 
-@media (max-width: 425px) {
+@media (max-width: 768px) {
   .containerChat {
-    height: 300px;
+    width: 100%;
   }
 }

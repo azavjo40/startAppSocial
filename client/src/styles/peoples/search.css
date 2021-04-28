@@ -1,5 +1,5 @@
 .containerSearch {
-  width: 300px;
+  width: 23%;
 }
 .containerSearch input {
   width: 100%;
@@ -14,6 +14,17 @@
 }
 .containerSearch input:focus {
   outline: none;
+}
+
+@media (max-width: 768px) {
+  .containerSearch {
+    width: 60%;
+  }
+}
+@media (max-width: 420px) {
+  .containerSearch {
+    width: 80%;
+  }
 }
 
 /*# sourceMappingURL=search.css.map */
