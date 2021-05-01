@@ -10,26 +10,28 @@ import {
   getMessages,
   getSoketMessage,
   sendSoketMessage,
+  showChat,
 } from "src/redux/peoples/peopleAcsions"
 
-function Chat({ setShowChat, showChat, interlocutor }) {
+function Chat() {
   const [mount, setMount] = useState(false)
   const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
   const [form, setForm] = useState({ name: "", message: "", chatId: "" })
   const socket = io.connect("http://localhost:5000/")
   const message = useSelector(state => state.peoples.message)
+  const interlocutor = useSelector(state => state.peoples.interL)
   const menuRef = useRef()
   const dispatch = useDispatch()
-  const containerHeight = window.innerHeight - 70
+
   const chatId = [
     `${interlocutor._id}-${storage.userId}`,
     `${storage.userId}-${interlocutor._id}`,
   ]
 
   const closeModale = useCallback(() => {
-    setShowChat(!showChat)
+    dispatch(showChat(false))
     dispatch(getMessages())
-  }, [dispatch, setShowChat, showChat])
+  }, [dispatch])
 
   useEffect(() => {
     if (!mount) {
@@ -39,14 +41,14 @@ function Chat({ setShowChat, showChat, interlocutor }) {
   }, [dispatch, mount, socket])
 
   useEffect(() => {
-    const handler = event => {
+    const closeHandler = event => {
       if (!menuRef.current.contains(event.target)) {
         closeModale()
       }
     }
-    document.addEventListener("mousedown", handler)
+    document.addEventListener("mousedown", closeHandler)
     return () => {
-      document.removeEventListener("mousedown", handler)
+      document.removeEventListener("mousedown", closeHandler)
     }
   }, [dispatch, closeModale])
 
@@ -70,19 +72,15 @@ function Chat({ setShowChat, showChat, interlocutor }) {
   }
 
   return (
-    <div
-      ref={menuRef}
-      className='containerChat'
-      style={{ height: `${containerHeight}px` }}
-    >
-      <div className='infoPeople'>
+    <div ref={menuRef} className='containerChat'>
+      <div className='header'>
         <span>{interlocutor.name}</span>
         <img src={close} alt='close' onClick={closeModale} />
       </div>
-      <div className='chatPeople'>
+      <div className='body'>
         {message &&
           message.map((item, i) => (
-            <div key={i} className='itemChat'>
+            <div key={i} className='message'>
               <span>
                 {item.name} {new Date(item.date).toLocaleTimeString()}
               </span>{" "}

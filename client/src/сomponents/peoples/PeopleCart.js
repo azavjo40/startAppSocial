@@ -1,26 +1,22 @@
-import React, { useState } from "react"
+import React from "react"
 import "../../styles/peoples/peoples.css"
-import Chat from "./chat"
+import { useDispatch } from "react-redux"
+import { interLocutor, showChat } from "src/redux/peoples/peopleAcsions"
 function SearchCart({ item, iconeMessage }) {
-  const [showChat, setShowChat] = useState(false)
+  const dispatch = useDispatch()
   return (
     <>
-      <div className='item'>
+      <div
+        className='item'
+        onClick={() => {
+          dispatch(showChat(true))
+          dispatch(interLocutor(item))
+        }}
+      >
         <img src={item.imageSrc} alt={item.name} />
         <span>{item.name}</span>
-        <img
-          src={iconeMessage}
-          alt={item.name}
-          onClick={() => setShowChat(!showChat)}
-        />
+        <img src={iconeMessage} alt={item.name} />
       </div>
-      {showChat && (
-        <Chat
-          setShowChat={setShowChat}
-          showChat={showChat}
-          interlocutor={item}
-        />
-      )}
     </>
   )
 }

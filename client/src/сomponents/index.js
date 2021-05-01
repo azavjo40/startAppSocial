@@ -7,6 +7,7 @@ import UserData from "./userPages/UserData"
 import UserChangeData from "./userPages/UserChangeData"
 import PeopleCart from "./peoples/PeopleCart"
 import Search from "./peoples/Search"
+import Chat from "./peoples/chat"
 export {
   Login,
   Register,
@@ -17,4 +18,5 @@ export {
   UserChangeData,
   PeopleCart,
   Search,
+  Chat,
 }

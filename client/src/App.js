@@ -19,22 +19,24 @@ function App() {
   ])
   useEffect(() => isAuthUser && dispatch(getUserPage()), [dispatch, isAuthUser])
   return (
-    <div className='cont'>
-      <Router>
-        {isAuthUser ? (
-          <Navbar
-            logout='Logout'
-            lo='/'
-            myPage='User'
-            p='/userPage'
-            s='/searchPeople'
-            searchPeople='Search'
-          />
-        ) : (
-          <Navbar login='Login' l='/auth' />
-        )}
-        {routers}
-      </Router>
+    <div className='appCont'>
+      <div className='appBody'>
+        <Router>
+          {isAuthUser ? (
+            <Navbar
+              logout='Logout'
+              lo='/'
+              myPage='User'
+              p='/userPage'
+              s='/searchPeople'
+              searchPeople='Search'
+            />
+          ) : (
+            <Navbar login='Login' l='/auth' />
+          )}
+          {routers}
+        </Router>
+      </div>
     </div>
   )
 }

@@ -1,35 +1,35 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { getSearchPeople } from "src/redux/peoples/peopleAcsions"
-import { PeopleCart, Search } from "src/сomponents"
+import { PeopleCart, Search, Chat } from "src/сomponents"
 import iconeMessage from "../images/open-message.png"
 import "../styles/peoples/peoples.css"
 function Peoples() {
   const dispatch = useDispatch()
+  const chatShow = useSelector(state => state.peoples.chat)
   const items = useSelector(state => state.peoples.items)
   const searchItems = useSelector(state => state.peoples.search)
   let resultItems
   !searchItems ? (resultItems = items) : (resultItems = searchItems)
-  let containerHeight = window.innerHeight
   useEffect(() => {
     dispatch(getSearchPeople())
   }, [dispatch])
   return (
-    <div
-      className='containerPeoples'
-      style={{ height: `${containerHeight}px` }}
-    >
-      <Search items={items} />
-      {resultItems &&
-        resultItems.map(item => {
-          return (
-            <PeopleCart
-              item={item}
-              key={item._id}
-              iconeMessage={iconeMessage}
-            />
-          )
-        })}
+    <div className='containerPeoples'>
+      <div className='beoplesBox'>
+        <Search items={items} />
+        {resultItems &&
+          resultItems.map(item => {
+            return (
+              <PeopleCart
+                item={item}
+                key={item._id}
+                iconeMessage={iconeMessage}
+              />
+            )
+          })}
+      </div>
+      {chatShow && <Chat />}
     </div>
   )
 }

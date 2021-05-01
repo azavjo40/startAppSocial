@@ -1,16 +1,26 @@
-html {
-  padding: 0px;
-  padding: 0px;
-  width: 100%;
-}
-.cont {
+.appCont {
   width: 100%;
   padding: 0px;
   margin: 0px;
+  display: flex;
+  justify-content: center;
+  background-color: ghostwhite;
+}
+.appBody {
+  width: 80%;
+  padding: 0px;
+  margin: 0px;
+  position: relative;
 }
 .alert {
   position: fixed;
   top: 40px;
   right: 40px;
   z-index: 100;
+}
+
+@media (max-width: 425px) {
+  .appBody {
+    width: 100%;
+  }
 }

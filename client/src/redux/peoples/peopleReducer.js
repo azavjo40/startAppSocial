@@ -4,11 +4,15 @@ import {
   SEARCH_PEOPLE,
   SOCKET_MESSAGE_PEOPLE,
   GET_MESSAGES_PEOPLE,
+  SHOW_CHAT,
+  INTER_LOCUTOR,
 } from "./type"
 const initialState = {
   items: null,
   search: null,
   message: null,
+  chat: false,
+  interL: null,
 }
 export const peopleReducer = (state = initialState, actoin) => {
   switch (actoin.type) {
@@ -20,6 +24,10 @@ export const peopleReducer = (state = initialState, actoin) => {
       return { ...state, message: actoin.payload }
     case SOCKET_MESSAGE_PEOPLE:
       return { ...state, message: [...state.message, actoin.payload] }
+    case SHOW_CHAT:
+      return { ...state, chat: actoin.payload }
+    case INTER_LOCUTOR:
+      return { ...state, interL: actoin.payload }
     default:
       return state
   }

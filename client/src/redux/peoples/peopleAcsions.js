@@ -4,7 +4,9 @@ import { httpFetch } from "../hooks/httpFetch"
 import {
   GET_MESSAGES_PEOPLE,
   GET_SEARCH_PEOPLE,
+  INTER_LOCUTOR,
   SEARCH_PEOPLE,
+  SHOW_CHAT,
   SOCKET_MESSAGE_PEOPLE,
 } from "./type"
 
@@ -25,6 +27,18 @@ export const getSearchPeople = () => {
 export const searchPeople = item => {
   return async dispach => {
     dispach({ type: SEARCH_PEOPLE, payload: item })
+  }
+}
+
+export const showChat = item => {
+  return async dispach => {
+    dispach({ type: SHOW_CHAT, payload: item })
+  }
+}
+
+export const interLocutor = item => {
+  return async dispach => {
+    dispach({ type: INTER_LOCUTOR, payload: item })
   }
 }
 
