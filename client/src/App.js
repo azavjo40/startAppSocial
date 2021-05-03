@@ -5,10 +5,12 @@ import { BrowserRouter as Router } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { autoLogin, refreshToken } from "./redux/auths/authAcsions"
 import { getUserPage } from "./redux/userPages/userAcsions"
+import { Alert } from "./сomponents/index"
 import "./App.css"
 
 function App() {
   const isAuthUser = useSelector(state => state.auth.isAuthUser)
+  const alert = useSelector(state => state.general.alert)
   const routers = useRouters(isAuthUser)
   const dispatch = useDispatch()
 
@@ -20,19 +22,19 @@ function App() {
   useEffect(() => isAuthUser && dispatch(getUserPage()), [dispatch, isAuthUser])
   return (
     <div className='appCont'>
+      {alert && <Alert text={alert} />}
       <div className='appBody'>
         <Router>
           {isAuthUser ? (
             <Navbar
+              isAuthUser={isAuthUser}
               logout='Logout'
-              lo='/'
-              myPage='User'
-              p='/userPage'
-              s='/searchPeople'
-              searchPeople='Search'
+              logoutUrl='/'
+              home='Home'
+              homeUrl='/home'
             />
           ) : (
-            <Navbar login='Login' l='/auth' />
+            <Navbar isAuthUser={isAuthUser} />
           )}
           {routers}
         </Router>

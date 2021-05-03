@@ -1,87 +1,65 @@
-.header {
+.containerNavbar {
   width: 100%;
   padding: 0px;
   margin: 0px;
   position: relative;
+  background-color: cornflowerblue;
+  height: 50px;
+  position: relative;
 }
-
-.imgIcon {
+.containerNavbar .imgIcon {
   width: 26px;
   position: absolute;
   z-index: 20;
   left: 16px;
-  top: 16px;
+  top: 13px;
   cursor: pointer;
   border: none;
-  display: none;
 }
-.imgIcon:hover {
+.containerNavbar .imgIcon:hover {
   transition: 0.5s;
-  border: 1px solid #ecf3ff;
+  border: 1px solid #ecf3ff99;
 }
-
-.nav_links {
-  background-color: #ecf3ff;
-  width: 100%;
-  height: 50px;
-  list-style-type: none;
-  margin: 0;
-  padding-left: 25px;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  z-index: 19;
-  position: absolute;
-}
-.nav_links a {
-  border-radius: 5px;
-  text-decoration: none;
-  color: #181818;
-  font-size: 13px;
-  cursor: pointer;
-  user-select: none;
-}
-.nav_links a:hover {
-  color: #787878;
-  transition: 0.5s;
-}
-
-@media (max-width: 425px) {
-  .imgIcon {
-    display: block;
-  }
-
-  .openNav {
-    color: #787878;
-  }
-}
-.openNav {
-  width: 100%;
+.containerNavbar .openMenu {
+  width: 250px;
   height: 300px;
   display: block;
   display: flex;
-  flex-wrap: wrap;
   flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  list-style-type: none;
   margin: 0;
   padding: 0;
-  background-color: #ecf3ff;
+  background-color: #ecf3ff99;
   position: absolute;
   z-index: 19;
-  transition: 2s;
+  transition: 1s;
+  top: 49px;
+  border: 1px solid cornflowerblue;
 }
-.openNav a {
+.containerNavbar .openMenu .navbar {
+  width: 100%;
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  height: 200px;
+  align-items: flex-start;
+}
+.containerNavbar .openMenu .navbar a {
+  border-radius: 5px;
   text-decoration: none;
-  color: #181818;
-  user-select: none;
+  color: black;
   font-size: 13px;
   cursor: pointer;
+  user-select: none;
 }
-.openNav a:hover {
-  color: #181818;
+.containerNavbar .openMenu .navbar a:hover {
+  color: black;
   transition: 0.5s;
+}
+
+.closeMenu {
+  display: none;
 }
 
 /*# sourceMappingURL=navbar.css.map */

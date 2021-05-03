@@ -1,66 +1,60 @@
-import { useState } from "react"
+import { useState, useRef, useEffect } from "react"
 import { NavLink } from "react-router-dom"
 import icon from "../../images/openMenu.png"
 import { useDispatch } from "react-redux"
 import { logout } from "../../redux/auths/authAcsions"
 import "../../styles/navbar/navbar.css"
+import { UserData } from "../../сomponents/index"
 const Navbar = props => {
   const [isLoadin, setIsLoading] = useState(false)
   const dispatch = useDispatch()
-  function handleResize() {
-    if (window.innerWidth > 425) {
-      setIsLoading(false)
+  const menuRef = useRef()
+
+  useEffect(() => {
+    const clickOutsideClose = event => {
+      if (!menuRef.current.contains(event.target)) setIsLoading(false)
     }
-  }
-  window.addEventListener("resize", handleResize)
+    document.addEventListener("mousedown", clickOutsideClose)
+    return () => document.removeEventListener("mousedown", clickOutsideClose)
+  }, [])
 
   return (
-    <header className='header'>
-      <img
-        src={icon}
-        alt={icon}
-        className='imgIcon'
-        onClick={() => setIsLoading(!isLoadin)}
-      />
-      <ul
-        className={isLoadin ? "openNav" : "nav_links"}
-        onClick={() => setIsLoading(false)}
-      >
-        {props.login ? (
-          <li>
-            <NavLink to={props.l ? props.l : ""}>{props.login}</NavLink>
-          </li>
-        ) : (
-          ""
-        )}
-        {props.myPage ? (
-          <li>
-            <NavLink to={props.p ? props.p : ""}>{props.myPage}</NavLink>
-          </li>
-        ) : (
-          ""
-        )}
-        {props.searchPeople ? (
-          <li>
-            <NavLink to={props.s ? props.s : ""}>{props.searchPeople}</NavLink>
-          </li>
-        ) : (
-          ""
-        )}
-        {props.logout ? (
-          <li>
-            <NavLink
-              to={props.logout ? props.lo : ""}
-              onClick={() => dispatch(logout())}
-            >
-              {props.logout}
-            </NavLink>
-          </li>
-        ) : (
-          ""
-        )}
-      </ul>
-    </header>
+    <div ref={menuRef} className='containerNavbar'>
+      {props.isAuthUser && (
+        <img
+          src={icon}
+          alt={icon}
+          className='imgIcon'
+          onClick={() => setIsLoading(!isLoadin)}
+        />
+      )}
+      <div className={isLoadin ? "openMenu" : "closeMenu"}>
+        <UserData />
+        <ul className='navbar'>
+          {props.home ? (
+            <li onClick={() => setIsLoading(!isLoadin)}>
+              <NavLink to={props.homeUrl ? props.homeUrl : ""}>
+                {props.home}
+              </NavLink>
+            </li>
+          ) : (
+            ""
+          )}
+          {props.logout ? (
+            <li onClick={() => setIsLoading(!isLoadin)}>
+              <NavLink
+                to={props.logout ? props.logoutUrl : ""}
+                onClick={() => dispatch(logout())}
+              >
+                {props.logout}
+              </NavLink>
+            </li>
+          ) : (
+            ""
+          )}
+        </ul>
+      </div>
+    </div>
   )
 }
 export default Navbar

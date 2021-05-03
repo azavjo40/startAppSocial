@@ -1,56 +1,27 @@
-.containerMyData {
-  width: 100%;
-  height: 150px;
-  display: flex;
-  position: relative;
-  z-index: 1;
-  background-color: #ecf3ff99;
-}
-.containerMyData .avatar {
-  width: 60px;
-  height: 60px;
-  position: absolute;
-  z-index: 2;
-  top: -25%;
-  left: 12%;
-}
-.containerMyData .avatar img {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-}
-.containerMyData .btnData {
-  width: 100px;
-  height: 25px;
-  position: absolute;
-  right: 10%;
-  top: 10%;
-  font-size: 10px;
-}
-.containerMyData .itemData {
-  width: 100%;
-  display: flex;
-  position: absolute;
-  align-items: flex-end;
-  bottom: 0px;
-  left: 0px;
-  justify-content: space-around;
-  align-items: flex-end;
-  padding-bottom: 10px;
-}
-.containerMyData .itemData p {
-  width: 150px;
-  height: 20px;
+.containerData {
   padding: 0px;
   margin: 0px;
-  overflow: hidden;
+  width: 250px;
+  height: 100px;
+  background-color: #ecf3ff99;
 }
-
-@media (max-width: 425px) {
-  .containerMyData .avatar {
-    width: 50px;
-    height: 50px;
-  }
+.containerData .userAvatar {
+  width: 100%;
+  margin: 20px 0 0 30px;
+}
+.containerData .userAvatar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 30px;
+}
+.containerData .userData {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.containerData .userData p {
+  padding: 0px;
+  margin: 10px 0 0 0;
 }
 
 /*# sourceMappingURL=userData.css.map */

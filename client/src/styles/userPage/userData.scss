@@ -1,59 +1,27 @@
-$myColor-1: #ecf3ff;
-$myColor-2: #ecf3ff99;
-$black-80: #181818;
-$black-50: #787878;
-.containerMyData {
-  width: 100%;
-  height: 150px;
-  display: flex;
-  position: relative;
-  z-index: 1;
-  background-color: $myColor-2;
-  .avatar {
-    width: 60px;
-    height: 60px;
-    position: absolute;
-    z-index: 2;
-    top: -25%;
-    left: 12%;
+$gray-blue: #ecf3ff99;
+$c-series: #f2f2f2;
+.containerData {
+  padding: 0px;
+  margin: 0px;
+  width: 250px;
+  height: 100px;
+  background-color: $gray-blue;
+  .userAvatar {
+    width: 100%;
+    margin: 20px 0 0 30px;
     img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      border-radius: 30px;
     }
   }
-  .btnData {
-    width: 100px;
-    height: 25px;
-    position: absolute;
-    right: 10%;
-    top: 10%;
-    font-size: 10px;
-  }
-  .itemData {
+  .userData {
     width: 100%;
     display: flex;
-    position: absolute;
-    align-items: flex-end;
-    bottom: 0px;
-    left: 0px;
     justify-content: space-around;
-    align-items: flex-end;
-    padding-bottom: 10px;
     p {
-      width: 150px;
-      height: 20px;
       padding: 0px;
-      margin: 0px;
-      overflow: hidden;
-    }
-  }
-}
-@media (max-width: 425px) {
-  .containerMyData {
-    .avatar {
-      width: 50px;
-      height: 50px;
+      margin: 10px 0 0 0;
     }
   }
 }
