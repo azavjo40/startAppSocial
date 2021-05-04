@@ -5,7 +5,7 @@ import "../../styles/peoples/chat.css"
 import { useDispatch } from "react-redux"
 import { sendSoketMessage } from "src/redux/peoples/peopleAcsions"
 
-function InputChat({ chatId, socket,storage }) {
+function InputChat({ chatId, socket, storage }) {
   const [form, setForm] = useState({ name: "", message: "", chatId: "" })
   const dispatch = useDispatch()
   const changeHandler = e => {
@@ -15,6 +15,7 @@ function InputChat({ chatId, socket,storage }) {
       [e.target.name]: e.target.value,
       name: storage.user.name,
       chatId,
+      userId: storage.userId,
     })
   }
   const sendMessage = e => {

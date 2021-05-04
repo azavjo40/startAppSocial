@@ -1,18 +1,13 @@
-import { useState, useEffect, useRef, useCallback } from "react"
+import { useEffect, useRef, useCallback } from "react"
 import close from "../../images/close-window.png"
 import "../../styles/peoples/chat.css"
 import io from "socket.io-client"
 import { LOCAL_STORAGE } from "src/constant/localstorage"
 import { useDispatch, useSelector } from "react-redux"
 import { InputChat, ChatCart } from "../../сomponents/index"
-import {
-  getMessages,
-  getSoketMessage,
-  showChat,
-} from "src/redux/peoples/peopleAcsions"
+import { getMessages, showChat } from "src/redux/peoples/peopleAcsions"
 
 function Chat() {
-  const [mount, setMount] = useState(false)
   const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
   const socket = io.connect("http://localhost:5000/")
   const interlocutor = useSelector(state => state.peoples.interL)
@@ -28,13 +23,6 @@ function Chat() {
     dispatch(showChat(false))
     dispatch(getMessages())
   }, [dispatch])
-
-  useEffect(() => {
-    if (!mount) {
-      setMount(true)
-      dispatch(getSoketMessage(socket))
-    }
-  }, [dispatch, mount, socket])
 
   useEffect(() => {
     const clickOutsideClose = event => {

@@ -79,6 +79,7 @@ module.exports.getUserPage = async (req, res) => {
     res.status(200).json({ ...user })
   } catch (e) {
     res.status(500).json({ message: "Something went wrong, please try again" })
+    console.log(e)
   }
 }
 
@@ -92,6 +93,7 @@ module.exports.refreshToken = async (req, res) => {
       .json({ ...user, token: `Bearer ${tokenUser()}`, userId: user._id })
   } catch (e) {
     res.status(500).json({ message: "Something went wrong, please try again" })
+    console.log(e)
   }
 }
 

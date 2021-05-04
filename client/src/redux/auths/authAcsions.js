@@ -1,8 +1,8 @@
 //@ts-check
 import { LOCAL_STORAGE } from "../../constant/localstorage"
-import { showAlert } from "../generals/generalAcsions"
 import { httpFetch } from "../hooks/httpFetch"
 import { USER_PAGES_PAGE } from "../userPages/types"
+import { userPagesPage } from "../userPages/userAcsions"
 import { IS_AUTH_USER } from "./types"
 
 const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
@@ -23,7 +23,8 @@ export const autoSaveStorage = data => {
           user: data._doc,
         })
       )
-      dispach(authUser(true))
+      await dispach(authUser(true))
+      await dispach(userPagesPage(data))
     }
   }
 }
@@ -36,9 +37,7 @@ export function autoLogin() {
       } else {
         await dispach(authUser(false))
       }
-    } catch (e) {
-      dispach(showAlert("Error something went wrong to Login"))
-    }
+    } catch (e) {}
   }
 }
 
@@ -58,11 +57,13 @@ export function authRegister(form) {
         body: null,
         file: formdata,
         token: null,
-        type: USER_PAGES_PAGE,
+        type: null,
       }
       const { data } = await dispach(httpFetch(options))
       await dispach(autoSaveStorage(data))
-    } catch (e) {}
+    } catch (e) {
+      console.log(e)
+    }
   }
 }
 
@@ -73,7 +74,7 @@ export function authLogin(form) {
     body: form,
     file: null,
     token: null,
-    type: USER_PAGES_PAGE,
+    type: null,
   }
   return async dispach => {
     try {
@@ -103,7 +104,9 @@ export const refreshToken = () => {
           await dispach(autoSaveStorage(data))
         }, 1000000)
       }
-    } catch (e) {}
+    } catch (e) {
+      console.log(e)
+    }
   }
 }
 
@@ -124,13 +127,16 @@ export const userChangeAvatar = form => {
         url: "/api/auth/user/change/avatar",
         method: "PATCH",
         token: storage.token,
-        type: USER_PAGES_PAGE,
+        type: null,
       }
       formdata ? (options.file = formdata) : (options.body = form)
       if (form) {
-        await dispach(httpFetch(options))
+        const { data } = await dispach(httpFetch(options))
+        await dispach(autoSaveStorage(data))
       }
-    } catch (e) {}
+    } catch (e) {
+      console.log(e)
+    }
   }
 }
 
@@ -148,12 +154,15 @@ export const userChangeBanner = banner => {
         body: null,
         file: formdata,
         token: storage.token,
-        type: USER_PAGES_PAGE,
+        type: null,
       }
       if (banner.file) {
-        await dispach(httpFetch(options))
+        const { data } = await dispach(httpFetch(options))
+        await dispach(autoSaveStorage(data))
       }
-    } catch (e) {}
+    } catch (e) {
+      console.log(e)
+    }
   }
 }
 

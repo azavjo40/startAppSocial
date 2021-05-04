@@ -1,4 +1,5 @@
 //@ts-check
+import { LOCAL_STORAGE } from "src/constant/localstorage"
 import { showAlert } from "../generals/generalAcsions"
 import { httpFetch } from "../hooks/httpFetch"
 import {
@@ -9,7 +10,7 @@ import {
   SHOW_CHAT,
   SOCKET_MESSAGE_PEOPLE,
 } from "./type"
-
+const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
 export const getSearchPeople = () => {
   return async dispach => {
     const options = {
@@ -17,7 +18,7 @@ export const getSearchPeople = () => {
       method: "GET",
       body: null,
       file: null,
-      token: null,
+      token: storage.token,
       type: GET_SEARCH_PEOPLE,
     }
     await dispach(httpFetch(options))
@@ -71,7 +72,7 @@ export const getMessages = chatId => {
         method: "get",
         body: null,
         file: null,
-        token: null,
+        token: storage.token,
         type: GET_MESSAGES_PEOPLE,
       }
       await dispach(httpFetch(options))

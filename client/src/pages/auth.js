@@ -1,6 +1,5 @@
 import React, { useState } from "react"
-import { Login, Register, Alert } from "../сomponents"
-import { useSelector } from "react-redux"
+import { Login, Register } from "../сomponents"
 import "../styles/auth/auth.css"
 function Auth() {
   const [isLogin, setIsLogin] = useState(true)

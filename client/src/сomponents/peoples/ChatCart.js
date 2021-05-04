@@ -1,19 +1,18 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useCallback } from "react"
 import "../../styles/peoples/chat.css"
 import { useDispatch, useSelector } from "react-redux"
 import { getMessages, getSoketMessage } from "src/redux/peoples/peopleAcsions"
-
 function ChatCart({ socket, storage, interlocutor }) {
   const [mount, setMount] = useState(false)
   const message = useSelector(state => state.peoples.message)
   const dispatch = useDispatch()
-
-  useEffect(() => {
+  const autoSendMessage = useCallback(() => {
     if (!mount) {
       setMount(true)
       dispatch(getSoketMessage(socket))
     }
   }, [dispatch, mount, socket])
+  useEffect(() => autoSendMessage(), [autoSendMessage])
 
   !message && dispatch(getMessages(`${interlocutor._id}-${storage.userId}`))
 

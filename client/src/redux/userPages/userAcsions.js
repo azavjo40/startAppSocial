@@ -4,6 +4,17 @@ import { httpFetch } from "../hooks/httpFetch"
 import { USER_PAGES_PAGE } from "./types"
 const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
 
+export const userPagesPage = text => {
+  return dispach => {
+    if (text.userId) {
+      dispach({
+        type: USER_PAGES_PAGE,
+        payload: text,
+      })
+    }
+  }
+}
+
 export const getUserPage = () => {
   return async dispatch => {
     try {
@@ -15,19 +26,13 @@ export const getUserPage = () => {
           body: null,
           file: null,
           token: storage.token,
-          type: USER_PAGES_PAGE,
+          type: null,
         }
-        await dispatch(httpFetch(options))
+        const { data } = await dispatch(httpFetch(options))
+        dispatch(userPagesPage(data))
       }
-    } catch (e) {}
-  }
-}
-
-const userPagesPage = text => {
-  return dispach => {
-    dispach({
-      type: USER_PAGES_PAGE,
-      payload: text,
-    })
+    } catch (e) {
+      console.log(e)
+    }
   }
 }
