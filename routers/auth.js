@@ -1,9 +1,9 @@
-const { Router } = require("express");
-const { check } = require("express-validator");
-const router = Router();
-const passport = require("passport");
-const controller = require("../controlles/auth");
-const upload = require("../midlleware/upload");
+const { Router } = require("express")
+const { check } = require("express-validator")
+const router = Router()
+const passport = require("passport")
+const controller = require("../controlles/auth")
+const upload = require("../midlleware/upload")
 router.post(
   "/register",
   upload.single("file"),
@@ -13,7 +13,7 @@ router.post(
     check("name", "Please enter name").exists(),
   ],
   controller.register
-);
+)
 
 router.post(
   "/login",
@@ -22,32 +22,28 @@ router.post(
     check("password", "Please enter password"),
   ],
   controller.login
-);
+)
 
 router.get(
   "/get/user/page/:userId",
   passport.authenticate("jwt", { session: false }),
   controller.getUserPage
-);
+)
 
-router.post(
-  "/refresh/token",
-  passport.authenticate("jwt", { session: false }),
-  controller.refreshToken
-);
+router.post("/refresh/token", controller.refreshToken)
 
 router.patch(
   "/user/change/avatar",
   upload.single("file"),
   passport.authenticate("jwt", { session: false }),
   controller.userChangeAvatar
-);
+)
 
 router.patch(
   "/user/change/banner",
   upload.single("file"),
   passport.authenticate("jwt", { session: false }),
   controller.userChangeBanner
-);
+)
 
-module.exports = router;
+module.exports = router

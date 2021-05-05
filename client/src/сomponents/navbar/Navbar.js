@@ -5,7 +5,9 @@ import { useDispatch } from "react-redux"
 import { logout } from "../../redux/auths/authAcsions"
 import "../../styles/navbar/navbar.css"
 import { UserData } from "../../сomponents/index"
+import { CreateBot } from "../../сomponents/index"
 const Navbar = props => {
+  const [showModal, setShowMdal] = useState(false)
   const [isLoadin, setIsLoading] = useState(false)
   const dispatch = useDispatch()
   const menuRef = useRef()
@@ -32,7 +34,7 @@ const Navbar = props => {
         <UserData />
         <ul className='navbar'>
           {props.home ? (
-            <li onClick={() => setIsLoading(!isLoadin)}>
+            <li>
               <NavLink to={props.homeUrl ? props.homeUrl : ""}>
                 {props.home}
               </NavLink>
@@ -40,12 +42,17 @@ const Navbar = props => {
           ) : (
             ""
           )}
+
+          {props && (
+            <li onClick={() => setShowMdal(!showModal)}>
+              <NavLink to='/home'>Create Bot Team</NavLink>
+            </li>
+          )}
+
           {props.logout ? (
-            <li onClick={() => setIsLoading(!isLoadin)}>
-              <NavLink
-                to={props.logout ? props.logoutUrl : ""}
-                onClick={() => dispatch(logout())}
-              >
+            <li onClick={() => dispatch(logout())}>
+              <NavLink to={props.logout ? props.logoutUrl : ""}>
+                {" "}
                 {props.logout}
               </NavLink>
             </li>
@@ -54,6 +61,9 @@ const Navbar = props => {
           )}
         </ul>
       </div>
+      {showModal && (
+        <CreateBot showModal={showModal} setShowMdal={setShowMdal} />
+      )}
     </div>
   )
 }

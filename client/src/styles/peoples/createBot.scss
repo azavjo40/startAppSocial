@@ -1,0 +1,13 @@
+.formBot {
+  display: flex;
+  flex-direction: column;
+}
+#outlined-name {
+  width: 300px;
+}
+
+button {
+  &:focus {
+    outline: none;
+  }
+}

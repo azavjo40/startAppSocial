@@ -6,7 +6,6 @@ const chatIo = http => {
       origins: ["http://localhost:5000"],
     },
   })
-
   return async () => {
     try {
       io.on("connection", async socket => {

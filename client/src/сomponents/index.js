@@ -8,6 +8,7 @@ import Search from "./peoples/Search"
 import Chat from "./peoples/chat"
 import InputChat from "./peoples/InputChat"
 import ChatCart from "./peoples/ChatCart"
+import CreateBot from "./peoples/CreateBot"
 export {
   Login,
   Register,
@@ -19,4 +20,5 @@ export {
   Chat,
   InputChat,
   ChatCart,
+  CreateBot,
 }
