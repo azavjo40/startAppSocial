@@ -14,11 +14,6 @@ function Chat() {
   const menuRef = useRef()
   const dispatch = useDispatch()
 
-  const chatId = [
-    `${interlocutor._id}-${storage.userId}`,
-    `${storage.userId}-${interlocutor._id}`,
-  ]
-
   const closeModale = useCallback(() => {
     dispatch(showChat(false))
     dispatch(getMessages())
@@ -40,7 +35,11 @@ function Chat() {
         <img src={close} alt='close' onClick={closeModale} />
       </div>
       <ChatCart socket={socket} interlocutor={interlocutor} storage={storage} />
-      <InputChat storage={storage} socket={socket} chatId={chatId} />
+      <InputChat
+        storage={storage}
+        socket={socket}
+        interlocutor={interlocutor}
+      />
     </div>
   )
 }

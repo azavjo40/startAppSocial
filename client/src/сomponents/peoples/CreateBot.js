@@ -1,52 +1,60 @@
-import Button from "@material-ui/core/Button"
-import Dialog from "@material-ui/core/Dialog"
-import DialogActions from "@material-ui/core/DialogActions"
-import DialogContent from "@material-ui/core/DialogContent"
-import DialogContentText from "@material-ui/core/DialogContentText"
-import DialogTitle from "@material-ui/core/DialogTitle"
-import TextField from "@material-ui/core/TextField"
+import { useEffect, useRef, useState } from "react"
 import "../../styles/peoples/createBot.css"
+import { LOCAL_STORAGE } from "src/constant/localstorage"
+import { useDispatch } from "react-redux"
+import { createBot } from "src/redux/peoples/peopleAcsions"
 const CreateBot = ({ showModal, setShowMdal }) => {
-  const showHandle = () => {
-    setShowMdal(!showModal)
+  const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
+  const [form, setForm] = useState({ ifWrote: "", answer: "" })
+  const menuRef = useRef()
+  const dispatch = useDispatch()
+  const changehandler = event => {
+    setForm({
+      ...form,
+      [event.target.name]: event.target.value,
+      name: storage.user.name,
+      botId: storage.userId,
+    })
+  }
+
+  useEffect(() => {
+    const clickOutsideClose = event => {
+      if (!menuRef.current.contains(event.target)) setShowMdal(!showModal)
+    }
+    document.addEventListener("mousedown", clickOutsideClose)
+    return () => document.removeEventListener("mousedown", clickOutsideClose)
+  }, [setShowMdal, showModal])
+
+  const sendHandler = e => {
+    e.preventDefault()
+    dispatch(createBot(form))
+    setForm({ ifWrote: "", answer: "" })
   }
   return (
-    <div>
-      <Dialog
-        open={true}
-        onClose={showHandle}
-        aria-labelledby='alert-dialog-title'
-        aria-describedby='alert-dialog-description'
-      >
-        <DialogTitle id='alert-dialog-title'>
-          {"Create An Autoresponder"}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText id='alert-dialog-description'>
-            <form noValidate autoComplete='off' className='formBot'>
-              <TextField
-                id='outlined-name'
-                label='If Wrote To Me'
-                margin='normal'
-                variant='outlined'
-              />
-              <TextField
-                id='outlined-name'
-                label='Response From The Bot'
-                margin='normal'
-                variant='outlined'
-              />
-            </form>
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button color='secondary' nClick={showHandle}>
-            Saved
-          </Button>
-        </DialogActions>
-      </Dialog>
+    <div className='containerBot'>
+      <form ref={menuRef} className='boxBot' onSubmit={sendHandler}>
+        <p onClick={() => setShowMdal(!showModal)}>+</p>
+        <input
+          type='text'
+          placeholder='If They Wronte Before You'
+          value={form.ifWrote}
+          onChange={event => changehandler(event)}
+          name='ifWrote'
+          required
+          autoComplete='off'
+        />
+        <input
+          value={form.answer}
+          name='answer'
+          onChange={event => changehandler(event)}
+          type='text'
+          placeholder='Here The Answer Is An Answering Machine'
+          required
+          autoComplete='off'
+        />
+        <button type='submit'>Save</button>
+      </form>
     </div>
   )
 }
-
 export default CreateBot

@@ -79,3 +79,21 @@ export const getMessages = chatId => {
     }
   }
 }
+
+export const createBot = form => {
+  const options = {
+    url: "/api/create/bot",
+    method: "POST",
+    body: form,
+    file: null,
+    token: storage.token,
+    type: null,
+  }
+  return async dispach => {
+    try {
+      await dispach(httpFetch(options))
+    } catch (e) {
+      console.log(e)
+    }
+  }
+}

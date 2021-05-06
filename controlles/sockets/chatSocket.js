@@ -10,13 +10,17 @@ const chatIo = http => {
     try {
       io.on("connection", async socket => {
         await socket.on("message", async ({ form }) => {
+          const chatId = [
+            `${form.interlocutor._id}-${form.userId}`,
+            `${form.userId}-${form.interlocutor._id}`,
+          ]
           if (form.userId) {
             const user = await User.findById({ _id: form.userId })
             if (user) {
               const chat = new Chat({
                 message: form.message,
                 name: form.name,
-                chatId: form.chatId,
+                chatId,
               })
               await chat.save()
               await io.emit("message", { chatResult: chat })

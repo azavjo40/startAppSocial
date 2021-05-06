@@ -45,7 +45,8 @@
   height: 200px;
   align-items: flex-start;
 }
-.containerNavbar .openMenu .navbar a {
+.containerNavbar .openMenu .navbar a,
+.containerNavbar .openMenu .navbar p {
   border-radius: 5px;
   text-decoration: none;
   color: black;
@@ -53,7 +54,8 @@
   cursor: pointer;
   user-select: none;
 }
-.containerNavbar .openMenu .navbar a:hover {
+.containerNavbar .openMenu .navbar a:hover,
+.containerNavbar .openMenu .navbar p:hover {
   color: black;
   transition: 0.5s;
 }

@@ -34,7 +34,7 @@ const Navbar = props => {
         <UserData />
         <ul className='navbar'>
           {props.home ? (
-            <li>
+            <li onClick={() => setIsLoading(!isLoadin)}>
               <NavLink to={props.homeUrl ? props.homeUrl : ""}>
                 {props.home}
               </NavLink>
@@ -44,14 +44,17 @@ const Navbar = props => {
           )}
 
           {props && (
-            <li onClick={() => setShowMdal(!showModal)}>
-              <NavLink to='/home'>Create Bot Team</NavLink>
+            <li onClick={() => setIsLoading(!isLoadin)}>
+              <p onClick={() => setShowMdal(!showModal)}>Create Bot Team</p>
             </li>
           )}
 
           {props.logout ? (
             <li onClick={() => dispatch(logout())}>
-              <NavLink to={props.logout ? props.logoutUrl : ""}>
+              <NavLink
+                onClick={() => setIsLoading(!isLoadin)}
+                to={props.logout ? props.logoutUrl : ""}
+              >
                 {" "}
                 {props.logout}
               </NavLink>
