@@ -1,13 +1,13 @@
 const Bot = require("../models/bot")
 module.exports.createBot = async (req, res) => {
   try {
-    const { name, ifWrote, answer, botId } = req.body
+    const { name, ifWrote, message, botId } = req.body
 
     if (botId) {
       const bot = await new Bot({
         name,
         ifWrote,
-        answer,
+        message,
         botId,
         date: Date.now(),
       })

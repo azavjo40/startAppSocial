@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux"
 import { createBot } from "src/redux/peoples/peopleAcsions"
 const CreateBot = ({ showModal, setShowMdal }) => {
   const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
-  const [form, setForm] = useState({ ifWrote: "", answer: "" })
+  const [form, setForm] = useState({ ifWrote: "", message: "" })
   const menuRef = useRef()
   const dispatch = useDispatch()
   const changehandler = event => {
@@ -28,7 +28,7 @@ const CreateBot = ({ showModal, setShowMdal }) => {
   const sendHandler = e => {
     e.preventDefault()
     dispatch(createBot(form))
-    setForm({ ifWrote: "", answer: "" })
+    setForm({ ifWrote: "", message: "" })
   }
   return (
     <div className='containerBot'>
@@ -44,8 +44,8 @@ const CreateBot = ({ showModal, setShowMdal }) => {
           autoComplete='off'
         />
         <input
-          value={form.answer}
-          name='answer'
+          value={form.message}
+          name='message'
           onChange={event => changehandler(event)}
           type='text'
           placeholder='Here The Answer Is An Answering Machine'

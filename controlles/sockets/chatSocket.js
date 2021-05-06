@@ -1,5 +1,6 @@
 const Chat = require("../../models/chatIo")
 const User = require("../../models/auth")
+const Bot = require("../../models/bot")
 const chatIo = http => {
   const io = require("socket.io")(http, {
     cors: {
@@ -24,6 +25,15 @@ const chatIo = http => {
               })
               await chat.save()
               await io.emit("message", { chatResult: chat })
+              const bot = await Bot.find({ botId: form.interlocutor._id })
+              bot &&
+                bot.filter(async item => {
+                  if (
+                    item.ifWrote.toLowerCase() === form.message.toLowerCase()
+                  ) {
+                    await io.emit("message", { chatResult: item })
+                  }
+                })
             }
           }
         })
