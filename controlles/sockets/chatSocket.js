@@ -15,25 +15,27 @@ const chatIo = http => {
             `${form.interlocutor._id}-${form.userId}`,
             `${form.userId}-${form.interlocutor._id}`,
           ]
-          if (form.userId) {
-            const user = await User.findById({ _id: form.userId })
-            if (user) {
-              const chat = new Chat({
-                message: form.message,
-                name: form.name,
-                chatId,
+          const user = await User.findById({ _id: form.userId })
+          const bot = await Bot.find({ botId: form.interlocutor._id })
+          if (user) {
+            const chat = await new Chat({
+              message: form.message,
+              name: form.name,
+              chatId,
+            }).save()
+            await io.emit("message", { chatResult: chat })
+
+            if (bot) {
+              bot.filter(async item => {
+                if (item.ifWrote.toLowerCase() === form.message.toLowerCase()) {
+                  const chatBot = await new Chat({
+                    message: item.message,
+                    name: item.name,
+                    chatId,
+                  }).save()
+                  await io.emit("message", { chatResult: chatBot })
+                }
               })
-              await chat.save()
-              await io.emit("message", { chatResult: chat })
-              const bot = await Bot.find({ botId: form.interlocutor._id })
-              bot &&
-                bot.filter(async item => {
-                  if (
-                    item.ifWrote.toLowerCase() === form.message.toLowerCase()
-                  ) {
-                    await io.emit("message", { chatResult: item })
-                  }
-                })
             }
           }
         })

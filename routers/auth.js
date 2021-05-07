@@ -39,11 +39,4 @@ router.patch(
   controller.userChangeAvatar
 )
 
-router.patch(
-  "/user/change/banner",
-  upload.single("file"),
-  passport.authenticate("jwt", { session: false }),
-  controller.userChangeBanner
-)
-
 module.exports = router

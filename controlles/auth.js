@@ -26,7 +26,6 @@ module.exports.register = async (req, res) => {
       password: hashedPassword,
       country,
       imageSrc: file ? file.path : "uploads//spare//1617104631234-user.png",
-      banner: "uploads//spare//1617104683862-aavva.png",
     })
     await user.save()
     const tokenUser = token(user._id)
@@ -111,29 +110,6 @@ module.exports.userChangeAvatar = async (req, res) => {
       res.status(200).json({ ...user })
       if (imageSrcAvatar !== "uploads//spare//1617104631234-user.png") {
         const path = imageSrcAvatar.replace("uploadsad", "uploads/ad")
-        path && fs.unlinkSync(path)
-      }
-    } else {
-      await User.findByIdAndUpdate({ _id }, { $set: ubdate }, { new: true })
-      res.status(200).json({ ...user })
-    }
-  } catch (e) {
-    console.log(e)
-  }
-}
-
-module.exports.userChangeBanner = async (req, res) => {
-  try {
-    const { banner, _id, email } = req.body
-    const ubdate = {
-      banner: req.file ? req.file.path : banner,
-    }
-    const user = await User.findOne({ email })
-    if (req.file) {
-      await User.findByIdAndUpdate({ _id }, { $set: ubdate }, { new: true })
-      res.status(200).json({ ...user })
-      if (banner !== "uploads//spare//1617104683862-aavva.png") {
-        const path = banner.replace("uploadsad", "uploads/ad")
         path && fs.unlinkSync(path)
       }
     } else {
