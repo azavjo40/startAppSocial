@@ -4,6 +4,6 @@ const chatIo = new Schema({
   name: { type: String },
   message: { type: String },
   chatId: [],
-  date: { type: Date, default: Date.now },
+  date: { type: Date },
 })
 module.exports = model("Chat", chatIo)

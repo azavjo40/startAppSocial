@@ -15,11 +15,8 @@ function App() {
   const dispatch = useDispatch()
 
   useEffect(() => dispatch(autoLogin()), [dispatch])
-  useEffect(() => isAuthUser && dispatch(refreshToken()), [
-    dispatch,
-    isAuthUser,
-  ])
-  useEffect(() => isAuthUser && dispatch(getUserPage()), [dispatch, isAuthUser])
+  useEffect(() => dispatch(refreshToken(isAuthUser)), [dispatch, isAuthUser])
+  useEffect(() => dispatch(getUserPage(isAuthUser)), [dispatch, isAuthUser])
   return (
     <div className='appCont'>
       {alert && <Alert text={alert} />}

@@ -21,6 +21,7 @@ const chatIo = http => {
             const chat = await new Chat({
               message: form.message,
               name: form.name,
+              date: Date.now(),
               chatId,
             }).save()
             await io.emit("message", { chatResult: chat })
@@ -31,9 +32,12 @@ const chatIo = http => {
                   const chatBot = await new Chat({
                     message: item.message,
                     name: item.name,
+                    date: Date.now(),
                     chatId,
                   }).save()
-                  await io.emit("message", { chatResult: chatBot })
+                  setTimeout(async () => {
+                    await io.emit("message", { chatResult: chatBot })
+                  }, 1000)
                 }
               })
             }

@@ -9,9 +9,7 @@ module.exports.createBot = async (req, res) => {
         ifWrote,
         message,
         botId,
-        date: Date.now(),
       })
-      console.log(bot)
       bot.save()
       res.status(201).json({ message: "create bot" })
     }

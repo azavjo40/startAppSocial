@@ -49,7 +49,6 @@ export function authRegister(form) {
     formdata.append("email", form.email)
     formdata.append("password", form.password)
     formdata.append("file", form.file)
-    console.log(formdata)
     try {
       const options = await {
         url: "/api/auth/register",
@@ -87,10 +86,10 @@ export function authLogin(form) {
 }
 
 let setTime
-export const refreshToken = () => {
+export const refreshToken = isAuthUser => {
   return dispach => {
     try {
-      if (storage.userId) {
+      if (storage.userId && isAuthUser) {
         const options = {
           url: "/api/auth/refresh/token",
           method: "POST",

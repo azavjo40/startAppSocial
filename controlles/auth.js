@@ -75,7 +75,12 @@ module.exports.getUserPage = async (req, res) => {
         .json({ message: "Something went wrong, please try again" })
     }
     const user = await User.findById({ _id })
-    res.status(200).json({ ...user })
+    const tokenUser = token(user._id)
+    res.status(201).json({
+      ...user,
+      token: `Bearer ${tokenUser()}`,
+      userId: user._id,
+    })
   } catch (e) {
     res.status(500).json({ message: "Something went wrong, please try again" })
     console.log(e)
@@ -96,7 +101,7 @@ module.exports.refreshToken = async (req, res) => {
   }
 }
 
-module.exports.userChangeAvatar = async (req, res) => {
+module.exports.userChangeData = async (req, res) => {
   try {
     const { imageSrcAvatar, name, country, _id, email } = req.body
     const ubdate = {

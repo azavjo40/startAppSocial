@@ -36,7 +36,7 @@ router.patch(
   "/user/change/avatar",
   upload.single("file"),
   passport.authenticate("jwt", { session: false }),
-  controller.userChangeAvatar
+  controller.userChangeData
 )
 
 module.exports = router

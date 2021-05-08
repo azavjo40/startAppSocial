@@ -5,6 +5,5 @@ const bot = new Schema({
   ifWrote: { type: String },
   message: { type: String },
   botId: { type: String },
-  date: {},
 })
 module.exports = model("Bot", bot)

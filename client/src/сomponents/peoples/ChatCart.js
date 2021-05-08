@@ -6,6 +6,7 @@ function ChatCart({ socket, storage, interlocutor }) {
   const [mount, setMount] = useState(false)
   const message = useSelector(state => state.peoples.message)
   const dispatch = useDispatch()
+
   const autoSendMessage = useCallback(() => {
     if (!mount) {
       setMount(true)
@@ -14,7 +15,9 @@ function ChatCart({ socket, storage, interlocutor }) {
   }, [dispatch, mount, socket])
   useEffect(() => autoSendMessage(), [autoSendMessage])
 
-  !message && dispatch(getMessages(`${interlocutor._id}-${storage.userId}`))
+  useEffect(() => {
+    !message && dispatch(getMessages(`${interlocutor._id}-${storage.userId}`))
+  }, [dispatch, message, interlocutor._id, storage.userId])
 
   return (
     <div className='body'>

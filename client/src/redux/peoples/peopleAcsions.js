@@ -46,7 +46,10 @@ export const interLocutor = item => {
 export const getSoketMessage = socket => {
   return dispach => {
     socket.on("message", ({ chatResult }) => {
-      dispach({ type: SOCKET_MESSAGE_PEOPLE, payload: chatResult })
+      dispach({
+        type: SOCKET_MESSAGE_PEOPLE,
+        payload: chatResult,
+      })
     })
   }
 }
@@ -64,7 +67,6 @@ export const sendSoketMessage = (form, socket) => {
 export const getMessages = chatId => {
   return async dispach => {
     if (!chatId) {
-      dispach(showAlert("Something went wrong, try again"))
       dispach({ type: GET_MESSAGES_PEOPLE, payload: null })
     } else {
       const options = {
