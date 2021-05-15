@@ -1,13 +1,13 @@
-import React from "react"
-import "../../styles/peoples/peoples.css"
-import { useDispatch } from "react-redux"
-import { interLocutor, showChat } from "src/redux/peoples/peopleAcsions"
+import React from 'react'
+import '../../styles/message/peoples.css'
+import { useDispatch } from 'react-redux'
+import { interLocutor, showChat } from 'src/redux/message/messageAcsions'
 function SearchCart({ item, iconeMessage }) {
   const dispatch = useDispatch()
   return (
     <>
       <div
-        className='item'
+        className="item"
         onClick={() => {
           dispatch(showChat(true))
           dispatch(interLocutor(item))

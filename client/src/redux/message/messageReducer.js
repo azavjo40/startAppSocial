@@ -6,7 +6,7 @@ import {
   GET_MESSAGES_PEOPLE,
   SHOW_CHAT,
   INTER_LOCUTOR,
-} from "./type"
+} from './type'
 const initialState = {
   items: null,
   search: null,
@@ -14,7 +14,7 @@ const initialState = {
   chat: false,
   interL: null,
 }
-export const peopleReducer = (state = initialState, actoin) => {
+export const messageReducer = (state = initialState, actoin) => {
   switch (actoin.type) {
     case GET_SEARCH_PEOPLE:
       return { ...state, items: actoin.payload }

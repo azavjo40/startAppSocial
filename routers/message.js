@@ -1,16 +1,16 @@
 const { Router } = require('express')
 const router = Router()
-const controller = require('../controlles/bot')
+const controller = require('../controlles/message')
 const passport = require('passport')
 
-router.post(
-  '/create/bot',
+router.get(
+  '/search/peoples',
   passport.authenticate('jwt', { session: false }),
-  controller.createBot
+  controller.searchPeople
 )
 router.get(
-  '/get/bot/:id',
+  '/get/messages/:id',
   passport.authenticate('jwt', { session: false }),
-  controller.getBot
+  controller.chatRest
 )
 module.exports = router

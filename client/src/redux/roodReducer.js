@@ -1,14 +1,16 @@
 //@ts-check
-import { combineReducers } from "redux"
+import { combineReducers } from 'redux'
 import {
   authReducer,
   generalReducer,
   userReducer,
-  peopleReducer,
-} from "./index"
+  messageReducer,
+  botReducer,
+} from './index'
 export const roodReducer = combineReducers({
   auth: authReducer,
   general: generalReducer,
   userPages: userReducer,
-  peoples: peopleReducer,
+  peoples: messageReducer,
+  bot: botReducer,
 })

@@ -1,10 +1,11 @@
-import { useState, useEffect, useCallback } from "react"
-import "../../styles/peoples/chat.css"
-import { useDispatch, useSelector } from "react-redux"
-import { getMessages, getSoketMessage } from "src/redux/peoples/peopleAcsions"
+import { useState, useEffect, useCallback } from 'react'
+import '../../styles/message/chat.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { getMessages, getSoketMessage } from 'src/redux/message/messageAcsions'
+
 function ChatCart({ socket, storage, interlocutor }) {
+  const message = useSelector((state) => state.peoples.message)
   const [mount, setMount] = useState(false)
-  const message = useSelector(state => state.peoples.message)
   const dispatch = useDispatch()
 
   const autoSendMessage = useCallback(() => {
@@ -12,21 +13,25 @@ function ChatCart({ socket, storage, interlocutor }) {
       setMount(true)
       dispatch(getSoketMessage(socket))
     }
-  }, [dispatch, mount, socket])
+    document.title = interlocutor.name
+  }, [dispatch, mount, socket, interlocutor.name])
+
   useEffect(() => autoSendMessage(), [autoSendMessage])
 
   useEffect(() => {
-    !message && dispatch(getMessages(`${interlocutor._id}-${storage.userId}`))
+    if (!message) {
+      dispatch(getMessages(`${interlocutor._id}-${storage.userId}`))
+    }
   }, [dispatch, message, interlocutor._id, storage.userId])
 
   return (
-    <div className='body'>
+    <div className="body">
       {message &&
         message
-          .sort(() => -1)
+          .reverse(() => -1)
           .map((item, i) => {
             return (
-              <div key={i} className='message'>
+              <div key={i} className="message">
                 <span>
                   {item.name} {new Date(item.date).toLocaleTimeString()}
                 </span>

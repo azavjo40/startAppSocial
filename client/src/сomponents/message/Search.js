@@ -1,11 +1,11 @@
-import { useDispatch } from "react-redux"
-import { searchPeople } from "src/redux/peoples/peopleAcsions"
-import "../../styles/peoples/search.css"
+import { useDispatch } from 'react-redux'
+import { searchPeople } from 'src/redux/message/messageAcsions'
+import '../../styles/message/search.css'
 function Search({ items }) {
   const dispatch = useDispatch()
-  const changeHandler = e => {
+  const changeHandler = (e) => {
     const inputResult = e.target.value.trim().toLowerCase()
-    const peoples = items.filter(item => {
+    const peoples = items.filter((item) => {
       if (item.name.toLowerCase() >= inputResult) {
         return item
       }
@@ -16,8 +16,8 @@ function Search({ items }) {
   }
 
   return (
-    <div className='containerSearch'>
-      <input type='text' onInput={changeHandler} placeholder='Search' />
+    <div className="containerSearch">
+      <input type="text" onInput={changeHandler} placeholder="Search" />
     </div>
   )
 }

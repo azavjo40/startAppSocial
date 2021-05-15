@@ -1,7 +1,7 @@
 //@ts-check
-import { LOCAL_STORAGE } from "src/constant/localstorage"
-import { showAlert } from "../generals/generalAcsions"
-import { httpFetch } from "../hooks/httpFetch"
+import { LOCAL_STORAGE } from 'src/constant/localstorage'
+import { showAlert } from '../generals/generalAcsions'
+import { httpFetch } from '../hooks/httpFetch'
 import {
   GET_MESSAGES_PEOPLE,
   GET_SEARCH_PEOPLE,
@@ -9,13 +9,14 @@ import {
   SEARCH_PEOPLE,
   SHOW_CHAT,
   SOCKET_MESSAGE_PEOPLE,
-} from "./type"
+} from './type'
 const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
+
 export const getSearchPeople = () => {
-  return async dispach => {
+  return async (dispach) => {
     const options = {
       url: `/api/search/peoples`,
-      method: "GET",
+      method: 'GET',
       body: null,
       file: null,
       token: storage.token,
@@ -25,27 +26,27 @@ export const getSearchPeople = () => {
   }
 }
 
-export const searchPeople = item => {
-  return async dispach => {
+export const searchPeople = (item) => {
+  return async (dispach) => {
     dispach({ type: SEARCH_PEOPLE, payload: item })
   }
 }
 
-export const showChat = item => {
-  return async dispach => {
+export const showChat = (item) => {
+  return async (dispach) => {
     dispach({ type: SHOW_CHAT, payload: item })
   }
 }
 
-export const interLocutor = item => {
-  return async dispach => {
+export const interLocutor = (item) => {
+  return async (dispach) => {
     dispach({ type: INTER_LOCUTOR, payload: item })
   }
 }
 
-export const getSoketMessage = socket => {
-  return dispach => {
-    socket.on("message", ({ chatResult }) => {
+export const getSoketMessage = (socket) => {
+  return (dispach) => {
+    socket.on('message', ({ chatResult }) => {
       dispach({
         type: SOCKET_MESSAGE_PEOPLE,
         payload: chatResult,
@@ -55,47 +56,29 @@ export const getSoketMessage = socket => {
 }
 
 export const sendSoketMessage = (form, socket) => {
-  return dispach => {
+  return (dispach) => {
     if (!form.message) {
-      dispach(showAlert("Something went wrong, try again"))
+      dispach(showAlert('Something went wrong, try again'))
     } else {
-      socket.emit("message", { form })
+      socket.emit('message', { form })
     }
   }
 }
 
-export const getMessages = chatId => {
-  return async dispach => {
+export const getMessages = (chatId) => {
+  return async (dispach) => {
     if (!chatId) {
       dispach({ type: GET_MESSAGES_PEOPLE, payload: null })
     } else {
       const options = {
         url: `/api/get/messages/${chatId}`,
-        method: "get",
+        method: 'get',
         body: null,
         file: null,
         token: storage.token,
         type: GET_MESSAGES_PEOPLE,
       }
       await dispach(httpFetch(options))
-    }
-  }
-}
-
-export const createBot = form => {
-  const options = {
-    url: "/api/create/bot",
-    method: "POST",
-    body: form,
-    file: null,
-    token: storage.token,
-    type: null,
-  }
-  return async dispach => {
-    try {
-      await dispach(httpFetch(options))
-    } catch (e) {
-      console.log(e)
     }
   }
 }
