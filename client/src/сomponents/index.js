@@ -9,6 +9,7 @@ import Chat from './message/chat'
 import InputChat from './message/InputChat'
 import ChatCart from './message/ChatCart'
 import Bot from './bot/Bot'
+import ListBot from './bot/ListBot'
 export {
   Login,
   Register,
@@ -21,4 +22,5 @@ export {
   InputChat,
   ChatCart,
   Bot,
+  ListBot,
 }

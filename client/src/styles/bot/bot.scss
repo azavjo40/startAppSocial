@@ -5,25 +5,33 @@ $primary: #3f51b5;
 $gray-blue: #ecf3ff99;
 $c-series: #f2f2f2;
 .containerBot {
-  position: absolute;
-  background-color: $black-50;
   width: 100%;
-  height: 100vh;
-  z-index: 20;
   display: flex;
-  justify-content: center;
   align-items: center;
-  span {
+  justify-content: center;
+  border: 1px solid $gray-blue;
+  height: 92.5vh;
+  background-color: white;
+  position: absolute;
+  right: 0px;
+  top: 50px;
+  z-index: 2;
+  .selectorBot {
     font-size: 15px;
     position: absolute;
     top: 0px;
     right: 5px;
     cursor: pointer;
     z-index: 2;
+    background-color: $primary;
+    color: white;
+    border-radius: 3px;
+    padding: 2px;
+    margin: 2px;
   }
   .boxCreateBot {
     padding: 10px;
-    width: 60%;
+    width: 80%;
     height: 50vh;
     display: flex;
     flex-direction: column;
@@ -53,7 +61,7 @@ $c-series: #f2f2f2;
     }
   }
   .conList {
-    width: 60%;
+    width: 80%;
     background-color: red;
     position: relative;
     .boxListBot {
@@ -67,17 +75,42 @@ $c-series: #f2f2f2;
       justify-content: center;
       position: relative;
       overflow: auto;
-      p {
+      .listItem {
+        margin: 4px;
         font-size: 12px;
+        width: 100%;
+        height: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        p {
+          padding: 0px;
+          margin: 0px;
+          font-size: 15px;
+        }
+        .removeList {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-size: 20px;
+          cursor: pointer;
+          background-color: red;
+          height: 20px;
+          width: 40px;
+          border-radius: 3px;
+        }
       }
     }
   }
 }
-@media (max-width: 425px) {
+@media (max-width: 700px) {
   .containerBot {
-    .boxCreateBot,
-    .conList {
-      width: 95%;
-    }
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    top: 50px;
+    z-index: 2;
+    justify-content: center;
   }
 }

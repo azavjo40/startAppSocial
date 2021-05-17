@@ -6,12 +6,14 @@
   justify-content: center;
   background-color: ghostwhite;
 }
+
 .appBody {
   width: 80%;
   padding: 0px;
   margin: 0px;
   position: relative;
 }
+
 .alert {
   position: fixed;
   top: 40px;
@@ -19,7 +21,7 @@
   z-index: 100;
 }
 
-@media (max-width: 425px) {
+@media (max-width: 500px) {
   .appBody {
     width: 100%;
   }

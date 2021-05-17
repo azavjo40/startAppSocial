@@ -10,19 +10,29 @@ import {
   SHOW_CHAT,
   SOCKET_MESSAGE_PEOPLE,
 } from './type'
-const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
 
+let storage
+const getStorage = async () => {
+  storage = await JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
+}
 export const getSearchPeople = () => {
   return async (dispach) => {
-    const options = {
-      url: `/api/search/peoples`,
-      method: 'GET',
-      body: null,
-      file: null,
-      token: storage.token,
-      type: GET_SEARCH_PEOPLE,
+    await getStorage()
+    if (storage.token) {
+      try {
+        const options = {
+          url: `/api/search/peoples`,
+          method: 'GET',
+          body: null,
+          file: null,
+          token: storage.token,
+          type: GET_SEARCH_PEOPLE,
+        }
+        await dispach(httpFetch(options))
+      } catch (e) {
+        console.log(e)
+      }
     }
-    await dispach(httpFetch(options))
   }
 }
 
@@ -70,6 +80,7 @@ export const getMessages = (chatId) => {
     if (!chatId) {
       dispach({ type: GET_MESSAGES_PEOPLE, payload: null })
     } else {
+      await getStorage()
       const options = {
         url: `/api/get/messages/${chatId}`,
         method: 'get',

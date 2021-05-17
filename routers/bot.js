@@ -13,4 +13,9 @@ router.get(
   passport.authenticate('jwt', { session: false }),
   controller.getBot
 )
+router.delete(
+  '/remove/bot/:id',
+  passport.authenticate('jwt', { session: false }),
+  controller.removeBote
+)
 module.exports = router

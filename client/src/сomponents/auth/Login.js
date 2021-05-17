@@ -28,7 +28,7 @@ function Login() {
       />
       <input
         className="input"
-        type="passeord"
+        type="password"
         name="password"
         placeholder="Enter Password"
         required

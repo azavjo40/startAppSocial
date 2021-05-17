@@ -18,11 +18,23 @@ module.exports.createBot = async (req, res) => {
     console.log(e)
   }
 }
+
 module.exports.getBot = async (req, res) => {
   try {
     if (req.params.id) {
       const bot = await Bot.find({ botId: req.params.id })
       res.status(200).json(bot)
+    }
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+module.exports.removeBote = async (req, res) => {
+  try {
+    if (req.params.id) {
+      await Bot.remove({ _id: req.params.id })
+      res.status(200).json({ message: 'Remove Bot' })
     }
   } catch (e) {
     console.log(e)

@@ -1,0 +1,98 @@
+.containerBot {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #ecf3ff99;
+  height: 92.5vh;
+  background-color: white;
+  position: absolute;
+  right: 0px;
+  top: 50px;
+  z-index: 2; }
+  .containerBot .selectorBot {
+    font-size: 15px;
+    position: absolute;
+    top: 0px;
+    right: 5px;
+    cursor: pointer;
+    z-index: 2;
+    background-color: #3f51b5;
+    color: white;
+    border-radius: 3px;
+    padding: 2px;
+    margin: 2px; }
+  .containerBot .boxCreateBot {
+    padding: 10px;
+    width: 80%;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f2f2f2;
+    justify-content: center;
+    position: relative; }
+    .containerBot .boxCreateBot input {
+      width: 100%;
+      margin: 10px 0 10px 0;
+      border: 0.5px solid #f2f2f2;
+      text-align: center; }
+      .containerBot .boxCreateBot input:focus {
+        outline: none; }
+    .containerBot .boxCreateBot button {
+      margin: 4px;
+      border: none;
+      background-color: #3f51b5;
+      color: white;
+      border-radius: 5px; }
+      .containerBot .boxCreateBot button:focus {
+        outline: none; }
+  .containerBot .conList {
+    width: 80%;
+    background-color: red;
+    position: relative; }
+    .containerBot .conList .boxListBot {
+      padding: 10px;
+      width: 100%;
+      height: 50vh;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      background-color: #f2f2f2;
+      justify-content: center;
+      position: relative;
+      overflow: auto; }
+      .containerBot .conList .boxListBot .listItem {
+        margin: 4px;
+        font-size: 12px;
+        width: 100%;
+        height: 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center; }
+        .containerBot .conList .boxListBot .listItem p {
+          padding: 0px;
+          margin: 0px;
+          font-size: 15px; }
+        .containerBot .conList .boxListBot .listItem .removeList {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: white;
+          font-size: 20px;
+          cursor: pointer;
+          background-color: red;
+          height: 20px;
+          width: 40px;
+          border-radius: 3px; }
+
+@media (max-width: 700px) {
+  .containerBot {
+    width: 100%;
+    position: absolute;
+    left: 0px;
+    top: 50px;
+    z-index: 2;
+    justify-content: center; } }
+
+/*# sourceMappingURL=bot.css.map */
