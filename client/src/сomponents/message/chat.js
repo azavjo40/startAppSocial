@@ -9,7 +9,7 @@ import { getMessages, showChat } from 'src/redux/message/messageAcsions'
 
 function Chat() {
   const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
-  const socket = io.connect('https://azam-app-tj-js.herokuapp.com')
+  const socket = io.connect('http://localhost:5000/')
   const interlocutor = useSelector((state) => state.peoples.interL)
   const menuRef = useRef()
   const dispatch = useDispatch()

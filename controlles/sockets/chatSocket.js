@@ -4,7 +4,7 @@ const Bot = require('../../models/bot')
 const chatIo = (http) => {
   const io = require('socket.io')(http, {
     cors: {
-      origins: ['https://azam-app-tj-js.herokuapp.com'],
+      origins: ['http://localhost:5000'],
     },
   })
   return async () => {
