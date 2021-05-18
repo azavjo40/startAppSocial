@@ -1,15 +1,15 @@
-import React, { useState } from "react"
-import { Login, Register } from "../сomponents"
-import "../styles/auth/auth.css"
+import React, { useState } from 'react'
+import { Login, Register } from '../сomponents'
+import '../styles/auth/auth.css'
 function Auth() {
   const [isLogin, setIsLogin] = useState(true)
 
   return (
-    <div className='contAuth'>
+    <div className="contAuth">
       {isLogin ? <Login /> : <Register />}
-      <div className='switchBtn'>
+      <div className="switchBtn">
         <button onClick={() => setIsLogin(!isLogin)}>
-          {isLogin ? "To Register" : "To Login"}
+          {isLogin ? 'To Register' : 'To Login'}
         </button>
       </div>
     </div>

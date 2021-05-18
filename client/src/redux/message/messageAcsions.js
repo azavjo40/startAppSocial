@@ -11,13 +11,13 @@ import {
   SOCKET_MESSAGE_PEOPLE,
 } from './type'
 
-let storage
 const getStorage = async () => {
-  storage = await JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
+  return await JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
 }
+
 export const getSearchPeople = () => {
   return async (dispach) => {
-    await getStorage()
+    const storage = await getStorage()
     if (storage.token) {
       try {
         const options = {
@@ -77,6 +77,7 @@ export const sendSoketMessage = (form, socket) => {
 
 export const getMessages = (chatId) => {
   return async (dispach) => {
+    const storage = await getStorage()
     if (!chatId) {
       dispach({ type: GET_MESSAGES_PEOPLE, payload: null })
     } else {

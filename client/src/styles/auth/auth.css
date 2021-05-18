@@ -7,7 +7,8 @@
   height: 92vh;
   justify-content: center; }
   .contAuth .switchBtn {
-    width: 100%; }
+    width: 100%;
+    height: 100%; }
     .contAuth .switchBtn button {
       margin-top: 40px;
       border: none;

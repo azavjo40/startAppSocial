@@ -7,6 +7,7 @@ const mongoose = require('mongoose')
 const passport = require('passport')
 const cors = require('cors')
 const socketIo = require('./routers/socketIo')
+const path = require('path')
 app.use('/uploads', express.static('uploads'))
 app.use(cors())
 app.use(morgan('dev'))
@@ -17,13 +18,14 @@ app.use('/api', require('./routers/message'))
 app.use(passport.initialize())
 require('./midlleware/passport')(passport)
 
-// if (process.env.NODE_ENV === "production") {
-//   app.use("/", express.static(path.join(__dirname, "client", "build")))
-//   app.get("*", (req, res) => {
-//     res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
-//   })
-// }
 socketIo(http)()
+
+if (process.env.NODE_ENV === 'production') {
+  app.use('/', express.static(path.join(__dirname, 'client', 'build')))
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
+  })
+}
 
 const PORT = process.env.PORT || config.get('port') || 5000
 async function start() {

@@ -5,9 +5,8 @@ import { USER_PAGES_PAGE } from '../userPages/types'
 import { userPagesPage } from '../userPages/userAcsions'
 import { IS_AUTH_USER } from './types'
 
-let storage
 const getStorage = async () => {
-  storage = await JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
+  return await JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
 }
 
 export const authUser = (isAuthUser) => ({
@@ -37,7 +36,7 @@ export const autoSaveStorage = (data) => {
 export function autoLogin() {
   return async (dispach) => {
     try {
-      await getStorage()
+      const storage = await getStorage()
       if (storage.token) {
         await dispach(authUser(true))
       } else {
@@ -95,7 +94,7 @@ let setTime
 export const refreshToken = (isAuthUser) => {
   return async (dispach) => {
     try {
-      await getStorage()
+      const storage = await getStorage()
       if (storage.userId && isAuthUser) {
         const options = {
           url: '/api/auth/refresh/token',
@@ -119,7 +118,7 @@ export const refreshToken = (isAuthUser) => {
 export const userChangeAvatar = (form) => {
   return async (dispach) => {
     try {
-      await getStorage()
+      const storage = await getStorage()
       let formdata
       if (form.file) {
         formdata = new FormData()

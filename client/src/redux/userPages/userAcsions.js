@@ -3,9 +3,9 @@ import { LOCAL_STORAGE } from '../../constant/localstorage'
 import { autoSaveStorage } from '../auths/authAcsions'
 import { httpFetch } from '../hooks/httpFetch'
 import { USER_PAGES_PAGE } from './types'
-let storage
+
 const getStorage = async () => {
-  storage = await JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
+  return await JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
 }
 
 export const userPagesPage = (text) => {
@@ -22,7 +22,7 @@ export const userPagesPage = (text) => {
 export const getUserPage = (isAuthUser) => {
   return async (dispatch) => {
     try {
-      await getStorage()
+      const storage = await getStorage()
       if (storage.userId && isAuthUser) {
         const userId = storage.userId
         const options = {

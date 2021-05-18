@@ -1,6 +1,6 @@
 {
-  "port": 5000,
+  "port": 80,
   "jwtSecret": "azamshokh www",
   "mongoUri": "mongodb+srv://azavjon40:Brat1221@cluster0.tdgcv.mongodb.net/EastKebab?retryWrites=true&w=majority",
-  "baseUrl": "http://localhost:5000"
+  "baseUrl": "http:azam-app-tj-js.ru:80"
 }
