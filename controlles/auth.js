@@ -1,8 +1,8 @@
-const User = require("../models/auth")
-const bcrypt = require("bcryptjs")
-const { validationResult } = require("express-validator")
-const fs = require("fs")
-const token = require("../midlleware/token")
+const User = require('../models/auth')
+const bcrypt = require('bcryptjs')
+const { validationResult } = require('express-validator')
+const fs = require('fs')
+const token = require('../midlleware/token')
 
 module.exports.register = async (req, res) => {
   try {
@@ -10,14 +10,14 @@ module.exports.register = async (req, res) => {
     if (!errors.isEmpty()) {
       return res.status(400).json({
         errors: errors.array(),
-        message: "Incorrect register  data",
+        message: 'Incorrect register  data',
       })
     }
     const file = req.file
     const { name, email, password, country } = req.body
     const candidate = await User.findOne({ email })
     if (candidate) {
-      return res.status(400).json({ message: "This user already exists" })
+      return res.status(400).json({ message: 'This user already exists' })
     }
     const hashedPassword = await bcrypt.hash(password, 12)
     const user = new User({
@@ -25,7 +25,7 @@ module.exports.register = async (req, res) => {
       email,
       password: hashedPassword,
       country,
-      imageSrc: file ? file.path : "uploads//spare//1617104631234-user.png",
+      imageSrc: file ? file.path : 'uploads//spare//1617104631234-user.png',
     })
     await user.save()
     const tokenUser = token(user._id)
@@ -33,10 +33,10 @@ module.exports.register = async (req, res) => {
       ...user,
       token: `Bearer ${tokenUser()}`,
       userId: user._id,
-      message: "User created",
+      message: 'User created',
     })
   } catch (e) {
-    res.status(500).json({ message: "Something went wrong, please try again" })
+    res.status(500).json({ message: 'Something went wrong, please try again' })
   }
 }
 
@@ -46,7 +46,7 @@ module.exports.login = async (req, res) => {
     if (!errors.isEmpty) {
       return res.status(400).json({
         errors: errors.array(),
-        message: "Incorrect registration data",
+        message: 'Incorrect registration data',
       })
     }
     const { email, password } = req.body
@@ -55,14 +55,14 @@ module.exports.login = async (req, res) => {
     if (!isMatch) {
       return res
         .status(400)
-        .json({ message: "Invalid password, please try again" })
+        .json({ message: 'Invalid password, please try again' })
     }
     const tokenUser = token(user._id)
     res
       .status(200)
       .json({ ...user, token: `Bearer ${tokenUser()}`, userId: user._id })
   } catch (e) {
-    res.status(500).json({ message: "Something went wrong, please try again" })
+    res.status(500).json({ message: 'Something went wrong, please try again' })
   }
 }
 
@@ -72,7 +72,7 @@ module.exports.getUserPage = async (req, res) => {
     if (!_id) {
       res
         .status(400)
-        .json({ message: "Something went wrong, please try again" })
+        .json({ message: 'Something went wrong, please try again' })
     }
     const user = await User.findById({ _id })
     const tokenUser = token(user._id)
@@ -82,7 +82,7 @@ module.exports.getUserPage = async (req, res) => {
       userId: user._id,
     })
   } catch (e) {
-    res.status(500).json({ message: "Something went wrong, please try again" })
+    res.status(500).json({ message: 'Something went wrong, please try again' })
     console.log(e)
   }
 }
@@ -96,7 +96,7 @@ module.exports.refreshToken = async (req, res) => {
       .status(200)
       .json({ ...user, token: `Bearer ${tokenUser()}`, userId: user._id })
   } catch (e) {
-    res.status(500).json({ message: "Something went wrong, please try again" })
+    res.status(500).json({ message: 'Something went wrong, please try again' })
     console.log(e)
   }
 }
@@ -113,13 +113,17 @@ module.exports.userChangeData = async (req, res) => {
     if (req.file) {
       await User.findByIdAndUpdate({ _id }, { $set: ubdate }, { new: true })
       res.status(200).json({ ...user })
-      if (imageSrcAvatar !== "uploads//spare//1617104631234-user.png") {
-        const path = imageSrcAvatar.replace("uploadsad", "uploads/ad")
+      if (imageSrcAvatar !== 'uploads//spare//1617104631234-user.png') {
+        const path = imageSrcAvatar.replace('uploadsad', 'uploads/ad')
         path && fs.unlinkSync(path)
       }
     } else {
       await User.findByIdAndUpdate({ _id }, { $set: ubdate }, { new: true })
-      res.status(200).json({ ...user })
+
+      const tokenUser = token(user._id)
+      res
+        .status(200)
+        .json({ ...user, token: `Bearer ${tokenUser()}`, userId: user._id })
     }
   } catch (e) {
     console.log(e)

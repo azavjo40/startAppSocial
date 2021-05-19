@@ -12,6 +12,7 @@ import Bot from './bot/Bot'
 import ListBot from './bot/ListBot'
 import UserModal from './user/UberModal'
 import UserCart from './user/UserCart'
+import UserChangeData from './user/UserChangeData'
 export {
   Login,
   Register,
@@ -27,4 +28,5 @@ export {
   ListBot,
   UserModal,
   UserCart,
+  UserChangeData,
 }

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import close from '../../images/close-window.png'
 import { showUserCart } from 'src/redux/userPages/userAcsions'
 import '../../styles/userPage/userCart.css'
-import UserCart from './UserCart'
+import { UserCart, UserChangeData } from '../index'
 const UserModal = () => {
   const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
   const userCart = useSelector((state) => state.userPages.userCart)
@@ -13,7 +13,6 @@ const UserModal = () => {
   const closeModale = useCallback(() => {
     dispatch(showUserCart(false))
   }, [dispatch])
-  console.log(storage)
   useEffect(() => {
     const clickOutsideClose = (event) => {
       if (!menuRef.current.contains(event.target)) closeModale()
@@ -26,7 +25,11 @@ const UserModal = () => {
       <div className="header">
         <img src={close} alt="close" onClick={closeModale} />
       </div>
-      <UserCart userCart={userCart} />
+      {storage.userId === userCart._id ? (
+        <UserChangeData item={userCart} />
+      ) : (
+        <UserCart userCart={userCart} />
+      )}
     </div>
   )
 }
