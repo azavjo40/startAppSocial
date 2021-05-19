@@ -2,7 +2,7 @@
 import { LOCAL_STORAGE } from '../../constant/localstorage'
 import { autoSaveStorage } from '../auths/authAcsions'
 import { httpFetch } from '../hooks/httpFetch'
-import { USER_PAGES_PAGE } from './types'
+import { USER_PAGES_PAGE, SHOW_USER_CART, USER_CART_DATA } from './types'
 
 const getStorage = async () => {
   return await JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
@@ -39,5 +39,12 @@ export const getUserPage = (isAuthUser) => {
     } catch (e) {
       console.log(e)
     }
+  }
+}
+
+export const showUserCart = (bool, item) => {
+  return (dispach) => {
+    dispach({ type: SHOW_USER_CART, payload: bool })
+    dispach({ type: USER_CART_DATA, payload: item })
   }
 }

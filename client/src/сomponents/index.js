@@ -10,6 +10,8 @@ import InputChat from './message/InputChat'
 import ChatCart from './message/ChatCart'
 import Bot from './bot/Bot'
 import ListBot from './bot/ListBot'
+import UserModal from './user/UberModal'
+import UserCart from './user/UserCart'
 export {
   Login,
   Register,
@@ -23,4 +25,6 @@ export {
   ChatCart,
   Bot,
   ListBot,
+  UserModal,
+  UserCart,
 }

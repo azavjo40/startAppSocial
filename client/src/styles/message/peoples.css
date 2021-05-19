@@ -3,8 +3,7 @@
   height: 90vh;
   display: flex;
   flex-direction: row;
-  background-color: white;
-  background-color: aqua; }
+  background-color: white; }
   .containerPeoples .beoplesBox {
     display: flex;
     flex-direction: column;
