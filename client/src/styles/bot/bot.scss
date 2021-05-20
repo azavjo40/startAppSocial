@@ -4,91 +4,105 @@ $black-50: hsl(0, 0%, 47%);
 $primary: #3f51b5;
 $gray-blue: #ecf3ff99;
 $c-series: #f2f2f2;
-.containerBot {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid $gray-blue;
-  height: 92.5vh;
-  background-color: white;
-  position: absolute;
-  right: 0px;
-  top: 50px;
-  z-index: 2;
-  .selectorBot {
-    font-size: 15px;
-    position: absolute;
-    top: 0px;
-    right: 5px;
-    cursor: pointer;
-    z-index: 2;
-    background-color: $primary;
-    color: white;
-    border-radius: 3px;
-    padding: 2px;
-    margin: 2px;
-  }
-  .boxCreateBot {
-    padding: 10px;
-    width: 80%;
-    height: 50vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: $c-series;
-    justify-content: center;
-    position: relative;
 
-    input {
-      width: 100%;
-      margin: 10px 0 10px 0;
-      border: 0.5px solid $c-series;
-      text-align: center;
-      &:focus {
-        outline: none;
-      }
-    }
-    button {
-      margin: 4px;
-      border: none;
-      background-color: $primary;
-      color: white;
-      border-radius: 5px;
-      &:focus {
-        outline: none;
-      }
+.containerBot {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid $gray-blue;
+  height: 90vh;
+  background-color: white;
+  justify-content: flex-start;
+  align-items: center;
+  .header {
+    width: 100%;
+    height: 25px;
+    flex: 0 1 auto;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid $gray-blue;
+    img {
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+      border-radius: 50px;
     }
   }
-  .conList {
+  .itemsBots {
     width: 80%;
-    background-color: red;
-    position: relative;
+    height: 100vh;
+    border: 1px solid $gray-blue;
+    background-color: $gray-blue;
+    .boxCreateBot {
+      width: 100%;
+      height: 60px;
+      display: flex;
+      justify-content: center;
+      .inoutBox {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        input {
+          width: 100%;
+          height: 50%;
+          border: 0.5px solid $c-series;
+          text-align: center;
+          &:focus {
+            outline: none;
+          }
+          &:hover {
+            border: 0.5px solid $primary;
+          }
+        }
+      }
+      button {
+        border: none;
+        background-color: $primary;
+        color: white;
+        width: 40px;
+        height: 60px;
+        font-size: 15px;
+        text-align: center;
+        &:focus {
+          outline: none;
+        }
+      }
+    }
     .boxListBot {
       padding: 10px;
       width: 100%;
-      height: 50vh;
+      height: 200px;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      background-color: $c-series;
-      justify-content: center;
-      position: relative;
       overflow: auto;
-      .listItem {
-        margin: 4px;
-        font-size: 12px;
+      .boxBot {
         width: 100%;
-        height: 20px;
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        p {
+        height: 20px;
+        margin: 3px;
+        .listItem {
           padding: 0px;
-          margin: 0px;
-          font-size: 15px;
+          font-size: 12px;
+          width: 100%;
+          height: 20px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background-color: chartreuse;
+          overflow: auto;
+          p {
+            padding: 0px;
+            margin: 0px;
+            font-size: 15px;
+          }
         }
         .removeList {
+          padding: 0px;
+          margin: 0px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -98,7 +112,6 @@ $c-series: #f2f2f2;
           background-color: red;
           height: 20px;
           width: 40px;
-          border-radius: 3px;
         }
       }
     }
@@ -111,6 +124,9 @@ $c-series: #f2f2f2;
     left: 0px;
     top: 50px;
     z-index: 2;
-    justify-content: center;
+    .itemsBots {
+      width: 90%;
+      height: 95vh;
+    }
   }
 }

@@ -1,80 +1,90 @@
 .containerBot {
-  width: 100%;
+  width: 80%;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
   border: 1px solid #ecf3ff99;
-  height: 92.5vh;
+  height: 90vh;
   background-color: white;
-  position: absolute;
-  right: 0px;
-  top: 50px;
-  z-index: 2; }
-  .containerBot .selectorBot {
-    font-size: 15px;
-    position: absolute;
-    top: 0px;
-    right: 5px;
-    cursor: pointer;
-    z-index: 2;
-    background-color: #3f51b5;
-    color: white;
-    border-radius: 3px;
-    padding: 2px;
-    margin: 2px; }
-  .containerBot .boxCreateBot {
-    padding: 10px;
-    width: 80%;
-    height: 50vh;
+  justify-content: flex-start;
+  align-items: center; }
+  .containerBot .header {
+    width: 100%;
+    height: 25px;
+    flex: 0 1 auto;
     display: flex;
-    flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
-    background-color: #f2f2f2;
-    justify-content: center;
-    position: relative; }
-    .containerBot .boxCreateBot input {
-      width: 100%;
-      margin: 10px 0 10px 0;
-      border: 0.5px solid #f2f2f2;
-      text-align: center; }
-      .containerBot .boxCreateBot input:focus {
-        outline: none; }
-    .containerBot .boxCreateBot button {
-      margin: 4px;
-      border: none;
-      background-color: #3f51b5;
-      color: white;
-      border-radius: 5px; }
-      .containerBot .boxCreateBot button:focus {
-        outline: none; }
-  .containerBot .conList {
+    padding: 15px;
+    border-bottom: 1px solid #ecf3ff99; }
+    .containerBot .header img {
+      width: 25px;
+      height: 25px;
+      cursor: pointer;
+      border-radius: 50px; }
+  .containerBot .itemsBots {
     width: 80%;
-    background-color: red;
-    position: relative; }
-    .containerBot .conList .boxListBot {
+    height: 100vh;
+    border: 1px solid #ecf3ff99;
+    background-color: #ecf3ff99; }
+    .containerBot .itemsBots .boxCreateBot {
+      width: 100%;
+      height: 60px;
+      display: flex;
+      justify-content: center; }
+      .containerBot .itemsBots .boxCreateBot .inoutBox {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center; }
+        .containerBot .itemsBots .boxCreateBot .inoutBox input {
+          width: 100%;
+          height: 50%;
+          border: 0.5px solid #f2f2f2;
+          text-align: center; }
+          .containerBot .itemsBots .boxCreateBot .inoutBox input:focus {
+            outline: none; }
+          .containerBot .itemsBots .boxCreateBot .inoutBox input:hover {
+            border: 0.5px solid #3f51b5; }
+      .containerBot .itemsBots .boxCreateBot button {
+        border: none;
+        background-color: #3f51b5;
+        color: white;
+        width: 40px;
+        height: 60px;
+        font-size: 15px;
+        text-align: center; }
+        .containerBot .itemsBots .boxCreateBot button:focus {
+          outline: none; }
+    .containerBot .itemsBots .boxListBot {
       padding: 10px;
       width: 100%;
-      height: 50vh;
+      height: 200px;
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
-      background-color: #f2f2f2;
-      justify-content: center;
-      position: relative;
       overflow: auto; }
-      .containerBot .conList .boxListBot .listItem {
-        margin: 4px;
-        font-size: 12px;
+      .containerBot .itemsBots .boxListBot .boxBot {
         width: 100%;
-        height: 20px;
         display: flex;
-        justify-content: space-between;
-        align-items: center; }
-        .containerBot .conList .boxListBot .listItem p {
+        align-items: center;
+        height: 20px;
+        margin: 3px; }
+        .containerBot .itemsBots .boxListBot .boxBot .listItem {
+          padding: 0px;
+          font-size: 12px;
+          width: 100%;
+          height: 20px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          background-color: chartreuse;
+          overflow: auto; }
+          .containerBot .itemsBots .boxListBot .boxBot .listItem p {
+            padding: 0px;
+            margin: 0px;
+            font-size: 15px; }
+        .containerBot .itemsBots .boxListBot .boxBot .removeList {
           padding: 0px;
           margin: 0px;
-          font-size: 15px; }
-        .containerBot .conList .boxListBot .listItem .removeList {
           display: flex;
           align-items: center;
           justify-content: center;
@@ -83,8 +93,7 @@
           cursor: pointer;
           background-color: red;
           height: 20px;
-          width: 40px;
-          border-radius: 3px; }
+          width: 40px; }
 
 @media (max-width: 700px) {
   .containerBot {
@@ -92,7 +101,9 @@
     position: absolute;
     left: 0px;
     top: 50px;
-    z-index: 2;
-    justify-content: center; } }
+    z-index: 2; }
+    .containerBot .itemsBots {
+      width: 90%;
+      height: 95vh; } }
 
 /*# sourceMappingURL=bot.css.map */

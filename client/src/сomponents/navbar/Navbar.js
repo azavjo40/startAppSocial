@@ -5,9 +5,8 @@ import { useDispatch } from 'react-redux'
 import { logout } from '../../redux/auths/authAcsions'
 import '../../styles/navbar/navbar.css'
 import { UserData } from '../../сomponents/index'
-import { Bot } from '../../сomponents/index'
+import { showModalBot } from 'src/redux/bot/botAcsions'
 const Navbar = (props) => {
-  const [showModal, setShowMdal] = useState(false)
   const [isLoadin, setIsLoading] = useState(false)
   const dispatch = useDispatch()
   const menuRef = useRef()
@@ -45,7 +44,7 @@ const Navbar = (props) => {
 
           {props && (
             <li onClick={() => setIsLoading(!isLoadin)}>
-              <p onClick={() => setShowMdal(!showModal)}>Bot</p>
+              <p onClick={() => dispatch(showModalBot(true))}>Bot</p>
             </li>
           )}
 
@@ -64,7 +63,6 @@ const Navbar = (props) => {
           )}
         </ul>
       </div>
-      {showModal && <Bot showModal={showModal} setShowMdal={setShowMdal} />}
     </div>
   )
 }
