@@ -5,11 +5,13 @@ import close from '../../images/close-window.png'
 import { showUserCart } from 'src/redux/userPages/userAcsions'
 import '../../styles/userPage/userCart.css'
 import { UserCart, UserChangeData } from '../index'
+
 const UserModal = () => {
   const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
   const userCart = useSelector((state) => state.userPages.userCart)
   const menuRef = useRef()
   const dispatch = useDispatch()
+
   const closeModale = useCallback(() => {
     dispatch(showUserCart(false))
   }, [dispatch])
@@ -20,6 +22,7 @@ const UserModal = () => {
     document.addEventListener('mousedown', clickOutsideClose)
     return () => document.removeEventListener('mousedown', clickOutsideClose)
   }, [dispatch, closeModale])
+
   return (
     <div ref={menuRef} className="containerUser">
       <div className="header">

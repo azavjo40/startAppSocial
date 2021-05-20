@@ -1,8 +1,9 @@
 //@ts-check
 import { LOCAL_STORAGE } from '../../constant/localstorage'
 import { httpFetch } from '../hooks/httpFetch'
+import { getSearchPeople } from '../message/messageAcsions'
 import { USER_PAGES_PAGE } from '../userPages/types'
-import { userPagesPage } from '../userPages/userAcsions'
+import { getUserPage, userPagesPage } from '../userPages/userAcsions'
 import { IS_AUTH_USER } from './types'
 
 const getStorage = async () => {
@@ -115,7 +116,7 @@ export const refreshToken = (isAuthUser) => {
   }
 }
 
-export const userChangeAvatar = (form) => {
+export const userChangeData = (form) => {
   return async (dispach) => {
     try {
       const storage = await getStorage()
@@ -139,6 +140,8 @@ export const userChangeAvatar = (form) => {
       if (form) {
         const { data } = await dispach(httpFetch(options))
         await dispach(autoSaveStorage(data))
+        dispach(getUserPage(true))
+        dispach(getSearchPeople())
       }
     } catch (e) {
       console.log(e)

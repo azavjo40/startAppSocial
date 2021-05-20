@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { showUserCart } from 'src/redux/userPages/userAcsions'
-import { userChangeAvatar } from '../../redux/auths/authAcsions'
+import { userChangeData } from '../../redux/auths/authAcsions'
 import '../../styles/userPage/userCart.css'
 function UserChangeData({ item }) {
   const [form, setForm] = useState({
@@ -14,17 +14,16 @@ function UserChangeData({ item }) {
   const dispatch = useDispatch()
 
   const changehandlerAvatar = (e) => {
-    const files = e.target.files
-    const file = files && files[0]
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-      file,
-    })
+    setForm({ ...form, file: e.target.files[0] })
   }
+
+  const changehandlerData = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value })
+  }
+
   const userChangeHandler = (e) => {
     e.preventDefault()
-    dispatch(userChangeAvatar(form))
+    dispatch(userChangeData(form))
     dispatch(showUserCart(false, null))
   }
   return (
@@ -50,7 +49,7 @@ function UserChangeData({ item }) {
           placeholder="Enter Name"
           required
           value={form.name}
-          onChange={changehandlerAvatar}
+          onChange={changehandlerData}
         />
 
         <input
@@ -60,7 +59,7 @@ function UserChangeData({ item }) {
           placeholder="Enter Country"
           required
           value={form.country}
-          onChange={changehandlerAvatar}
+          onChange={changehandlerData}
         />
         <button>Save</button>
       </div>

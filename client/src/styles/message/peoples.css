@@ -13,7 +13,6 @@
     background-color: white;
     width: 250px;
     border: 1px solid #f2f2f2;
-    cursor: pointer;
     height: 92.5vh;
     overflow: auto; }
 
@@ -28,14 +27,16 @@
   position: relative;
   z-index: 1;
   padding: 5px; }
-  .item:focus {
-    background-color: #ecf3ff99; }
   .item:hover {
     background-color: #f2f2f2; }
   .item img {
-    width: 50px;
-    height: 50px;
-    border-radius: 30px; }
+    width: 40px;
+    height: 40px;
+    border-radius: 30px;
+    cursor: pointer; }
+    .item img:hover {
+      width: 42px;
+      height: 42px; }
 
 @media (max-width: 425px) {
   .containerPeoples .beoplesBox {

@@ -23,7 +23,7 @@
       border-radius: 50px; }
 
 .userCart {
-  width: 70%;
+  width: 80%;
   height: 60vh;
   border: 1px solid #ecf3ff99;
   background-color: #ecf3ff99; }
@@ -34,20 +34,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px; }
+    padding: 15px;
+    position: relative; }
     .userCart .userAvatar .iconeAvatar {
       width: 70px;
       height: 70px;
       border-radius: 50%;
       cursor: pointer; }
       .userCart .userAvatar .iconeAvatar:hover {
-        width: 100%;
-        height: 150px;
-        border-radius: 0px;
-        position: absolute;
-        top: 0px;
-        left: 0px;
-        transition: 1s; }
+        width: 72px;
+        height: 72px; }
     .userCart .userAvatar .iconeMessage {
       width: 40px;
       height: 40px;
@@ -86,7 +82,7 @@
     z-index: 2; }
 
   .userCart {
-    width: 95%;
+    width: 90%;
     height: 95vh; } }
 
 /*# sourceMappingURL=userCart.css.map */

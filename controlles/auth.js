@@ -109,18 +109,22 @@ module.exports.userChangeData = async (req, res) => {
       country,
       imageSrc: req.file ? req.file.path : imageSrcAvatar,
     }
+
     const user = await User.findOne({ email })
+    const tokenUser = token(user._id)
+
     if (req.file) {
       await User.findByIdAndUpdate({ _id }, { $set: ubdate }, { new: true })
-      res.status(200).json({ ...user })
+      res
+        .status(200)
+        .json({ ...user, token: `Bearer ${tokenUser()}`, userId: user._id })
+
       if (imageSrcAvatar !== 'uploads//spare//1617104631234-user.png') {
         const path = imageSrcAvatar.replace('uploadsad', 'uploads/ad')
         path && fs.unlinkSync(path)
       }
     } else {
       await User.findByIdAndUpdate({ _id }, { $set: ubdate }, { new: true })
-
-      const tokenUser = token(user._id)
       res
         .status(200)
         .json({ ...user, token: `Bearer ${tokenUser()}`, userId: user._id })

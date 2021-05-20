@@ -5,6 +5,10 @@ import { interLocutor, showChat } from 'src/redux/message/messageAcsions'
 import { showUserCart } from 'src/redux/userPages/userAcsions'
 function SearchCart({ item, iconeMessage }) {
   const dispatch = useDispatch()
+  const openModaleMessage = () => {
+    dispatch(showChat(true))
+    dispatch(interLocutor(item))
+  }
   return (
     <>
       <div className="item">
@@ -14,14 +18,7 @@ function SearchCart({ item, iconeMessage }) {
           onClick={() => dispatch(showUserCart(true, item))}
         />
         <span>{item.name}</span>
-        <img
-          src={iconeMessage}
-          alt={item.name}
-          onClick={() => {
-            dispatch(showChat(true))
-            dispatch(interLocutor(item))
-          }}
-        />
+        <img src={iconeMessage} alt={item.name} onClick={openModaleMessage} />
       </div>
     </>
   )
