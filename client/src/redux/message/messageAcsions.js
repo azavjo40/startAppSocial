@@ -1,5 +1,4 @@
 //@ts-check
-import { LOCAL_STORAGE } from 'src/constant/localstorage'
 import { showAlert } from '../generals/generalAcsions'
 import { httpFetch } from '../hooks/httpFetch'
 import {
@@ -10,10 +9,7 @@ import {
   SHOW_CHAT,
   SOCKET_MESSAGE_PEOPLE,
 } from './type'
-
-const getStorage = async () => {
-  return await JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
-}
+import { getStorage } from '../generals/generalAcsions'
 
 export const getSearchPeople = () => {
   return async (dispach) => {

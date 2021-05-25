@@ -1,8 +1,8 @@
 import { useEffect, useRef, useCallback } from 'react'
-import { LOCAL_STORAGE } from 'src/constant/localstorage'
+import { LOCAL_STORAGE } from '../../constant/localstorage'
 import { useDispatch, useSelector } from 'react-redux'
 import close from '../../images/close-window.png'
-import { showUserCart } from 'src/redux/userPages/userAcsions'
+import { showUserCart } from '../../redux/userPages/userAcsions'
 import '../../styles/userPage/userCart.css'
 import { UserCart, UserChangeData } from '../index'
 

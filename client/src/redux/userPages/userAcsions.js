@@ -1,12 +1,8 @@
 //@ts-check
-import { LOCAL_STORAGE } from '../../constant/localstorage'
 import { autoSaveStorage } from '../auths/authAcsions'
 import { httpFetch } from '../hooks/httpFetch'
 import { USER_PAGES_PAGE, SHOW_USER_CART, USER_CART_DATA } from './types'
-
-const getStorage = async () => {
-  return await JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
-}
+import { getStorage } from '../generals/generalAcsions'
 
 export const userPagesPage = (text) => {
   return async (dispach) => {

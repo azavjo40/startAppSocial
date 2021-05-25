@@ -2,15 +2,15 @@ import { useEffect, useRef, useCallback } from 'react'
 import close from '../../images/close-window.png'
 import '../../styles/message/chat.css'
 import io from 'socket.io-client'
-import { LOCAL_STORAGE } from 'src/constant/localstorage'
+import { LOCAL_STORAGE } from '../../constant/localstorage'
 import { useDispatch, useSelector } from 'react-redux'
 import { InputChat, ChatCart } from '../index'
-import { getMessages, showChat } from 'src/redux/message/messageAcsions'
-import { showUserCart } from 'src/redux/userPages/userAcsions'
+import { getMessages, showChat } from '../../redux/message/messageAcsions'
+import { showUserCart } from '../../redux/userPages/userAcsions'
 
 function Chat() {
   const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
-  const socket = io.connect('http://azam-app-tj-js.pl')
+  const socket = io.connect('http://localhost:5000')
   const interlocutor = useSelector((state) => state.peoples.interL)
   const menuRef = useRef()
   const dispatch = useDispatch()

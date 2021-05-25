@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSearchPeople } from 'src/redux/message/messageAcsions'
-import { PeopleCart, Search, Chat, UserModal, Bot } from 'src/сomponents'
+import { getSearchPeople } from '../redux/message/messageAcsions'
+import { PeopleCart, Search, Chat, UserModal, Bot } from '../сomponents'
 import iconeMessage from '../images/open-message.png'
 import '../styles/message/peoples.css'
 function Peoples() {

@@ -1,10 +1,11 @@
 const Chat = require('../../models/chatIo')
 const User = require('../../models/auth')
 const Bot = require('../../models/bot')
+
 const chatIo = (http) => {
   const io = require('socket.io')(http, {
     cors: {
-      origins: ['http://azam-app-tj-js.pl'],
+      origins: ['http://localhost:5000'],
     },
   })
   return async () => {
@@ -26,6 +27,7 @@ const chatIo = (http) => {
             }).save()
             io.emit('message', { chatResult: chat })
             const bot = await Bot.find({ botId: form.interlocutor._id })
+            // change bot
             if (bot) {
               bot.filter(async (item) => {
                 if (item.ifWrote.toLowerCase() === form.message.toLowerCase()) {
@@ -35,12 +37,13 @@ const chatIo = (http) => {
                     date: Date.now(),
                     chatId,
                   }).save()
-                  setTimeout(async () => {
-                    await io.emit('message', { chatResult: chatBot })
-                  }, 2000)
+                  setTimeout(() => {
+                    io.emit('message', { chatResult: chatBot })
+                  }, 3000)
                 }
               })
             }
+            //
           }
         })
       })

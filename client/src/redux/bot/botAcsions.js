@@ -1,11 +1,7 @@
 //@ts-check
-import { LOCAL_STORAGE } from 'src/constant/localstorage'
 import { httpFetch } from '../hooks/httpFetch'
 import { GET_BOTS, SHOW_MODAL_BOT } from './type'
-
-const getStorage = async () => {
-  return await JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
-}
+import { getStorage } from '../generals/generalAcsions'
 
 export const getBot = (userId) => {
   return async (dispach) => {

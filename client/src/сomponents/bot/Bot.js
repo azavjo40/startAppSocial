@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import '../../styles/bot/bot.css'
-import { LOCAL_STORAGE } from 'src/constant/localstorage'
+import { LOCAL_STORAGE } from '../../constant/localstorage'
 import { useDispatch } from 'react-redux'
-import { createBot, showModalBot } from 'src/redux/bot/botAcsions'
+import { createBot, showModalBot } from '../../redux/bot/botAcsions'
 import { ListBot } from '../index'
 import close from '../../images/close-window.png'
 const Bot = () => {

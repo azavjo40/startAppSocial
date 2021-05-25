@@ -1,8 +1,8 @@
-const chatSocket = require("../controlles/sockets/chatSocket")
-const socketIo = http => {
+const chatSocket = require('../controlles/sockets/chatSocket')
+const socketIo = (http) => {
   return () => {
     try {
-      console.log("Socket is connection")
+      console.log('Socket is connection')
       chatSocket(http)()
     } catch (e) {
       console.log(e)

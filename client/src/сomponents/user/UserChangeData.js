@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { showUserCart } from 'src/redux/userPages/userAcsions'
+import { showUserCart } from '../../redux/userPages/userAcsions'
 import { userChangeData } from '../../redux/auths/authAcsions'
 import '../../styles/userPage/userCart.css'
 function UserChangeData({ item }) {

@@ -1,5 +1,5 @@
 import { useDispatch } from 'react-redux'
-import { searchPeople } from 'src/redux/message/messageAcsions'
+import { searchPeople } from '../../redux/message/messageAcsions'
 import '../../styles/message/search.css'
 function Search({ items }) {
   const dispatch = useDispatch()

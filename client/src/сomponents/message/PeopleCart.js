@@ -1,8 +1,8 @@
 import React from 'react'
 import '../../styles/message/peoples.css'
 import { useDispatch } from 'react-redux'
-import { interLocutor, showChat } from 'src/redux/message/messageAcsions'
-import { showUserCart } from 'src/redux/userPages/userAcsions'
+import { interLocutor, showChat } from '../../redux/message/messageAcsions'
+import { showUserCart } from '../../redux/userPages/userAcsions'
 function SearchCart({ item, iconeMessage }) {
   const dispatch = useDispatch()
   const openModaleMessage = () => {

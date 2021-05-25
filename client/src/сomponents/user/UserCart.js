@@ -1,8 +1,8 @@
 import '../../styles/userPage/userCart.css'
 import iconeMessage from '../../images/open-message.png'
-import { interLocutor, showChat } from 'src/redux/message/messageAcsions'
+import { interLocutor, showChat } from '../../redux/message/messageAcsions'
 import { useDispatch } from 'react-redux'
-import { showUserCart } from 'src/redux/userPages/userAcsions'
+import { showUserCart } from '../../redux/userPages/userAcsions'
 const UserCart = ({ userCart }) => {
   const dispatch = useDispatch()
   const openModaleMessage = () => {

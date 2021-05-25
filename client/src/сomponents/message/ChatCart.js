@@ -1,44 +1,46 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useEffect, useMemo, useState, useCallback } from 'react'
 import '../../styles/message/chat.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { getMessages, getSoketMessage } from 'src/redux/message/messageAcsions'
+import {
+  getMessages,
+  getSoketMessage,
+} from '../../redux/message/messageAcsions'
 
 function ChatCart({ socket, storage, interlocutor }) {
   const message = useSelector((state) => state.peoples.message)
-  const [mount, setMount] = useState(false)
+  const msg = useMemo(() => message, [message])
   const dispatch = useDispatch()
+  const [mount, setMount] = useState(false)
 
   const autoSendMessage = useCallback(() => {
     if (!mount) {
       setMount(true)
       dispatch(getSoketMessage(socket))
     }
-    document.title = interlocutor.name
-  }, [dispatch, mount, socket, interlocutor.name])
+  }, [dispatch, mount, socket])
 
-  useEffect(() => autoSendMessage(), [autoSendMessage])
+  useMemo(() => autoSendMessage(), [autoSendMessage])
 
   useEffect(() => {
-    if (!message) {
+    if (!msg) {
       dispatch(getMessages(`${interlocutor._id}-${storage.userId}`))
     }
-  }, [dispatch, message, interlocutor._id, storage.userId])
+    document.title = interlocutor.name
+  }, [dispatch, msg, interlocutor._id, storage.userId, interlocutor.name])
 
   return (
     <div className="body">
-      {message &&
-        message
-          .reverse(() => -1)
-          .map((item, i) => {
-            return (
-              <div key={i} className="message">
-                <span>
-                  {item.name} {new Date(item.date).toLocaleTimeString()}
-                </span>
-                <p>{item.message}</p>
-              </div>
-            )
-          })}
+      {msg &&
+        msg.reverse(false).map((item, i) => {
+          return (
+            <div key={i} className="message">
+              <span>
+                {item.name} {new Date(item.date).toLocaleTimeString()}
+              </span>
+              <p>{item.message}</p>
+            </div>
+          )
+        })}
     </div>
   )
 }

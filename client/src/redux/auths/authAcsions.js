@@ -1,14 +1,11 @@
 //@ts-check
-import { LOCAL_STORAGE } from '../../constant/localstorage'
 import { httpFetch } from '../hooks/httpFetch'
 import { getSearchPeople } from '../message/messageAcsions'
 import { USER_PAGES_PAGE } from '../userPages/types'
 import { getUserPage, userPagesPage } from '../userPages/userAcsions'
 import { IS_AUTH_USER } from './types'
-
-const getStorage = async () => {
-  return await JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
-}
+import { getStorage } from '../generals/generalAcsions'
+import { LOCAL_STORAGE } from '../../constant/localstorage'
 
 export const authUser = (isAuthUser) => ({
   type: IS_AUTH_USER,

@@ -5,7 +5,7 @@ import { useDispatch } from 'react-redux'
 import { logout } from '../../redux/auths/authAcsions'
 import '../../styles/navbar/navbar.css'
 import { UserData } from '../../сomponents/index'
-import { showModalBot } from 'src/redux/bot/botAcsions'
+import { showModalBot } from '../../redux/bot/botAcsions'
 const Navbar = (props) => {
   const [isLoadin, setIsLoading] = useState(false)
   const dispatch = useDispatch()
