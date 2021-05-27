@@ -1,5 +1,5 @@
 import { useEffect, useRef, useCallback } from 'react'
-import { LOCAL_STORAGE } from '../../constant/localstorage'
+import { getStorage } from '../../utils/index'
 import { useDispatch, useSelector } from 'react-redux'
 import close from '../../images/close-window.png'
 import { showUserCart } from '../../redux/userPages/userAcsions'
@@ -7,7 +7,7 @@ import '../../styles/userPage/userCart.css'
 import { UserCart, UserChangeData } from '../index'
 
 const UserModal = () => {
-  const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
+  const storage = getStorage()
   const userCart = useSelector((state) => state.userPages.userCart)
   const menuRef = useRef()
   const dispatch = useDispatch()

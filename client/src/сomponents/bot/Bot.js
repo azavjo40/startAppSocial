@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from 'react'
 import '../../styles/bot/bot.css'
-import { LOCAL_STORAGE } from '../../constant/localstorage'
+import { getStorage } from '../../utils/index'
 import { useDispatch } from 'react-redux'
 import { createBot, showModalBot } from '../../redux/bot/botAcsions'
 import { ListBot } from '../index'
 import close from '../../images/close-window.png'
 const Bot = () => {
-  const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
+  const storage = getStorage()
   const [form, setForm] = useState({ ifWrote: '', message: '' })
   const menuRef = useRef()
   const dispatch = useDispatch()

@@ -1,11 +1,11 @@
 import { useEffect } from 'react'
 import '../../styles/bot/bot.css'
-import { LOCAL_STORAGE } from '../../constant/localstorage'
+import { getStorage } from '../../utils/index'
 import { useDispatch, useSelector } from 'react-redux'
 import { getBot, removeBot } from '../../redux/bot/botAcsions'
 const ListBot = () => {
   const dispatch = useDispatch()
-  const storage = JSON.parse(localStorage.getItem(LOCAL_STORAGE.STORAGE_NAME))
+  const storage = getStorage()
   const items = useSelector((state) => state.bot.items)
 
   useEffect(() => dispatch(getBot(storage.userId)), [dispatch, storage.userId])

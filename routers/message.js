@@ -13,4 +13,10 @@ router.get(
   passport.authenticate('jwt', { session: false }),
   controller.chatRest
 )
+
+router.post(
+  '/unread/messages',
+  passport.authenticate('jwt', { session: false }),
+  controller.unreadMsg
+)
 module.exports = router

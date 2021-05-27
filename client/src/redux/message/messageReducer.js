@@ -6,6 +6,7 @@ import {
   GET_MESSAGES_PEOPLE,
   SHOW_CHAT,
   INTER_LOCUTOR,
+  UNREAD_MESSAGES_PEOPLE,
 } from './type'
 const initialState = {
   items: null,
@@ -13,6 +14,7 @@ const initialState = {
   message: null,
   chat: false,
   interL: null,
+  unread: null,
 }
 export const messageReducer = (state = initialState, actoin) => {
   switch (actoin.type) {
@@ -28,6 +30,8 @@ export const messageReducer = (state = initialState, actoin) => {
       return { ...state, chat: actoin.payload }
     case INTER_LOCUTOR:
       return { ...state, interL: actoin.payload }
+    case UNREAD_MESSAGES_PEOPLE:
+      return { ...state, unread: actoin.payload }
     default:
       return state
   }

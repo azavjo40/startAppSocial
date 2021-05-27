@@ -8,6 +8,7 @@ import {
   SEARCH_PEOPLE,
   SHOW_CHAT,
   SOCKET_MESSAGE_PEOPLE,
+  // UNREAD_MESSAGES_PEOPLE,
 } from './type'
 import { getStorage } from '../generals/generalAcsions'
 
@@ -71,13 +72,30 @@ export const sendSoketMessage = (form, socket) => {
   }
 }
 
+export const unreadMsg = (unread) => {
+  return async (dispach) => {
+    // const storage = await getStorage()
+    console.log(unread)
+    // if (unread) {
+    //   const options = {
+    //     url: '/api/unread/messages',
+    //     method: 'POST',
+    //     body: unread,
+    //     file: null,
+    //     token: storage.token,
+    //     type: UNREAD_MESSAGES_PEOPLE,
+    //   }
+    //   await dispach(httpFetch(options))
+    // }
+  }
+}
+
 export const getMessages = (chatId) => {
   return async (dispach) => {
     const storage = await getStorage()
     if (!chatId) {
       dispach({ type: GET_MESSAGES_PEOPLE, payload: null })
     } else {
-      await getStorage()
       const options = {
         url: `/api/get/messages/${chatId}`,
         method: 'get',
