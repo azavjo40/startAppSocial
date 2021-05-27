@@ -6,7 +6,6 @@ import iconeMessage from '../images/open-message.png'
 import '../styles/message/peoples.css'
 function Peoples() {
   const dispatch = useDispatch()
-
   const chatShow = useSelector((state) => state.peoples.chat)
   const items = useSelector((state) => state.peoples.items)
   const searchItems = useSelector((state) => state.peoples.search)
@@ -17,6 +16,7 @@ function Peoples() {
   useEffect(() => {
     dispatch(getSearchPeople())
   }, [dispatch])
+
   return (
     <div className="containerPeoples">
       <div className="beoplesBox">
