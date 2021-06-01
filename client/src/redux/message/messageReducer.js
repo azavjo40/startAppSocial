@@ -11,7 +11,7 @@ import {
 const initialState = {
   items: null,
   search: null,
-  message: null,
+  message: [],
   chat: false,
   interL: null,
   unread: null,

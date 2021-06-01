@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSearchPeople } from '../redux/message/messageAcsions'
+import { chatHistory, getSearchPeople } from '../redux/message/messageAcsions'
 import { PeopleCart, Search, Chat, UserModal, Bot } from '../сomponents'
 import iconeMessage from '../images/open-message.png'
 import '../styles/message/peoples.css'
@@ -15,8 +15,8 @@ function Peoples() {
   !searchItems ? (resultItems = items) : (resultItems = searchItems)
   useEffect(() => {
     dispatch(getSearchPeople())
+    dispatch(chatHistory())
   }, [dispatch])
-
   return (
     <div className="containerPeoples">
       <div className="beoplesBox">

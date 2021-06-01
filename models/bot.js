@@ -1,4 +1,4 @@
-const { Schema, model } = require("mongoose")
+const { Schema, model } = require('mongoose')
 
 const bot = new Schema({
   name: { type: String },
@@ -6,4 +6,4 @@ const bot = new Schema({
   message: { type: String },
   botId: { type: String },
 })
-module.exports = model("Bot", bot)
+module.exports = model('Bot', bot)

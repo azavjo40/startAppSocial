@@ -72,21 +72,20 @@ export const sendSoketMessage = (form, socket) => {
   }
 }
 
-export const unreadMsg = (unread) => {
+export const chatHistory = () => {
   return async (dispach) => {
-    // const storage = await getStorage()
-    console.log(unread)
-    // if (unread) {
-    //   const options = {
-    //     url: '/api/unread/messages',
-    //     method: 'POST',
-    //     body: unread,
-    //     file: null,
-    //     token: storage.token,
-    //     type: UNREAD_MESSAGES_PEOPLE,
-    //   }
-    //   await dispach(httpFetch(options))
-    // }
+    const storage = await getStorage()
+    if (storage.userId) {
+      const options = {
+        url: `/api/chat/history/${storage.userId}`,
+        method: 'GET',
+        body: null,
+        file: null,
+        token: storage.token,
+        type: null,
+      }
+      await dispach(httpFetch(options))
+    }
   }
 }
 
@@ -94,7 +93,7 @@ export const getMessages = (chatId) => {
   return async (dispach) => {
     const storage = await getStorage()
     if (!chatId) {
-      dispach({ type: GET_MESSAGES_PEOPLE, payload: null })
+      dispach({ type: GET_MESSAGES_PEOPLE, payload: [] })
     } else {
       const options = {
         url: `/api/get/messages/${chatId}`,

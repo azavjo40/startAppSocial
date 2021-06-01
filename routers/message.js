@@ -11,12 +11,12 @@ router.get(
 router.get(
   '/get/messages/:id',
   passport.authenticate('jwt', { session: false }),
-  controller.chatRest
+  controller.getMessages
 )
 
-router.post(
-  '/unread/messages',
+router.get(
+  '/chat/history/:id',
   passport.authenticate('jwt', { session: false }),
-  controller.unreadMsg
+  controller.chatHistory
 )
 module.exports = router
