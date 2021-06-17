@@ -28,8 +28,21 @@ module.exports.getMessages = async (req, res) => {
 
 module.exports.chatHistory = async (req, res) => {
   try {
-    console.log(req.params.id)
-    const chatHistory = await ChatHistory.find()
+    const userId = req.body.userId
+    if (req.params.id) {
+      const chatHistory = await ChatHistory.find({ unitedId: req.params.id })
+      if (chatHistory[0]) {
+        const chats = await Chat.find({ chatId: chatHistory[0]._id })
+        const unreadMsg = []
+        chats.filter((item) => {
+          if (item.unread === 'true' && userId !== item.user) {
+            unreadMsg.push(item)
+          }
+        })
+        console.log(unreadMsg.length)
+        res.status(200).json({ unreadMsg: unreadMsg.length })
+      }
+    }
   } catch (e) {
     console.log(e)
   }

@@ -72,23 +72,6 @@ export const sendSoketMessage = (form, socket) => {
   }
 }
 
-export const chatHistory = () => {
-  return async (dispach) => {
-    const storage = await getStorage()
-    if (storage.userId) {
-      const options = {
-        url: `/api/chat/history/${storage.userId}`,
-        method: 'GET',
-        body: null,
-        file: null,
-        token: storage.token,
-        type: null,
-      }
-      await dispach(httpFetch(options))
-    }
-  }
-}
-
 export const getMessages = (chatId) => {
   return async (dispach) => {
     const storage = await getStorage()
@@ -104,6 +87,24 @@ export const getMessages = (chatId) => {
         type: GET_MESSAGES_PEOPLE,
       }
       await dispach(httpFetch(options))
+    }
+  }
+}
+
+export const chatHistory = (chatId) => {
+  return async (dispach) => {
+    const storage = await getStorage()
+    if (storage.userId) {
+      const options = {
+        url: `/api/chat/history/${chatId}`,
+        method: 'POST',
+        body: { userId: storage.userId },
+        file: null,
+        token: storage.token,
+        type: null,
+      }
+      const { data } = await dispach(httpFetch(options))
+      console.log(data)
     }
   }
 }

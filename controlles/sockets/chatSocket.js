@@ -12,10 +12,9 @@ const chatIo = (http) => {
   return async () => {
     try {
       io.on('connection', async (socket) => {
-        await socket.on('message', async ({ form }) => {
+        socket.on('message', async ({ form }) => {
           ///
-          let chatHistory
-          chatHistory = await ChatHistory.find({
+          let chatHistory = await ChatHistory.find({
             unitedId: `${form.userId}-${form.interlocutor._id}`,
           })
 
@@ -47,7 +46,6 @@ const chatIo = (http) => {
           ///
 
           // change bot
-
           const bot = await Bot.find({ botId: form.interlocutor._id })
           if (bot) {
             bot.filter(async (item) => {

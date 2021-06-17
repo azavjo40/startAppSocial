@@ -14,9 +14,9 @@ router.get(
   controller.getMessages
 )
 
-router.get(
+router.post(
   '/chat/history/:id',
-  passport.authenticate('jwt', { session: false }),
+  // passport.authenticate('jwt', { session: false }),
   controller.chatHistory
 )
 module.exports = router
