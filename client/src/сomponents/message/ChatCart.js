@@ -1,9 +1,12 @@
 import { useEffect, useMemo, useState, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getSoketMessage } from '../../redux/message/messageAcsions'
+import {
+  getSoketMessage,
+  unreadMsgRead,
+} from '../../redux/message/messageAcsions'
 import '../../styles/message/chat.css'
 
-function ChatCart({ socket, interlocutor }) {
+function ChatCart({ socket, interlocutor, storage }) {
   const message = useSelector((state) => state.peoples.message)
   const msg = useMemo(() => message, [message])
   const dispatch = useDispatch()
@@ -26,6 +29,9 @@ function ChatCart({ socket, interlocutor }) {
     <div className="body">
       {msg &&
         msg.reverse(false).map((item, i) => {
+          if (item._id !== storage._id) {
+            dispatch(unreadMsgRead(item._id))
+          }
           return (
             <div key={i} className="message">
               <span>

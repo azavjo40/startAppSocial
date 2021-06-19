@@ -26,11 +26,14 @@ module.exports.getMessages = async (req, res) => {
   }
 }
 
-module.exports.chatHistory = async (req, res) => {
+module.exports.unreadMsg = async (req, res) => {
   try {
-    const userId = req.body.userId
-    if (req.params.id) {
-      const chatHistory = await ChatHistory.find({ unitedId: req.params.id })
+    const { userId, interlocutor } = req.body
+    const unitedId = `${userId}-${interlocutor}`
+    if (unitedId) {
+      const chatHistory = await ChatHistory.find({
+        unitedId,
+      })
       if (chatHistory[0]) {
         const chats = await Chat.find({ chatId: chatHistory[0]._id })
         const unreadMsg = []
@@ -39,10 +42,28 @@ module.exports.chatHistory = async (req, res) => {
             unreadMsg.push(item)
           }
         })
-        console.log(unreadMsg.length)
         res.status(200).json({ unreadMsg: unreadMsg.length })
       }
     }
+  } catch (e) {
+    console.log(e)
+  }
+}
+
+module.exports.unreadMsgRead = async (req, res) => {
+  try {
+    console.log(req.params.id)
+    // if (req.params.id) {
+    //   const ubdate = {
+    //     unraed: 'false',
+    //   }
+    //   const chat = await Chat.findByIdAndUpdate(
+    //     { _id: req.params.id },
+    //     { $set: ubdate },
+    //     { new: true }
+    //   )
+    //   console.log(chat)
+    // }
   } catch (e) {
     console.log(e)
   }

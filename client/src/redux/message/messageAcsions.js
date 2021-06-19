@@ -91,20 +91,19 @@ export const getMessages = (chatId) => {
   }
 }
 
-export const chatHistory = (chatId) => {
+export const unreadMsgRead = (_id) => {
   return async (dispach) => {
     const storage = await getStorage()
     if (storage.userId) {
       const options = {
-        url: `/api/chat/history/${chatId}`,
-        method: 'POST',
+        url: `/api/chat/unread/msg/read/${_id}`,
+        method: 'GET',
         body: { userId: storage.userId },
         file: null,
         token: storage.token,
         type: null,
       }
-      const { data } = await dispach(httpFetch(options))
-      console.log(data)
+      await dispach(httpFetch(options))
     }
   }
 }

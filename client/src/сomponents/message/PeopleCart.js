@@ -5,16 +5,38 @@ import {
   interLocutor,
   showChat,
   getMessages,
-  chatHistory,
 } from '../../redux/message/messageAcsions'
 import { getStorage } from '../../utils'
 import { useEffect } from 'react'
+import { useState } from 'react'
 function PeopleCart({ item, iconeMessage }) {
+  const [countUnread, setCountUnread] = useState()
   const dispatch = useDispatch()
   const storage = getStorage()
-  // useEffect(() => {
-  //   dispatch(chatHistory(`${storage.userId}-${item._id}`))
-  // }, [])
+  const unreadMsg = async () => {
+    const form = {
+      userId: storage.userId,
+      interlocutor: item._id,
+    }
+    try {
+      const option = {
+        method: 'POST',
+        body: JSON.stringify(form),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: storage.token,
+        },
+      }
+      const data = await fetch('/api/chat/unread/msg', option)
+      const json = await data.json()
+      setCountUnread(json.unreadMsg)
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  useEffect(() => unreadMsg, [unreadMsg])
+
   const openModaleMessage = () => {
     dispatch(showChat(true))
     dispatch(interLocutor(item))
@@ -28,10 +50,8 @@ function PeopleCart({ item, iconeMessage }) {
           alt={item.name}
           onClick={() => dispatch(showUserCart(true, item))}
         />
-        <span>
-          {item.name}
-          {/* {unreadMsg && unreadMsg} */}
-        </span>
+        <span>{item.name}</span>
+        <span> {countUnread > 0 && countUnread}</span>
         <img src={iconeMessage} alt={item.name} onClick={openModaleMessage} />
       </div>
     </>

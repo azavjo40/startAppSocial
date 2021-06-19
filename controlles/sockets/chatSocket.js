@@ -1,5 +1,4 @@
 const Chat = require('../../models/chatIo')
-const User = require('../../models/auth')
 const Bot = require('../../models/bot')
 const ChatHistory = require('../../models/chatHistory')
 
