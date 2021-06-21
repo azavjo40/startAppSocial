@@ -20,8 +20,8 @@ router.post(
   controller.unreadMsg
 )
 
-router.get(
-  '/chat/unread/msg/read/:id',
+router.post(
+  '/chat/unread/msg/read',
   passport.authenticate('jwt', { session: false }),
   controller.unreadMsgRead
 )

@@ -25,13 +25,21 @@ function ChatCart({ socket, interlocutor, storage }) {
     document.title = interlocutor.name
   }, [dispatch, interlocutor.name])
 
+  useEffect(() => {
+    const result = []
+    msg.filter((item) => {
+      if (item.unread === 'true' && item.user !== storage.userId) {
+        result.push(item._id)
+      }
+      return item
+    })
+    result.length > 0 && dispatch(unreadMsgRead(result))
+  }, [dispatch, msg, storage.userId])
+
   return (
     <div className="body">
       {msg &&
         msg.reverse(false).map((item, i) => {
-          if (item._id !== storage._id) {
-            dispatch(unreadMsgRead(item._id))
-          }
           return (
             <div key={i} className="message">
               <span>

@@ -3,6 +3,7 @@ import { searchPeople } from '../../redux/message/messageAcsions'
 import '../../styles/message/search.css'
 function Search({ items }) {
   const dispatch = useDispatch()
+
   const changeHandler = (e) => {
     const inputResult = e.target.value.trim().toLowerCase()
     const peoples = items.filter((item) => {

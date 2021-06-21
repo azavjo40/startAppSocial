@@ -42,7 +42,9 @@ module.exports.unreadMsg = async (req, res) => {
             unreadMsg.push(item)
           }
         })
-        res.status(200).json({ unreadMsg: unreadMsg.length })
+        if (unreadMsg.length > 0) {
+          res.status(200).json({ unreadMsg: unreadMsg.length })
+        }
       }
     }
   } catch (e) {
@@ -52,18 +54,17 @@ module.exports.unreadMsg = async (req, res) => {
 
 module.exports.unreadMsgRead = async (req, res) => {
   try {
-    console.log(req.params.id)
-    // if (req.params.id) {
-    //   const ubdate = {
-    //     unraed: 'false',
-    //   }
-    //   const chat = await Chat.findByIdAndUpdate(
-    //     { _id: req.params.id },
-    //     { $set: ubdate },
-    //     { new: true }
-    //   )
-    //   console.log(chat)
-    // }
+    const result = req.body
+    if (result) {
+      result.filter(async (item) => {
+        const chat = await Chat.findByIdAndUpdate(
+          { _id: item },
+          { $set: { unread: 'ok' } },
+          { new: true }
+        )
+      })
+      res.status(200)
+    }
   } catch (e) {
     console.log(e)
   }

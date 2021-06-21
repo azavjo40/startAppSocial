@@ -91,14 +91,14 @@ export const getMessages = (chatId) => {
   }
 }
 
-export const unreadMsgRead = (_id) => {
+export const unreadMsgRead = (result) => {
   return async (dispach) => {
     const storage = await getStorage()
     if (storage.userId) {
       const options = {
-        url: `/api/chat/unread/msg/read/${_id}`,
-        method: 'GET',
-        body: { userId: storage.userId },
+        url: '/api/chat/unread/msg/read',
+        method: 'POST',
+        body: result,
         file: null,
         token: storage.token,
         type: null,

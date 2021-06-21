@@ -1,4 +1,4 @@
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { showUserCart } from '../../redux/userPages/userAcsions'
 import '../../styles/message/peoples.css'
 import {
@@ -9,39 +9,31 @@ import {
 import { getStorage } from '../../utils'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import { unreadMsg } from '../../utils/index'
 function PeopleCart({ item, iconeMessage }) {
+  const chatShow = useSelector((state) => state.peoples.chat)
   const [countUnread, setCountUnread] = useState()
   const dispatch = useDispatch()
   const storage = getStorage()
-  const unreadMsg = async () => {
-    const form = {
-      userId: storage.userId,
-      interlocutor: item._id,
-    }
-    try {
-      const option = {
-        method: 'POST',
-        body: JSON.stringify(form),
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: storage.token,
-        },
-      }
-      const data = await fetch('/api/chat/unread/msg', option)
-      const json = await data.json()
-      setCountUnread(json.unreadMsg)
-    } catch (e) {
-      console.log(e)
-    }
-  }
 
-  useEffect(() => unreadMsg, [unreadMsg])
+  useEffect(() => {
+    if (!chatShow) {
+      console.log(chatShow)
+      const unreadCount = unreadMsg({
+        userId: storage.userId,
+        chatId: item._id,
+        token: storage.token,
+      })
+      unreadCount.then((item) => setCountUnread(item))
+    }
+  }, [item._id, storage.token, storage.userId, chatShow])
 
   const openModaleMessage = () => {
     dispatch(showChat(true))
     dispatch(interLocutor(item))
     dispatch(getMessages(`${storage.userId}-${item._id}`))
   }
+
   return (
     <>
       <div className="item">
