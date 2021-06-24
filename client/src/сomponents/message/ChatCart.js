@@ -35,11 +35,10 @@ function ChatCart({ socket, interlocutor, storage }) {
     })
     result.length > 0 && dispatch(unreadMsgRead(result))
   }, [dispatch, msg, storage.userId])
-
   return (
     <div className="body">
       {msg &&
-        msg.reverse(false).map((item, i) => {
+        msg.map((item, i) => {
           return (
             <div key={i} className="message">
               <span>

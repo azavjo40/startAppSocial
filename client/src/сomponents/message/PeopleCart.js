@@ -7,26 +7,31 @@ import {
   getMessages,
 } from '../../redux/message/messageAcsions'
 import { getStorage } from '../../utils'
-import { useEffect } from 'react'
-import { useState } from 'react'
-import { unreadMsg } from '../../utils/index'
+import { useEffect, useState, useCallback } from 'react'
+import io from 'socket.io-client'
 function PeopleCart({ item, iconeMessage }) {
+  const socket = io.connect('http://localhost:5000')
   const chatShow = useSelector((state) => state.peoples.chat)
   const [countUnread, setCountUnread] = useState()
   const dispatch = useDispatch()
   const storage = getStorage()
 
-  useEffect(() => {
-    if (!chatShow) {
-      console.log(chatShow)
-      const unreadCount = unreadMsg({
-        userId: storage.userId,
-        chatId: item._id,
-        token: storage.token,
-      })
-      unreadCount.then((item) => setCountUnread(item))
+  const unreadMsg = useCallback(() => {
+    const data = {
+      userId: storage.userId,
+      interlocutor: item._id,
     }
-  }, [item._id, storage.token, storage.userId, chatShow])
+    if (!chatShow) {
+      socket.emit('unreadMsg', { data })
+    }
+    socket.on(`unreadMsg${item._id}`, ({ unreadMsg }) => {
+      setCountUnread(unreadMsg)
+    })
+  }, [chatShow, item._id, socket, storage.userId])
+
+  useEffect(() => {
+    unreadMsg()
+  }, [unreadMsg])
 
   const openModaleMessage = () => {
     dispatch(showChat(true))

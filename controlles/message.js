@@ -26,32 +26,6 @@ module.exports.getMessages = async (req, res) => {
   }
 }
 
-module.exports.unreadMsg = async (req, res) => {
-  try {
-    const { userId, interlocutor } = req.body
-    const unitedId = `${userId}-${interlocutor}`
-    if (unitedId) {
-      const chatHistory = await ChatHistory.find({
-        unitedId,
-      })
-      if (chatHistory[0]) {
-        const chats = await Chat.find({ chatId: chatHistory[0]._id })
-        const unreadMsg = []
-        chats.filter((item) => {
-          if (item.unread === 'true' && userId !== item.user) {
-            unreadMsg.push(item)
-          }
-        })
-        if (unreadMsg.length > 0) {
-          res.status(200).json({ unreadMsg: unreadMsg.length })
-        }
-      }
-    }
-  } catch (e) {
-    console.log(e)
-  }
-}
-
 module.exports.unreadMsgRead = async (req, res) => {
   try {
     const result = req.body
