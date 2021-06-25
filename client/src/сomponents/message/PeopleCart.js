@@ -24,7 +24,7 @@ function PeopleCart({ item, iconeMessage }) {
     if (!chatShow) {
       socket.emit('unreadMsg', { data })
     }
-    socket.on(`unreadMsg${item._id}`, ({ unreadMsg }) => {
+    socket.on(`unreadMsg${item._id}${storage.userId}`, ({ unreadMsg }) => {
       setCountUnread(unreadMsg)
     })
   }, [chatShow, item._id, socket, storage.userId])
@@ -48,7 +48,7 @@ function PeopleCart({ item, iconeMessage }) {
           onClick={() => dispatch(showUserCart(true, item))}
         />
         <span>{item.name}</span>
-        <span> {countUnread > 0 && countUnread}</span>
+        <span className="countUnread"> {countUnread > 0 && countUnread}</span>
         <img src={iconeMessage} alt={item.name} onClick={openModaleMessage} />
       </div>
     </>

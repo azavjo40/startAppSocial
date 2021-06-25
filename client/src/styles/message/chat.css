@@ -24,25 +24,27 @@
     width: 100%;
     background-color: white;
     flex: 1 1 auto;
-    padding: 20px;
+    padding: 18px;
     display: flex;
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: flex-start;
     overflow-y: auto; }
-    .containerChat .body .message {
-      display: flex;
-      flex-direction: column; }
-      .containerChat .body .message span {
-        font-size: 10px;
-        margin: 0 0 0 7px; }
-      .containerChat .body .message p {
-        font-size: 15px;
-        margin: 7px;
-        background-color: #ecf3ff99;
-        width: 100%;
-        height: 100%;
-        border-radius: 15px;
-        padding: 3px; }
+    .containerChat .body .body_msg {
+      padding-bottom: 30px; }
+      .containerChat .body .body_msg .message {
+        display: flex;
+        flex-direction: column; }
+        .containerChat .body .body_msg .message span {
+          font-size: 10px;
+          margin: 0 0 0 7px; }
+        .containerChat .body .body_msg .message p {
+          font-size: 15px;
+          margin: 7px;
+          background-color: #ecf3ff99;
+          width: 100%;
+          height: 100%;
+          border-radius: 15px;
+          padding: 3px; }
   .containerChat form {
     display: flex;
     width: 100%;

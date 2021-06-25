@@ -37,17 +37,20 @@ function ChatCart({ socket, interlocutor, storage }) {
   }, [dispatch, msg, storage.userId])
   return (
     <div className="body">
-      {msg &&
-        msg.map((item, i) => {
-          return (
-            <div key={i} className="message">
-              <span>
-                {item.name} {new Date(item.date).toLocaleTimeString()}
-              </span>
-              <p>{item.message}</p>
-            </div>
-          )
-        })}
+      <div className="body_msg">
+        {msg &&
+          msg.map((item, i) => {
+            return (
+              <div key={i} className="message">
+                <span>
+                  {item.name && item.name}
+                  {item.date && new Date(item.date).toLocaleTimeString()}
+                </span>
+                <p>{item.message && item.message}</p>
+              </div>
+            )
+          })}
+      </div>
     </div>
   )
 }
