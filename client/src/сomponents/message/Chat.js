@@ -7,7 +7,6 @@ import { InputChat, ChatCart } from '../index'
 import { getMessages, showChat } from '../../redux/message/messageAcsions'
 import { showUserCart } from '../../redux/userPages/userAcsions'
 import { getStorage } from '../../utils/index'
-
 function Chat() {
   const storage = getStorage()
   const socket = io.connect('http://localhost:5000')

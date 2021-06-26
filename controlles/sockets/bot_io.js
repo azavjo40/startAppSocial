@@ -19,7 +19,7 @@ const bot_io = (socket, io) => {
               user: form.userId,
               unread: true,
             }).save()
-            setTimeout(() => io.emit('message', { chatResult: chatBot }), 3000)
+            setTimeout(() => io.emit(`message`, { chatResult: chatBot }), 3000)
           }
         })
       }

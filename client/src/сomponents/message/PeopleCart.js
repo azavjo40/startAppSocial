@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { showUserCart } from '../../redux/userPages/userAcsions'
 import '../../styles/message/peoples.css'
 import {
@@ -11,7 +11,6 @@ import { useEffect, useState, useCallback } from 'react'
 import io from 'socket.io-client'
 function PeopleCart({ item, iconeMessage }) {
   const socket = io.connect('http://localhost:5000')
-  const chatShow = useSelector((state) => state.peoples.chat)
   const [countUnread, setCountUnread] = useState()
   const dispatch = useDispatch()
   const storage = getStorage()
@@ -21,13 +20,11 @@ function PeopleCart({ item, iconeMessage }) {
       userId: storage.userId,
       interlocutor: item._id,
     }
-    if (!chatShow) {
-      socket.emit('unreadMsg', { data })
-    }
+    socket.emit('unreadMsg', { data })
     socket.on(`unreadMsg${item._id}${storage.userId}`, ({ unreadMsg }) => {
       setCountUnread(unreadMsg)
     })
-  }, [chatShow, item._id, socket, storage.userId])
+  }, [item._id, socket, storage.userId])
 
   useEffect(() => {
     unreadMsg()

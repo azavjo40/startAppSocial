@@ -1,11 +1,7 @@
 import { useEffect, useMemo, useState, useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import {
-  getSoketMessage,
-  unreadMsgRead,
-} from '../../redux/message/messageAcsions'
+import { getSoketMessage } from '../../redux/message/messageAcsions'
 import '../../styles/message/chat.css'
-
 function ChatCart({ socket, interlocutor, storage }) {
   const message = useSelector((state) => state.peoples.message)
   const msg = useMemo(() => message, [message])
@@ -26,15 +22,14 @@ function ChatCart({ socket, interlocutor, storage }) {
   }, [dispatch, interlocutor.name])
 
   useEffect(() => {
-    const result = []
     msg.filter((item) => {
       if (item.unread === 'true' && item.user !== storage.userId) {
-        result.push(item._id)
+        socket.emit('unred_read', { id: item._id })
       }
       return item
     })
-    result.length > 0 && dispatch(unreadMsgRead(result))
-  }, [dispatch, msg, storage.userId])
+  }, [dispatch, msg, storage.userId, socket])
+
   return (
     <div className="body">
       <div className="body_msg">

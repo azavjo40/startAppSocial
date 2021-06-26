@@ -90,20 +90,3 @@ export const getMessages = (chatId) => {
     }
   }
 }
-
-export const unreadMsgRead = (result) => {
-  return async (dispach) => {
-    const storage = await getStorage()
-    if (storage.userId) {
-      const options = {
-        url: '/api/chat/unread/msg/read',
-        method: 'POST',
-        body: result,
-        file: null,
-        token: storage.token,
-        type: null,
-      }
-      await dispach(httpFetch(options))
-    }
-  }
-}

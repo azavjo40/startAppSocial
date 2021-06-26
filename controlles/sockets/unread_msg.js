@@ -16,11 +16,9 @@ const unread_mg = (socket, io) => {
               unreadMsg.push(item)
             }
           })
-          if (unreadMsg.length > 0) {
-            io.emit(`unreadMsg${data.interlocutor}${data.userId}`, {
-              unreadMsg: unreadMsg.length,
-            })
-          }
+          io.emit(`unreadMsg${data.interlocutor}${data.userId}`, {
+            unreadMsg: unreadMsg.length,
+          })
         }
       }
     })

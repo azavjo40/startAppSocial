@@ -27,7 +27,7 @@ const chat_io = (socket, io) => {
           user: form.userId,
           unread: true,
         }).save()
-        io.emit('message', { chatResult: chat })
+        io.emit(`message`, { chatResult: chat })
       }
     })
   } catch (e) {

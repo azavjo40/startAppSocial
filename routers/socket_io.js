@@ -1,6 +1,7 @@
 const chat_io = require('../controlles/sockets/chat_io')
 const bot_io = require('../controlles/sockets/bot_io')
 const unread_msg = require('../controlles/sockets/unread_msg')
+const unread_read = require('../controlles/sockets/unread_read')
 const socket_io = (http) => {
   const io = require('socket.io')(http, {
     cors: {
@@ -14,6 +15,7 @@ const socket_io = (http) => {
         await chat_io(socket, io)
         await bot_io(socket, io)
         await unread_msg(socket, io)
+        await unread_read(socket, io)
       })
     } catch (e) {
       console.log(e)

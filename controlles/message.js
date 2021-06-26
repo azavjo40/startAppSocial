@@ -25,21 +25,3 @@ module.exports.getMessages = async (req, res) => {
     console.log(e)
   }
 }
-
-module.exports.unreadMsgRead = async (req, res) => {
-  try {
-    const result = req.body
-    if (result) {
-      result.filter(async (item) => {
-        const chat = await Chat.findByIdAndUpdate(
-          { _id: item },
-          { $set: { unread: 'ok' } },
-          { new: true }
-        )
-      })
-      res.status(200)
-    }
-  } catch (e) {
-    console.log(e)
-  }
-}
